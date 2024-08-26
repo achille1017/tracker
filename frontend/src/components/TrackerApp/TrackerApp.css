@@ -1,0 +1,144 @@
+#spreadSheet {
+    display: flex;
+    flex-direction: row;
+    max-width: calc(70vw - 26px);
+    overflow-x: scroll;
+    padding: 20px 0px 20px 20px;
+    border: solid lightblue;
+    border-radius: 20px;
+}
+
+.title {
+    border-left: solid 2px black;
+    border-bottom: solid 1px black;
+    width: 160px;
+    padding: 10.5px 10px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    height: 19px;
+}
+
+.habitCell {
+    border-left: solid 1px black;
+    border-bottom: solid 1px black;
+
+    width: 120px;
+    padding: 20px 10px;
+
+}
+
+.titleP {}
+
+#trackerApp {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    margin: 60px 0px;
+    min-height: calc(100vh - 200px);
+}
+
+#dateCell1 {
+    border-top: 1px solid black;
+    padding: 10px;
+}
+
+.moyenne {
+    width: 120px;
+    padding: 10.5px 10px;
+    display: flex;
+    justify-content: center;
+    border-left: solid 2px black;
+    border-bottom: solid 1px black;
+    border-right: solid 1px black;
+    height: 19px;
+    margin-right: 20px;
+    background: white;
+}
+
+#averagesColumn {
+    position: sticky;
+    right: 0px;
+}
+
+
+#habitsColumn {
+    position: sticky;
+    right: 163px;
+    background-color: white;
+}
+
+#overlayTextCellEditor{
+    position: absolute;
+    width: 40vw;
+    height: calc(50vh - 30px);
+    left: 30vw;
+    top: calc(25vh - 80px);
+    background-color: rgb(0, 0, 0,0.4);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(3px);
+    padding: 30px ;
+}
+
+.textAreaCell {
+    resize: none;
+    
+    font-family: sans-serif;
+    border-radius: 6px;
+    border: none;
+    padding: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+}
+
+.textCellEditor {
+    background-color: #e3e3e3;
+    padding: 10px;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+    z-index: 100000;
+    height: 30vh;
+    width: 40vw;
+}
+
+#firstLineCellEditor{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    align-items: center;
+}
+
+#titleCellEditor{
+    background-color: white;
+    padding: 6px;
+    border-radius: 10px;
+}
+
+#closeCellEditor{
+    border: none;
+    background-color: transparent;
+    width: 40px;
+    height: 36px;
+    cursor: pointer;
+}
+
+#closeImg{
+    width: 100%;
+    height: 100%;
+}
+
+.overlayBig{
+    width: 100vw;
+    height: calc(100vh - 80px);
+    position: absolute;
+    top: 80px;
+}

@@ -1,0 +1,111 @@
+.stepProfileSetter {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    width: 40vw;
+}
+
+.step4ProfileSetter {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    width: 60vw;
+}
+
+.textProfileSetter {
+    font-weight: bold;
+    font-size: 28px;
+    width: 100%;
+    text-align: left;
+}
+
+.textInputProfileSetter {
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    width: calc(50%);
+}
+
+.simpleNavigatorButton {
+    border: none;
+    padding: 6px;
+    border-radius: 10px;
+    width: 100px;
+}
+
+#alignSelfEnd {
+    align-self: flex-end;
+}
+
+.navigatorProfileSetter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.selectProfileSetter {
+    padding: 12px 30px 12px 12px;
+    border-radius: 10px;
+    border: none;
+    width: fit-content;
+}
+
+#none {
+    display: none;
+}
+
+.habitExample {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#habitExamples {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.habitType {
+    color: grey;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+#startProfile {
+    border: none;
+    background-color: rgb(76, 1, 220);
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 10px;
+    width: 224px;
+    color: white;
+    font-weight: bold;
+}
+
+.habitExampleButton {
+    border: none;
+    background-color: rgb(76, 1, 220);
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.titleHabitExample {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+.habitExamplesColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

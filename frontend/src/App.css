@@ -1,0 +1,17 @@
+*{margin: 0;}
+body{
+    background-color: #E7F8FF;
+
+}
+@font-face {
+    font-family: 'GoldPlayBold'; /* Name of the font */
+    src: url('assets/goldplay/Goldplay-Black.ttf'); /* Path to the .ttf file */
+}
+@font-face {
+    font-family: 'UniSansBold'; /* Name of the font */
+    src: url('assets/uni-sans/Uni\ Sans\ Heavy.otf'); /* Path to the .ttf file */
+}
+@font-face {
+    font-family: 'OpenSans'; /* Name of the font */
+    src: url('assets/open-sans.regular.ttf'); /* Path to the .ttf file */
+}

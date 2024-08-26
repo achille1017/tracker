@@ -1,0 +1,19 @@
+.habitCell {
+
+    width: 120px;
+    padding: 0px 10px;
+}
+
+.green {
+    background-color: lightgreen;
+
+}
+
+.red {
+    background-color: red;
+}
+
+
+.none{
+    display: none;
+}

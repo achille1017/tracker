@@ -1,0 +1,18 @@
+#contextMenu {
+    display: flex;
+    flex-direction: row;
+    width: 160px;
+    height: 80px;
+    background-color: lightgray;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+}
+
+#deleteColumnButton {
+    border: none;
+    width: 80px;
+    height: 60px;
+    border-radius: 6px;
+
+}

@@ -1,0 +1,118 @@
+#landing{
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#firstBoxLanding{
+    display: flex;
+    flex-direction: row;
+    padding: 0px 0px 0px 0px;
+    align-items: center;
+    height: calc(100vh - 80px);
+    justify-content: space-between;
+    width: 100%;
+}
+
+#screenshot1{
+    width: 30vw;
+}
+
+
+#secondBoxLanding{
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 100px;
+    margin-bottom: 120px;
+}
+#box2Texts{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 40px;
+}
+
+#text1{
+    font-size: 50px;
+    text-align: center;
+}
+
+.box2TextP{
+    font-size: 30px;
+}
+
+#whoMadeItP{
+    font-size: 20px;
+    text-align: justify;
+}
+
+#titleBox{
+    display: flex;
+    flex-direction: column;
+}
+#title1{
+    font-size: 100px;
+    font-weight: bold;
+    font-family: 'UniSansBold';
+}
+#title2{
+    font-size: 100px;
+    font-weight: bold;
+    font-family: 'UniSansBold';
+    align-self: center;
+}
+#title3{
+    font-size: 100px;
+    font-weight: bold;
+    font-family: 'UniSansBold';
+    align-self: flex-end;
+
+}
+
+#legend1{
+    width: fit-content;
+}
+
+#screenshot1Box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.validImg{
+    height: 30px;
+}
+
+.box2TextsDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.getStarted{
+    padding: 20px;
+    font-size: 30px;
+    background-color: rgb(0, 167, 0);
+    color: white;
+    width: fit-content;
+    text-decoration: none;
+    border-radius: 20px;
+}
+
+#thirdBoxLanding{
+    display: flex;
+    flex-direction: column;
+    margin: 120px 0px;
+    padding: 30px;
+    width: 60%;
+    background-color: #449DD1;
+    color: white;
+    gap: 40px;
+    border-radius: 10px;
+}

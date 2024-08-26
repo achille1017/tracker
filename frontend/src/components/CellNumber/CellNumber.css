@@ -1,0 +1,18 @@
+.numberInput{
+    width: calc(100% - 8px);
+    border: none;
+    text-align: center;
+    font-size: 16px;
+}
+
+.cellNumber{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 10px !important;
+    height: 20px;}
+
+input,textarea:focus {
+    outline: none; /* Remove the default focus outline */
+    box-shadow: none; /* Remove any box-shadow if applied */
+}

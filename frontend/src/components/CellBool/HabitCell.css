@@ -1,0 +1,36 @@
+.habitCell {
+    border-left: solid 1px black;
+    border-bottom: solid 1px black;
+    background-color: white;
+    width: 120px;
+    padding: 20px 10px;
+}
+
+.green {
+    background-color: lightgreen;
+
+}
+
+.red {
+
+    background-color: red;
+}
+
+.dateCell{
+    padding: 10px;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    height: 19px;
+}
+.none{
+    display: none;
+}
+
+
+  #todayCell{border-left: solid 3px black; border-right: solid 2px black;}

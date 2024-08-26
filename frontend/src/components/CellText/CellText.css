@@ -1,0 +1,39 @@
+.green {
+    background-color: lightgreen;
+
+}
+
+.red {
+    background-color: red;
+}
+
+
+.none {
+    display: none;
+}
+
+
+
+.absolute {
+    position: absolute;
+
+}
+
+
+
+.textCellDisplay {
+    overflow-x: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.cellText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px !important;
+    height: 20px;
+}
+
+
+

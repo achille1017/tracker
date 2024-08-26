@@ -1,0 +1,130 @@
+#navBar{
+    height: 80px;
+    background-color: #449DD1;
+    width: calc(70vw);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 15vw;
+    justify-content: space-between;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
+}
+
+.none{
+    display: none;
+}
+.openLoginBox{
+    display: flex;
+}
+
+#loginBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(0, 0, 0,0.3);
+    border-radius: 20px;
+    padding: 20px;
+    gap: 12px;
+    z-index: 100000;
+}
+
+#loginBox1{
+    display: flex;
+    flex-direction: column;
+    height: 39px;
+    gap: 30px;
+}
+
+#getIn{
+    border: none;
+    background-color: rgb(76, 1, 220);
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 10px;
+    width: 224px;
+    color: white;
+    font-weight: bold;
+}
+
+.inputLogin{
+    padding: 6px 12px;
+    border-radius: 12px;
+    border: none;
+    width: 160px;
+}
+
+#loginButton{
+    border: none;
+    width: 100%;
+    font-size: 20px;
+  padding: 8px;
+  border-radius: 10px;
+
+}
+
+#bigBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#logout{
+    border: none;
+    background-color: #f0f0f0;
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 10px;
+    width: 224px;
+
+}
+
+#linkLeftNavBar{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.linkNavBar{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    border: 2px white solid;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+#linkRegister{
+    border: none;
+    width: 100%;
+    font-size: 20px;
+    padding: 8px 0px;
+  border-radius: 10px;
+  background-color:  rgb(76, 1, 220);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+#productiveToday{
+    font-family: 'UniSansBold';
+    font-size: 30px;
+    color: white;
+}
+
+#footer{
+    height: 80px;
+    background-color: #449DD1;
+    width: calc(70vw);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 15vw;
+    justify-content: space-between;
+}
