@@ -3,6 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 import "./Base.css"
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import { useNavigate } from 'react-router-dom';
+import { SERVER_NAME } from '../../config.js';
 
 const Base = (props) => {
     const [loginBoxState, setLoginBoxState] = useState("none")
@@ -17,7 +18,7 @@ const Base = (props) => {
         setLoginBoxState("loginBox")
     }
     function login() {
-        fetch("http://localhost:4000/login", {
+        fetch(SERVER_NAME + "/login", {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -35,7 +36,7 @@ const Base = (props) => {
             })
     }
     function logout() {
-        fetch("http://localhost:4000/logout", {
+        fetch(SERVER_NAME + "/logout", {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -51,13 +52,13 @@ const Base = (props) => {
     return (
         <div id='bigBox'>
             <div id='navBar'>
-                <div id='linkLeftNavBar'>
+                <div className='leftBoxNavBar' id='linkLeftNavBar'>
                     <Link to="/" className='linkNavBar'>Home</Link>
                     {props.logged ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : null}
                 </div>
                 <p id='productiveToday'>productive.today</p>
-                {props.logged ? <button id='logout' onClick={logout}>Logout</button> :
-                    <div id='loginBox1'>
+                {props.logged ? <div className='rightBoxNavBar'><button id='logout' onClick={logout}>Logout</button> </div>:
+                <div className='rightBoxNavBar'><div id='loginBox1'>
                         <button onClick={openLoginBox} id='getIn'>Get in</button>
                         {loginBoxState !== "none" ? <ClickAwayListener onClickAway={closeLoginBox} touchEvent={false}>
                             <div id='loginBox'>
@@ -68,7 +69,7 @@ const Base = (props) => {
                                 <Link onClick={closeLoginBox} to="/register" id='linkRegister'>Register</Link>
                             </div>
                         </ClickAwayListener> : null}
-                    </div>
+                    </div></div>
                 }
             </div>
             <Outlet></Outlet>

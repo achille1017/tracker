@@ -15,3 +15,15 @@ body{
     font-family: 'OpenSans'; /* Name of the font */
     src: url('assets/open-sans.regular.ttf'); /* Path to the .ttf file */
 }
+@font-face {
+    font-family: 'Tommy'; /* Name of the font */
+    src: url('assets/TommyRegular.otf'); /* Path to the .ttf file */
+}
+@font-face {
+    font-family: 'TommyLight'; /* Name of the font */
+    src: url('assets/TommyLight.otf'); /* Path to the .ttf file */
+}
+@font-face {
+    font-family: 'TommyBold'; /* Name of the font */
+    src: url('assets/TommyBold.otf'); /* Path to the .ttf file */
+}

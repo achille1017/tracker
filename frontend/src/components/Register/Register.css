@@ -18,6 +18,8 @@
 }
 
 #registerButton {
+  font-weight: bold;
+  cursor: pointer;
   background-color: rgb(76, 1, 220);
   border: none;
   font-size: 20px;

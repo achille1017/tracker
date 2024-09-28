@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import "./HabitsManager.css"
+import { SERVER_NAME } from '../../config.js';
 
 const HabitsManager = (props) => {
     const [newHabit,setNewHabit]=useState("")
     const [newHabitType,setNewHabitType]=useState("bool")
 
     function createNewHabit() {
-        fetch("http://localhost:4000/newhabit", {
+        fetch(SERVER_NAME+"/newhabit", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json', // Indicate that you're sending JSON
@@ -21,7 +22,7 @@ const HabitsManager = (props) => {
             })
     }
     return (
-        <div id='habitsManager'>
+        <div id={props.id} className='habitsManager'>
             <p id='addANewHabit'>Add a new habit tracker : </p>
             <select id='newHabitType' value={newHabitType} onChange={(e) => setNewHabitType(e.target.value)}>
                 <option value="bool">Bool</option>

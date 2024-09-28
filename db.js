@@ -131,7 +131,7 @@ async function register(username, password) {
 				}
 				try {
 					let insert = db.prepare(`insert into users (username,password,data,habits,advice_daily,profile) values (?,?,?,?,?,?)`);
-					insert.run(username, hash, `[{"date":"${getFormattedDate()}"}]`, '{}', `{"${getFormattedDate()}":"welcome"}`, '{"profileSet":0,"name":"","job":"","language":""}');
+					insert.run(username, hash, `[{"date":"${getFormattedDate()}"}]`, '{}', `{"${getFormattedDate()}":"firstAdvice"}`, '{"profileSet":0,"name":"","job":"","language":""}');
 					result = true
 				} catch (e) {
 					console.log(e)

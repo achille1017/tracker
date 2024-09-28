@@ -9,6 +9,7 @@ import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import closeImage from "../../assets/close.png"
 import Assistant from '../Assistant/Assistant.js';
 import ProfileSetter from '../ProfileSetter/ProfileSetter.js';
+import { SERVER_NAME } from '../../config.js';
 
 const TrackerApp = (props) => {
     const [authorized, setAuthorized] = useState(false)
@@ -81,7 +82,7 @@ const TrackerApp = (props) => {
     }
     function updateHabits() {
         return new Promise((resolve, reject) => {
-            fetch("http://localhost:4000/habits", {
+            fetch(SERVER_NAME + "/habits", {
                 credentials: 'include',
             }).then(res => {
                 if (res.status === 200) {
@@ -94,7 +95,7 @@ const TrackerApp = (props) => {
     }
     function updateProfile() {
         return new Promise((resolve, reject) => {
-            fetch("http://localhost:4000/profile", {
+            fetch(SERVER_NAME + "/profile", {
                 credentials: 'include',
             }).then(res => {
                 if (res.status === 200) {
@@ -113,7 +114,7 @@ const TrackerApp = (props) => {
     }, [dataLoaded, profile.profileSet])
     function updateData() {
         updateHabits().then((habitsUser) => {
-            fetch("http://localhost:4000/data", {
+            fetch(SERVER_NAME + "/data", {
                 credentials: 'include',
             }).then(res => {
                 if (res.status === 200) {
@@ -153,7 +154,7 @@ const TrackerApp = (props) => {
             const averages = calculateAverages(dataTracker, habitsUser)
             setAverages(averages)
             setAverageTotal(getAverageFromObj(averages))
-            fetch("http://localhost:4000/updatedata", {
+            fetch(SERVER_NAME + "/updatedata", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -167,7 +168,7 @@ const TrackerApp = (props) => {
     return (
         <div>
             {dataLoaded && profile.profileSet === 1 ? <div id='trackerApp'>
-                <Assistant></Assistant>
+                <Assistant name={profile.name}></Assistant>
                 <div id='spreadSheet'>
                     {dataTracker.map((dataDay, index) => (
                         <DayTracker openTextCellEditor={openTextCellEditor} habitsUser={habitsUser} changeCellValue={changeCellValue} key={index} columns={columns} dataDay={dataDay}></DayTracker>
@@ -175,7 +176,7 @@ const TrackerApp = (props) => {
 
                     <div className='dayLine' id='habitsColumn'>
                         <p className="title" id='dateCell1'>Date</p>
-                        {Object.keys(habitsUser).map((columnName, index) => (<div className="title" key={columnName}><p onContextMenu={(event) => handleContextMenu(event, columnName)} key={columnName} >{columnName}</p></div>))}
+                        {Object.keys(habitsUser).map((columnName, index) => (<div className="title" key={columnName} onContextMenu={(event) => handleContextMenu(event, columnName)}><p  key={columnName} >{columnName}</p></div>))}
                     </div>
                     <div className='dayLine' id='averagesColumn'>
                         <p className="moyenne" id='dateCell1'>{isNaN(Math.round(averageTotal * 10) / 10) ? null : Math.round(averageTotal * 10) / 10 + " %"}</p>

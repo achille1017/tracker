@@ -1,17 +1,17 @@
 import React, { Component, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TrackerApp from './components/TrackerApp/TrackerApp';
 import Base from './components/Base/Base'
 import Register from './components/Register/Register';
 import Landing from './components/Landing/Landing';
+import { SERVER_NAME } from './config.js';
 function App() {
   const [logged, setLogged] = useState()
   async function updateLogged() {
     await new Promise(async next => {
 
-      fetch("http://localhost:4000/islogged", { method: "GET", credentials: 'include' }).then(res => { if (res !== true) { res.text().then(text => { if (text === "true") { setLogged(true) } else { setLogged(false) } next() }) } })
+      fetch(SERVER_NAME + "/islogged", { method: "GET", credentials: 'include' }).then(res => { if (res !== true) { res.text().then(text => { if (text === "true") { setLogged(true) } else { setLogged(false) } next() }) } })
     })
   }
   useState(() => {

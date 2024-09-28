@@ -36,13 +36,17 @@
     gap: 40px;
 }
 
-#text1{
+.text1{
     font-size: 50px;
     text-align: center;
+    font-weight: bold;
+    font-family: TommyBold;
+    width: fit-content;
 }
 
 .box2TextP{
     font-size: 30px;
+    font-family: Tommy;
 }
 
 #whoMadeItP{
@@ -75,6 +79,7 @@
 
 #legend1{
     width: fit-content;
+    font-family: TommyLight;
 }
 
 #screenshot1Box{
@@ -103,6 +108,7 @@
     width: fit-content;
     text-decoration: none;
     border-radius: 20px;
+    font-family: TommyBold;
 }
 
 #thirdBoxLanding{
@@ -110,9 +116,31 @@
     flex-direction: column;
     margin: 120px 0px;
     padding: 30px;
-    width: 60%;
     background-color: #449DD1;
     color: white;
     gap: 40px;
     border-radius: 10px;
+    align-items: center;
 }
+
+#poweredByAI{
+
+}
+
+#poweredByAI  {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    background: linear-gradient(90deg, rgba(186,148,62,1) 0%, rgba(236,172,32,1) 20%, rgba(186,148,62,1) 39%, rgba(249,244,180,1) 50%, rgba(186,148,62,1) 60%, rgba(236,172,32,1) 80%, rgba(186,148,62,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;	
+    animation: shine 6s infinite;
+    background-size: 200%;
+    background-position: left;
+    text-align: left;
+  
+  }
+  @keyframes shine {
+    to{background-position: right}
+   
+  }

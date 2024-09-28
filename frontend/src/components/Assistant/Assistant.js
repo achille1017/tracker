@@ -5,14 +5,20 @@ import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import { useNavigate } from 'react-router-dom';
 import Typewriter from '../TypeWriter/TypeWriter';
 import botImg from "../../assets/bot.png"
+import { SERVER_NAME } from '../../config.js';
 
 const Assistant = (props) => {
     const [advice, setAdvice]= useState("")
     useEffect(()=>{
         getAdvice()
     },[])
+    useEffect(()=>{
+        if(advice==="firstAdvice"){
+            setAdvice("Ew")
+        }
+    },[advice])
     function getAdvice() {
-        fetch("http://localhost:4000/advice", {
+        fetch(SERVER_NAME+"/advice", {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -22,7 +28,14 @@ const Assistant = (props) => {
         })
             .then(response => {
                 if (response.status === 200) {
-                    response.json().then(data=>setAdvice(data.advice))
+                    response.json().then(data=>{
+                        if(data.advice==="firstAdvice"){
+                            setAdvice(`Welcome ${props.name} ! Track your first day full of good habits and get an advice tomorrow. Have a good day !`)
+                            return
+                        }
+                        setAdvice(data.advice)
+                    
+                    })
                 }
             })
     }

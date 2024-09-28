@@ -1,4 +1,4 @@
-#habitsManager {
+.habitsManager {
     display: flex;
     flex-direction: row;
     gap: 30px;
@@ -6,6 +6,7 @@
     padding: 20px;
     border: solid 2px lightblue;
     border-radius: 10px;
+    width: fit-content;
 }
 
 #newHabitType {

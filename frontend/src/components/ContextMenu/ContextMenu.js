@@ -1,9 +1,11 @@
 import React from 'react';
 import "./ContextMenu.css"
+import { SERVER_NAME } from '../../config.js';
+
 const ContextMenu = ({ position, onClose, onSelect, habit, updateData }) => {
   function deleteColumn() {
     onClose()
-    fetch("http://localhost:4000/deletehabit", {
+    fetch(SERVER_NAME+"/deletehabit", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json', // Indicate that you're sending JSON

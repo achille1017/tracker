@@ -4,6 +4,7 @@ import Step1 from '../StepsProfileSetter/Step1';
 import Step2 from '../StepsProfileSetter/Step2';
 import Step3 from '../StepsProfileSetter/Step3';
 import Step4 from '../StepsProfileSetter/Step4';
+import { SERVER_NAME } from '../../config.js';
 
 const ProfileSetter = (props) => {
     const [step, setStep] = useState(0)
@@ -13,7 +14,7 @@ const ProfileSetter = (props) => {
     function setProfile(){
         const profile = {"profileSet":1,"name":name,"job":job,"language":language}
         console.log(profile)
-        fetch("http://localhost:4000/setprofile", {
+        fetch(SERVER_NAME+"/setprofile", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json', // Indicate that you're sending JSON

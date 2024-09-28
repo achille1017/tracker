@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import "./Register.css"
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
+import { SERVER_NAME } from '../../config.js';
 
 const Register = (props) => {
     const [username, setUsername] = useState("")
@@ -9,7 +10,7 @@ const Register = (props) => {
     const [messageState, setMessageState] = useState("none")
     const navigate = useNavigate()
     function register() {
-        fetch("http://localhost:4000/register", {
+        fetch(SERVER_NAME+"/register", {
             method: 'POST',
             credentials: 'include',
             headers: {

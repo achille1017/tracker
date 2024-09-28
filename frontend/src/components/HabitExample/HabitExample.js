@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import "./HabitExample.css"
 import valid from "../../assets/valid.png"
+import { SERVER_NAME } from '../../config.js';
+
 const HabitExample = (props) => {
     const [track, setTrack] = useState("track")
 
     function createNewHabit(newHabit, newHabitType) {
-        fetch("http://localhost:4000/newhabit", {
+        fetch(SERVER_NAME+"/newhabit", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,7 +27,7 @@ const HabitExample = (props) => {
 
         <div className='habitExample' id={props.id}>
             <p className='habitName'>{props.habitName}</p>
-            <p className='habitType'>{props.habitType === "bool" ? "Yes/no":props.habitType === "number" ? "Counter":props.habitType}</p>
+            <p className='habitType'>{props.habitType === "bool" ? "Yes/no":props.habitType === "number" ? "Counter":"Text"}</p>
             {track==="track" ? <button onClick={() => { createNewHabit(props.habitName, props.habitType) }} className='habitExampleButton'>Track it</button>:<img className='validHabitExample' src={valid}></img>}
         </div>
 
