@@ -5,7 +5,9 @@ import TrackerApp from './components/TrackerApp/TrackerApp';
 import Base from './components/Base/Base'
 import Register from './components/Register/Register';
 import Landing from './components/Landing/Landing';
+import Profile from './components/Profile/Profile'
 import { SERVER_NAME } from './config.js';
+import SubscriptionManager from './components/LemonSqueezy/SubscriptionManager.js';
 function App() {
   const [logged, setLogged] = useState()
   async function updateLogged() {
@@ -25,8 +27,9 @@ function App() {
           <Route path="/" element={<Landing></Landing>} />
           <Route path="/tracker" element={<TrackerApp logged={logged}></TrackerApp>} />
           <Route path="/register" element={<Register ></Register>} />
-
+          <Route path="/profile" element={<Profile ></Profile>} />
           <Route path="/*" element={<p>error</p>}></Route>
+          <Route path='/lemon' element={<SubscriptionManager></SubscriptionManager>}></Route>
         </Route>
 
       </Routes>

@@ -53,12 +53,12 @@ const Base = (props) => {
         <div id='bigBox'>
             <div id='navBar'>
                 <div className='leftBoxNavBar' id='linkLeftNavBar'>
-                    <Link to="/" className='linkNavBar'>Home</Link>
-                    {props.logged ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : null}
+                    {props.logged ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : <Link to="/" className='linkNavBar'>Home</Link>}
+                    {props.logged ? <Link to="/profile" className='linkNavBar'>Profile</Link> : <a href="#pricing" className='linkNavBar'>Subscribe</a>}
                 </div>
                 <p id='productiveToday'>withar.co</p>
-                {props.logged ? <div className='rightBoxNavBar'><button id='logout' onClick={logout}>Logout</button> </div>:
-                <div className='rightBoxNavBar'><div id='loginBox1'>
+                {props.logged ? <div className='rightBoxNavBar'><button id='logout' onClick={logout}>Logout</button> </div> :
+                    <div className='rightBoxNavBar'><div id='loginBox1'>
                         <button onClick={openLoginBox} id='getIn'>Get in</button>
                         {loginBoxState !== "none" ? <ClickAwayListener onClickAway={closeLoginBox} touchEvent={false}>
                             <div id='loginBox'>
@@ -76,7 +76,7 @@ const Base = (props) => {
             <div id='footer'>
                 <a href='https://achilledorier.com'>Who Am I ?</a>
                 <a>Contact</a>
-                <p>productive.today 2024</p>
+                <p>withar.co 2024</p>
             </div>
         </div>
     );
