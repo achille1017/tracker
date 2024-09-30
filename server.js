@@ -1,8 +1,13 @@
 import express from 'express';
 import session from 'express-session';
-import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice,getProfile,updateProfile } from './db.js';
+import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit } from './db.js';
 import cors from 'cors'
-import {getToday} from "./tools.js"
+import { getToday } from "./tools.js"
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 4000;
@@ -41,9 +46,9 @@ app.post('/advice', async (req, res) => {
         res.status(401).send()
     }
     else {
-        if(req.body.type==="daily"){
-            let advice=  await getDailyAdvice(getToday(),req.session.user)
-            res.json({"advice": advice})
+        if (req.body.type === "daily") {
+            let advice = await getDailyAdvice(getToday(), req.session.user)
+            res.json({ "advice": advice })
         }
     }
 });
@@ -52,7 +57,7 @@ app.post('/setprofile', (req, res) => {
         res.status(401).send()
     }
     else {
-        updateProfile(req.session.user,req.body.newProfile)
+        updateProfile(req.session.user, req.body.newProfile)
         res.status(200).send()
     }
 });
@@ -95,7 +100,15 @@ app.post('/deletehabit', (req, res) => {
         res.status(200).send()
     }
 })
-
+app.post('/changeorderhabit', (req, res) => {
+    if (req.session.logged !== true) {
+        res.status(401).send()
+    }
+    else {
+        changeOrderHabit(req.session.user, req.body.habit, req.body.order)
+        res.status(200).send()
+    }
+})
 app.post('/login', async (req, res) => {
     if (await allowLogin(req.body.username, req.body.password)) {
         req.session.logged = true;
@@ -128,6 +141,26 @@ app.post('/register', async (req, res) => {
         res.status(400).send()
     }
 })
+
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/static/:dir/:file', (req, res) => {
+    //console.log('GET /static/' + req.params.dir + "/" + req.params.file)
+    res.sendFile(__dirname + "/frontend/build/static/" + req.params.dir + "/" + req.params.file)
+})
+
+app.get('/favicon.ico', (req, res) => {
+    console.log('GET /')
+    res.sendFile(__dirname + "/frontend/public/favicon.ico");
+})
+
+app.get('/*', (req, res) => {
+    console.log('GET /')
+    res.sendFile(__dirname + "/frontend/build/index.html");
+});
+
+
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });

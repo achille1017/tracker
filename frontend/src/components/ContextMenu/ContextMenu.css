@@ -1,8 +1,8 @@
 #contextMenu {
     display: flex;
-    flex-direction: row;
-    width: 160px;
-    height: 80px;
+    flex-direction: column;
+    padding: 20px;
+    gap: 6px;
     background-color: lightgray;
     align-items: center;
     justify-content: space-around;
@@ -11,8 +11,18 @@
 
 #deleteColumnButton {
     border: none;
-    width: 80px;
-    height: 60px;
+    padding: 10px;
     border-radius: 6px;
 
+}
+
+.contextMenuButton{
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.habitNameContextMenu{
+    margin-bottom: 10px;
 }

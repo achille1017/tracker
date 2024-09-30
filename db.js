@@ -1,7 +1,7 @@
 import Sqlite from 'better-sqlite3'
 import bcrypt from 'bcrypt'
 import { generateDailyAdvice } from "./advicer.js"
-import { getYesterday } from './tools.js'
+import { getYesterday, replaceObjectValues, moveKeyValuePair } from './tools.js'
 
 const db = new Sqlite('db.sqlite');
 db.prepare('CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT, data TEXT, habits TEXT)').run();
@@ -101,16 +101,14 @@ async function allowLogin(username, userProvidedPassword) {
 }
 function getFormattedDate() {
 	const today = new Date();
-
-	// Get day, month, and year
-	const day = String(today.getDate()).padStart(2, '0'); // Ensures two digits
-	const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-	const year = today.getFullYear();
-
-	// Format the date as dd-mm-yyyy
-	return `${day}-${month}-${year}`;
+	return `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getFullYear()}`;
 }
-
+function changeOrderHabit(username, habit, order) {
+	let habits = getHabits(username)
+	const newhabits = moveKeyValuePair(habits, habit, order)
+	let update = db.prepare(`update users set habits=? where username = '${username}'`)
+	update.run(JSON.stringify(newhabits))
+}
 async function register(username, password) {
 	const saltRounds = 10;
 	let result;
@@ -155,6 +153,9 @@ async function getDailyAdvice(day, username) {
 	if (result.advice === null) {
 		let select2 = db.prepare(`SELECT value FROM users, json_each(data) AS value WHERE json_extract(value, '$.date') = '${getYesterday()}' and username='${username}';`);
 		let result2 = select2.get();
+		if (result2 === undefined) {
+			result2 = { "value": JSON.stringify(replaceObjectValues(getHabits(username), "bool", 0)) }
+		}
 		const profile = getProfile(username)
 		const advice = await generateDailyAdvice(JSON.parse(result2.value), profile.name, profile.job, profile.language)
 		let update = db.prepare(`update users SET advice_daily = json_insert(advice_daily, '$.${day}', ?) where username = '${username}'`)
@@ -163,4 +164,4 @@ async function getDailyAdvice(day, username) {
 	}
 	else return result.advice;
 }
-export { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile }
+export { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit }

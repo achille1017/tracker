@@ -182,11 +182,13 @@ const TrackerApp = (props) => {
                         <p className="moyenne" id='dateCell1'>{isNaN(Math.round(averageTotal * 10) / 10) ? null : Math.round(averageTotal * 10) / 10 + " %"}</p>
                         {Object.keys(habitsUser).map((columnName, index) => (habitsUser[columnName] === "bool" && averages[columnName] !== undefined ? <p key={columnName} className="moyenne">{Math.round(averages[columnName] * 10) / 10} %</p> : <p key={columnName} className="moyenne"></p>))}
                     </div>
+                    <div id='hidder'></div>
                 </div>
                 <HabitsManager updateData={updateData}></HabitsManager>
                 {contextMenu.visible && (
                     <div ref={menuRef}>
                         <ContextMenu
+                            habitsUser={habitsUser}
                             position={{ x: contextMenu.x, y: contextMenu.y }}
                             onClose={handleClose}
                             onSelect={handleClick}

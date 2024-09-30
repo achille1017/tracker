@@ -13,8 +13,8 @@ const Landing = (props) => {
             <div id='firstBoxLanding'>
                 <div id='titleBox'>
                     <p id='title1'>GET</p>
-                    <p id='title2'>PRODUCTIVE</p>
-                    <p id='title3'>TODAY</p>
+                    <p id='title1'>PRODUCTIVE</p>
+                    <p id='title1'>WITH ARCO</p>
                     <p id='poweredByAI'>Powered by AI</p>
                 </div>
                 <div id='screenshot1Box'><img id='screenshot1' src={screenshot1}></img><p id='legend1'>Get daily habits and track your progress towards success </p></div>

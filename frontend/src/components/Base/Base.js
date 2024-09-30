@@ -56,7 +56,7 @@ const Base = (props) => {
                     <Link to="/" className='linkNavBar'>Home</Link>
                     {props.logged ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : null}
                 </div>
-                <p id='productiveToday'>productive.today</p>
+                <p id='productiveToday'>withar.co</p>
                 {props.logged ? <div className='rightBoxNavBar'><button id='logout' onClick={logout}>Logout</button> </div>:
                 <div className='rightBoxNavBar'><div id='loginBox1'>
                         <button onClick={openLoginBox} id='getIn'>Get in</button>
