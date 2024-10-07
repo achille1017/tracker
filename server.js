@@ -1,27 +1,91 @@
 import express from 'express';
 import session from 'express-session';
-import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit } from './db.js';
+import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription } from './db.js';
 import cors from 'cors'
 import { getToday } from "./tools.js"
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { getThreeCheckoutLinks, FRONTEND_SERVER } from "./payements.js"
+import { Server } from 'socket.io';
+import http from "http"
+import fs from 'fs';
+import crypto from "crypto"
 
+const keys = JSON.parse(fs.readFileSync('keys.json', 'utf8'));
+const LEMON_SQUEEZY_SIGNING_SECRET = keys["lemonSqueezySigningSecret"]
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 4000;
-app.use(express.json());
-app.use(session({
-    secret: 'mySecretKey', // used to sign the session ID cookie
-    resave: false, // do not save the session if it's not modified
-    // do not save new sessions that have not been modified
-    saveUninitialized: false
+const sessionMiddleware = session({
+    secret: 'your secret key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: false, // set to true if using https
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 // 1 day
+    }
+});
+app.use(sessionMiddleware);
+
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: FRONTEND_SERVER,
+        credentials: true
+    }
+});
+
+io.use((socket, next) => {
+    sessionMiddleware(socket.request, socket.request.res || {}, next);
+});
+
+
+io.on('connection', (socket) => {
+    socket.on('joinRoom', () => {
+        socket.request.session.reload((err) => {
+            if (err) {
+                console.error('Error reloading session:', err);
+            } else {
+                socket.join(socket.request.session.mail);
+                console.log(`Socket ${socket.id} has joined room ${socket.request.session.mail}. User: ${socket.request.session.mail}`);
+            }
+        });
+    });
+});
+
+
+app.use(express.json({
+    verify: (req, res, buf) => {
+        req.rawBody = buf.toString();
+    }
 }));
 
 
+function verifyLemonSqueezyWebhook(req, res, next) {
+    const signature = req.headers['x-signature'];
+    const rawBody = req.rawBody;
+    const signingSecret = LEMON_SQUEEZY_SIGNING_SECRET;
+  
+    if (!signature) {
+      return res.status(400).send('No signature provided');
+    }
+  
+    const hmac = crypto.createHmac('sha256', signingSecret);
+    const digest = Buffer.from(hmac.update(rawBody).digest('hex'), 'utf8');
+    const providedSignature = Buffer.from(signature, 'utf8');
+  
+    if (crypto.timingSafeEqual(digest, providedSignature)) {
+      next();
+    } else {
+      res.status(401).send('Invalid signature');
+    }
+  }
+
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: FRONTEND_SERVER,
     credentials: true
 }));
 
@@ -30,7 +94,7 @@ app.get('/data', (req, res) => {
         res.status(401).send()
     }
     else {
-        res.json(getData(req.session.user));
+        res.json(getData(req.session.mail));
     }
 });
 app.get('/profile', (req, res) => {
@@ -38,7 +102,7 @@ app.get('/profile', (req, res) => {
         res.status(401).send()
     }
     else {
-        res.json(getProfile(req.session.user));
+        res.json(getProfile(req.session.mail));
     }
 });
 app.post('/advice', async (req, res) => {
@@ -47,7 +111,7 @@ app.post('/advice', async (req, res) => {
     }
     else {
         if (req.body.type === "daily") {
-            let advice = await getDailyAdvice(getToday(), req.session.user)
+            let advice = await getDailyAdvice(getToday(), req.session.mail)
             res.json({ "advice": advice })
         }
     }
@@ -57,7 +121,7 @@ app.post('/setprofile', (req, res) => {
         res.status(401).send()
     }
     else {
-        updateProfile(req.session.user, req.body.newProfile)
+        updateProfile(req.session.mail, req.body.newProfile)
         res.status(200).send()
     }
 });
@@ -66,7 +130,7 @@ app.get('/habits', (req, res) => {
         res.status(401).send()
     }
     else {
-        res.json(getHabits(req.session.user));
+        res.json(getHabits(req.session.mail));
     }
 });
 app.post('/updatedata', (req, res) => {
@@ -74,7 +138,7 @@ app.post('/updatedata', (req, res) => {
         res.status(401).send()
     }
     else {
-        updateData(req.session.user, req.body)
+        updateData(req.session.mail, req.body)
         res.status(200).send()
     }
 });
@@ -83,7 +147,7 @@ app.post('/newhabit', (req, res) => {
         res.status(401).send()
     }
     else {
-        if (insertHabit(req.session.user, req.body.newHabit, req.body.newHabitType)) {
+        if (insertHabit(req.session.mail, req.body.newHabit, req.body.newHabitType)) {
             res.status(200).send()
         }
         else {
@@ -96,7 +160,7 @@ app.post('/deletehabit', (req, res) => {
         res.status(401).send()
     }
     else {
-        deleteHabit(req.session.user, req.body.habit)
+        deleteHabit(req.session.mail, req.body.habit)
         res.status(200).send()
     }
 })
@@ -105,14 +169,14 @@ app.post('/changeorderhabit', (req, res) => {
         res.status(401).send()
     }
     else {
-        changeOrderHabit(req.session.user, req.body.habit, req.body.order)
+        changeOrderHabit(req.session.mail, req.body.habit, req.body.order)
         res.status(200).send()
     }
 })
 app.post('/login', async (req, res) => {
-    if (await allowLogin(req.body.username, req.body.password)) {
+    if (await allowLogin(req.body.mail, req.body.password)) {
         req.session.logged = true;
-        req.session.user = req.body.username
+        req.session.mail = req.body.mail
         res.status(200).send()
     }
     else {
@@ -133,13 +197,31 @@ app.post('/logout', (req, res) => {
     });
 })
 app.post('/register', async (req, res) => {
-    const registration = await register(req.body.username, req.body.password)
+    const registration = await register(req.body.mail, req.body.password)
     if (registration) {
         res.status(200).send()
     }
     else {
         res.status(400).send()
     }
+})
+
+//Payements 
+
+app.get('/checkout', (req, res) => {
+    getThreeCheckoutLinks(req.session.mail).then(links => res.json(links)
+    )
+})
+
+app.get('/plan', (req, res) => {
+    res.json({ "plan": getPlan(req.session.mail) })
+})
+
+app.post('/subscription_callback', verifyLemonSqueezyWebhook, (req, res) => {
+    console.log(req.body.meta.custom_data.mail + " updated his subscription to " + req.body.data.attributes.status)
+    updateSubscription(req.body.meta.custom_data.mail, req.body.data.attributes.status, req.body.data.attributes.updated_at)
+    io.to(req.body.meta.custom_data.mail).emit("subscription_updated");
+    res.status(200).send()
 })
 
 // Serve static files from the "public" directory
@@ -161,6 +243,6 @@ app.get('/*', (req, res) => {
 });
 
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });

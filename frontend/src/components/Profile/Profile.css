@@ -1,24 +1,57 @@
-#profile{
+#profile {
     min-height: calc(80vh - 80px);
     padding: 10vh 15vw;
     width: calc(70vw);
     display: flex;
     flex-direction: column;
     gap: 40px;
-}
-#title1Profile{
-    font-size: 40px;
+    align-items: center;
 }
 
-.profileDiv{
+#title1Profile {
+    font-size: 40px;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.profileDiv {
     display: flex;
     flex-direction: row;
-    width: 20vw;
     justify-content: space-between;
 }
 
-#bigProfileDiv{
+#bigProfileDiv {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+    background-color: #eefaff;
+    padding: 40px;
+    border: 1px black solid;
+    border-radius: 12px;
+    min-width: 600px;
+    width: 40vw;
+}
+
+.profileP {
+    font-size: 24px;
+}
+
+#saveChanges {
+
+    background-color: rgb(76, 1, 220);
+    color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 12px;
+    width: fit-content;
+    align-self: flex-end;
+
+}
+
+.inputProfile {
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    width: calc(50%);
 }

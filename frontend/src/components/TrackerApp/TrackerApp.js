@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import DayTracker from '../DayTracker/DayTracker';
 import "./TrackerApp.css"
 import HabitsManager from '../HabitsManager/HabitsManager';
@@ -10,6 +9,7 @@ import closeImage from "../../assets/close.png"
 import Assistant from '../Assistant/Assistant.js';
 import ProfileSetter from '../ProfileSetter/ProfileSetter.js';
 import { SERVER_NAME } from '../../config.js';
+import { useNavigateAndScroll } from "../functions.js"
 
 const TrackerApp = (props) => {
     const [authorized, setAuthorized] = useState(false)
@@ -25,8 +25,9 @@ const TrackerApp = (props) => {
     const [dateCellEditor, setDateCellEditor] = useState("")
     const [habitCellEditor, setHabitCellEditor] = useState("")
     const [profile, setProfile] = useState({})
+    const goRoute = useNavigateAndScroll()
+
     const menuRef = useRef(null);
-    const navigate = useNavigate();
     const handleContextMenu = (event, habit) => {
         event.preventDefault();
         setContextMenu({
@@ -61,7 +62,7 @@ const TrackerApp = (props) => {
     }
     useEffect(() => {
         if (props.logged === false) {
-            navigate('/')
+            goRoute('/')
         }
         document.addEventListener('click', handleClickAway);
         return () => {
@@ -70,7 +71,7 @@ const TrackerApp = (props) => {
     }, []);
     useEffect(() => {
         if (props.logged === false) {
-            navigate('/')
+            goRoute('/')
         }
     }, [props.logged])
     function changeCellValue(day, habit, newValue) {
@@ -175,7 +176,7 @@ const TrackerApp = (props) => {
                     ))}
 
                     <div className='dayLine' id='habitsColumn'>
-                        <p className="title" id='dateCell1'>Date</p>
+                        <p className="title" id='dateCell2'>Date</p>
                         {Object.keys(habitsUser).map((columnName, index) => (<div className="title" key={columnName} onContextMenu={(event) => handleContextMenu(event, columnName)}><p  key={columnName} >{columnName}</p></div>))}
                     </div>
                     <div className='dayLine' id='averagesColumn'>
@@ -211,7 +212,7 @@ const TrackerApp = (props) => {
                     </div>
                 }
 
-            </div> : dataLoaded && profile.profileSet === 0 ? <ProfileSetter updateProfile={updateProfile} updateData={updateData}></ProfileSetter> : null}
+            </div> : dataLoaded && profile.profileSet === 0 ? <ProfileSetter updateProfile={updateProfile} updateData={updateData} updateHabits={updateHabits}></ProfileSetter> : <div id="appWaiter"></div>}
         </div>
     );
 };

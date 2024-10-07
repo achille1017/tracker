@@ -4,7 +4,7 @@ import { generateDailyAdvice } from "./advicer.js"
 import { getYesterday, replaceObjectValues, moveKeyValuePair } from './tools.js'
 
 const db = new Sqlite('db.sqlite');
-db.prepare('CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT, data TEXT, habits TEXT)').run();
+db.prepare('CREATE TABLE IF NOT EXISTS users (mail TEXT PRIMARY KEY, password TEXT, data TEXT, habits TEXT,advice_daily TEXT,profile TEXT,plan TEXT)').run();
 function checkKeyExists(jsonObject, key) {
 	// Using the in operator
 	if (key in jsonObject) {
@@ -18,32 +18,38 @@ function checkKeyExists(jsonObject, key) {
 
 	return false;
 }
-function getData(username) {
-	let select = db.prepare(`SELECT data FROM users WHERE username = '${username}'`);
+function getData(mail) {
+	let select = db.prepare(`SELECT data FROM users WHERE mail = '${mail}'`);
 	let result = select.get();
 	if (result) return JSON.parse(result.data);
 	return null;
 }
-function getHabits(username) {
-	let select = db.prepare(`SELECT habits FROM users WHERE username = '${username}'`);
+function getPlan(mail) {
+	let select = db.prepare(`SELECT plan FROM users WHERE mail = '${mail}'`);
+	let result = select.get();
+	if (result) return JSON.parse(result.plan);
+	return null;
+}
+function getHabits(mail) {
+	let select = db.prepare(`SELECT habits FROM users WHERE mail = '${mail}'`);
 	let result = select.get();
 	if (result) return JSON.parse(result.habits);
 	return null;
 }
-function getProfile(username) {
-	let select = db.prepare(`SELECT profile FROM users WHERE username = '${username}'`);
+function getProfile(mail) {
+	let select = db.prepare(`SELECT profile FROM users WHERE mail = '${mail}'`);
 	let result = select.get();
 	if (result) return JSON.parse(result.profile);
 	return null;
 }
-function updateData(username, newData) {
-	let update = db.prepare(`update users set data=? where username = '${username}'`)
+function updateData(mail, newData) {
+	let update = db.prepare(`update users set data=? where mail = '${mail}'`)
 	update.run(JSON.stringify(newData))
 }
-function insertHabit(username, newHabit, newHabitType) {
-	let habitExists = checkKeyExists(getHabits(username), newHabit)
+function insertHabit(mail, newHabit, newHabitType) {
+	let habitExists = checkKeyExists(getHabits(mail), newHabit)
 	if (habitExists) { return false }
-	let update = db.prepare(`update users SET habits = json_insert(habits, '$.${newHabit}', '${newHabitType}') where username = '${username}'`)
+	let update = db.prepare(`update users SET habits = json_insert(habits, '$.${newHabit}', '${newHabitType}') where mail = '${mail}'`)
 	update.run()
 	update = db.prepare(`UPDATE users
 	SET data = (
@@ -51,14 +57,14 @@ function insertHabit(username, newHabit, newHabitType) {
 			json_set(value, '$.${newHabit}', '${newHabitType === "bool" ? 2 : ""}')
 		)
 		FROM json_each(data)
-		WHERE data IS NOT NULL and username='${username}'
+		WHERE data IS NOT NULL and mail='${mail}'
 	)
-	WHERE data IS NOT NULL and username='${username}';
+	WHERE data IS NOT NULL and mail='${mail}';
 	`)
 	update.run()
 	return true
 }
-function deleteHabit(username, habitName) {
+function deleteHabit(mail, habitName) {
 	let deleteRequest = db.prepare(`UPDATE users
 	SET data = (
 		SELECT json_group_array(
@@ -68,19 +74,19 @@ function deleteHabit(username, habitName) {
 			SELECT json_each.value
 			FROM users,
 			json_each(data)
-			WHERE data IS NOT NULL and username='${username}'
+			WHERE data IS NOT NULL and mail='${mail}'
 		)
-		WHERE data IS NOT NULL and username='${username}'
+		WHERE data IS NOT NULL and mail='${mail}'
 	)
-	WHERE data IS NOT NULL and username='${username}';`)
+	WHERE data IS NOT NULL and mail='${mail}';`)
 	deleteRequest.run()
 	deleteRequest = db.prepare(`UPDATE users
 	SET habits = json_remove(habits, '$."${habitName}"')
-	WHERE habits IS NOT NULL and username='${username}';`)
+	WHERE habits IS NOT NULL and mail='${mail}';`)
 	deleteRequest.run()
 }
-async function allowLogin(username, userProvidedPassword) {
-	let select = db.prepare(`SELECT password FROM users WHERE username = '${username}'`);
+async function allowLogin(mail, userProvidedPassword) {
+	let select = db.prepare(`SELECT password FROM users WHERE mail = '${mail}'`);
 	if (select.get() === undefined) { return false }
 	let storedHash = select.get()["password"];
 	let login;
@@ -103,13 +109,13 @@ function getFormattedDate() {
 	const today = new Date();
 	return `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getFullYear()}`;
 }
-function changeOrderHabit(username, habit, order) {
-	let habits = getHabits(username)
+function changeOrderHabit(mail, habit, order) {
+	let habits = getHabits(mail)
 	const newhabits = moveKeyValuePair(habits, habit, order)
-	let update = db.prepare(`update users set habits=? where username = '${username}'`)
+	let update = db.prepare(`update users set habits=? where mail = '${mail}'`)
 	update.run(JSON.stringify(newhabits))
 }
-async function register(username, password) {
+async function register(mail, password) {
 	const saltRounds = 10;
 	let result;
 	await new Promise(async next => {
@@ -128,8 +134,8 @@ async function register(username, password) {
 					return;
 				}
 				try {
-					let insert = db.prepare(`insert into users (username,password,data,habits,advice_daily,profile) values (?,?,?,?,?,?)`);
-					insert.run(username, hash, `[{"date":"${getFormattedDate()}"}]`, '{}', `{"${getFormattedDate()}":"firstAdvice"}`, '{"profileSet":0,"name":"","job":"","language":""}');
+					let insert = db.prepare(`insert into users (mail,password,data,habits,advice_daily,profile,plan) values (?,?,?,?,?,?,?)`);
+					insert.run(mail, hash, `[{"date":"${getFormattedDate()}"}]`, '{}', `{"${getFormattedDate()}":"firstAdvice"}`, '{"profileSet":0,"name":"","job":"","language":""}', `{"status":"inactive","updated":"${getFormattedDate()}"}`);
 					result = true
 				} catch (e) {
 					console.log(e)
@@ -141,27 +147,37 @@ async function register(username, password) {
 	})
 	return result
 }
-function updateProfile(username, newProfile) {
-	let profile = getProfile(username)
+function updateProfile(mail, newProfile) {
+	let profile = getProfile(mail)
 	Object.assign(profile, newProfile)
-	let update = db.prepare(`update users set profile='${JSON.stringify(profile)}' where username = '${username}'`)
+	let update = db.prepare(`update users set profile='${JSON.stringify(profile)}' where mail = '${mail}'`)
 	update.run()
 }
-async function getDailyAdvice(day, username) {
-	let select = db.prepare(`SELECT json_extract(advice_daily, '$."${day}"') as advice FROM users WHERE username = '${username}'`);
+async function getDailyAdvice(day, mail) {
+	let select = db.prepare(`SELECT json_extract(advice_daily, '$."${day}"') as advice FROM users WHERE mail = '${mail}'`);
 	let result = select.get();
 	if (result.advice === null) {
-		let select2 = db.prepare(`SELECT value FROM users, json_each(data) AS value WHERE json_extract(value, '$.date') = '${getYesterday()}' and username='${username}';`);
+		let select2 = db.prepare(`SELECT value FROM users, json_each(data) AS value WHERE json_extract(value, '$.date') = '${getYesterday()}' and mail='${mail}';`);
 		let result2 = select2.get();
 		if (result2 === undefined) {
-			result2 = { "value": JSON.stringify(replaceObjectValues(getHabits(username), "bool", 0)) }
+			result2 = { "value": JSON.stringify(replaceObjectValues(getHabits(mail), "bool", 0)) }
 		}
-		const profile = getProfile(username)
+		const profile = getProfile(mail)
 		const advice = await generateDailyAdvice(JSON.parse(result2.value), profile.name, profile.job, profile.language)
-		let update = db.prepare(`update users SET advice_daily = json_insert(advice_daily, '$.${day}', ?) where username = '${username}'`)
+		let update = db.prepare(`update users SET advice_daily = json_insert(advice_daily, '$.${day}', ?) where mail = '${mail}'`)
 		update.run(advice[0])
 		return advice[0]
 	}
 	else return result.advice;
 }
-export { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit }
+function updateSubscription(mail, status, date) {
+	let update = db.prepare(`UPDATE users
+		SET plan = JSON_PATCH(plan, JSON_OBJECT('status','${status}'))
+		WHERE mail = '${mail}'`)
+	update.run()
+	update = db.prepare(`UPDATE users
+		SET plan = JSON_PATCH(plan, JSON_OBJECT('updated','${date}'))
+		WHERE mail = '${mail}'`)
+	update.run()
+}
+export { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription }

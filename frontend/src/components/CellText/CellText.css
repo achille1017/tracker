@@ -37,3 +37,8 @@
 
 
 
+@media screen and (max-width: 720px) {
+    .cellText{
+        font-size: 14px;
+    }
+}

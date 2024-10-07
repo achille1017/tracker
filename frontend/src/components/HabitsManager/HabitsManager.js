@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import "./HabitsManager.css"
 import { SERVER_NAME } from '../../config.js';
+import valid from "../../assets/valid.png"
 
 const HabitsManager = (props) => {
-    const [newHabit,setNewHabit]=useState("")
-    const [newHabitType,setNewHabitType]=useState("bool")
-
+    const [newHabit, setNewHabit] = useState("")
+    const [newHabitType, setNewHabitType] = useState("bool")
+    const [buttonStatus, setButtonStatus] = useState("normal")
     function createNewHabit() {
-        fetch(SERVER_NAME+"/newhabit", {
+        fetch(SERVER_NAME + "/newhabit", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json', // Indicate that you're sending JSON
             },
-            body: JSON.stringify({"newHabit":newHabit,"newHabitType":newHabitType}) ,
-            credentials:'include'
+            body: JSON.stringify({ "newHabit": newHabit, "newHabitType": newHabitType }),
+            credentials: 'include'
         })
             .then(response => {
-                if(response.status===200){
+                if (response.status === 200) {
                     props.updateData()
+                    setButtonStatus("added")
+                    setTimeout(() => { setButtonStatus("normal") }, 3000)
                 }
             })
     }
@@ -30,7 +33,7 @@ const HabitsManager = (props) => {
                 <option value="number">Number</option>
             </select>
             <input id="newHabitName" type='text' value={newHabit} onChange={(e) => setNewHabit(e.target.value)} placeholder='name of new habit'></input>
-            <button onClick={createNewHabit} id='newTracker'>New tracker</button>
+            {buttonStatus === "normal" ? <button onClick={createNewHabit} id='newTracker'>New tracker</button> : <img className='validHabitExampleHabitManager' src={valid}></img>}
         </div>
     );
 };

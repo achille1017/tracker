@@ -19,7 +19,7 @@
     border-radius: 10px;
     border: none;
     background-color: #f0f0f0;
-    padding:  12px;
+    padding: 12px;
 }
 
 #newTracker {
@@ -29,9 +29,34 @@
     font-weight: bold;
     border-radius: 10px;
     padding: 12px;
-
+    width: 102px;
+    cursor: pointer;
 }
 
-#addANewHabit{
-    font-weight: 600    ;
+#addANewHabit {
+    font-weight: 600;
+}
+
+.validHabitExampleHabitManager {
+    height: 25px;
+    width: fit-content;
+    padding: 0px 38.5px;
+}
+
+@media screen and (max-width: 720px) {
+    .habitsManager {
+        flex-direction: column;
+        width: calc(100% - 20px);
+        padding: 10px;
+    }
+
+    #newHabitType,
+    #newTracker {
+
+        width: 100%;
+    }
+
+    #newHabitName {
+        width: calc(100% - 24px);
+    }
 }

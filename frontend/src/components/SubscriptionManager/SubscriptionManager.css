@@ -1,0 +1,40 @@
+#subscriptionManager{
+    min-height: calc(80vh - 80px);
+    padding: 10vh 0px;
+}
+
+.loaderAnimation {
+    width: 48px;
+    height: 48px;
+    border: 5px solid black;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+.loaderAnimationMobile{
+    display: none;
+}
+@media screen and (max-width: 720px) {
+    #subscriptionManager{
+        width: 86vw;
+    }
+    #toStartP{
+        text-align: center;
+        font-weight: bold;
+    }
+    .loaderAnimation {
+        display: none;
+    }
+    .loaderAnimationMobile {
+        width: 48px;
+        height: 48px;
+        border: 5px solid black;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+    }
+}

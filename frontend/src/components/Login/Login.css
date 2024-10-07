@@ -1,0 +1,104 @@
+.inputRegister {
+    background-color: lightgrey;
+    border: none;
+    font-size: 20px;
+    padding: 8px 16px;
+    border-radius: 10px;
+}
+
+#loginPage {
+    display: flex;
+    flex-direction: row;
+    width: 70vw;
+    margin: 60px 0px;
+    align-items: center;
+    min-height: calc(100vh - 200px);
+}
+
+#registerButton {
+    font-weight: bold;
+    cursor: pointer;
+    background-color: rgb(76, 1, 220);
+    border: none;
+    font-size: 20px;
+    padding: 16px 16px;
+    border-radius: 10px;
+    color: white;
+}
+
+#createYour {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+#register {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: calc(50% - 1px);
+    padding-right: 5vw;
+    flex: 1;
+}
+
+#login {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 1px);
+    height: 100%;
+    padding-left: 5vw;
+    gap: 20px;
+    flex: 1;
+}
+
+#verticalLineLogin {
+    height: 60vh;
+    width: 1px;
+    background-color: black;
+
+}
+
+@media screen and (max-width: 1080px) {
+    #loginPage {
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    #verticalLineLogin {
+        height: 1px;
+        width: 60vw;
+    }
+
+    #register,
+    #login {
+        width: 100%;
+        padding: 0px;
+        flex: unset;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    #registerButton {
+        padding: 6px 16px;
+    }
+
+    #loginPage {
+        width: 86vw;
+        margin: 20px 0px;
+        min-height: calc(100vh - 120px);
+    }
+
+    #createYour {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .inputRegister {
+        width: calc(100% - 32px);
+    }
+
+    #registerButton {
+        width: unset;
+    }
+}

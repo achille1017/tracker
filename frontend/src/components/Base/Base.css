@@ -1,4 +1,4 @@
-#navBar{
+#navBar {
     height: 80px;
     background-color: #449DD1;
     width: calc(70vw);
@@ -12,18 +12,19 @@
     z-index: 100;
 }
 
-.none{
+.none {
     display: none;
 }
-.openLoginBox{
+
+.openLoginBox {
     display: flex;
 }
 
-#loginBox{
+#loginBox {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(0, 0, 0,0.3);
+    background-color: rgb(0, 0, 0, 0.3);
     border-radius: 20px;
     padding: 20px;
     gap: 12px;
@@ -31,14 +32,14 @@
     backdrop-filter: blur(2px);
 }
 
-#loginBox1{
+#loginBox1 {
     display: flex;
     flex-direction: column;
     height: 39px;
     gap: 30px;
 }
 
-#getIn{
+#getIn {
     border: none;
     background-color: rgb(76, 1, 220);
     font-size: 20px;
@@ -50,45 +51,45 @@
     cursor: pointer;
 }
 
-.inputLogin{
+.inputLogin {
     padding: 6px 12px;
     border-radius: 12px;
     border: none;
     width: 160px;
 }
 
-#loginButton{
+#loginButton {
     border: none;
     width: 100%;
     font-size: 20px;
-  padding: 8px;
-  border-radius: 10px;
+    padding: 8px;
+    border-radius: 10px;
 
 }
 
-#bigBox{
+#bigBox {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#logout{
+#logout {
     border: none;
     background-color: #f0f0f0;
     font-size: 20px;
     padding: 8px;
     border-radius: 10px;
     width: 224px;
-
+    cursor: pointer;
 }
 
-#linkLeftNavBar{
+#linkLeftNavBar {
     display: flex;
     flex-direction: row;
     gap: 30px;
 }
 
-.linkNavBar{
+.linkNavBar {
     text-decoration: none;
     color: white;
     font-size: 20px;
@@ -96,31 +97,34 @@
     border-radius: 20px;
     padding: 10px 20px;
     font-weight: bold;
+    background-color: transparent;
+    cursor: pointer;
 }
 
-#linkRegister{
+#linkRegister {
     border: none;
     width: 100%;
     font-size: 20px;
     padding: 8px 0px;
-  border-radius: 10px;
-  background-color:  rgb(76, 1, 220);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
+    border-radius: 10px;
+    background-color: rgb(76, 1, 220);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 
-#productiveToday{
+#withArco {
     font-family: 'UniSansBold';
     font-size: 30px;
     color: white;
+    cursor: pointer;
 }
 
-#footer{
+#footer {
     height: 80px;
     background-color: #449DD1;
     width: calc(70vw);
@@ -131,7 +135,7 @@
     justify-content: space-between;
 }
 
-.rightBoxNavBar{
+.rightBoxNavBar {
     flex: 1;
     display: flex;
     flex-direction: row;
@@ -139,6 +143,54 @@
 }
 
 
-.leftBoxNavBar{
+.leftBoxNavBar {
     flex: 1;
+}
+
+.footerText {
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 1080px) {
+    #linkLeftNavBar {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 720px) {
+
+    #navBar {
+        padding: 0px 7vw;
+        width: 86vw;
+        align-items: center;
+
+    }
+
+    #getIn, #logout {
+        width: min-content;
+        text-wrap: nowrap;
+    }
+
+    #withArco {
+        font-size: 20px;
+    }
+
+    #footer {
+        padding: 0px 7vw;
+        width: 86vw;
+        align-items: center;
+
+    }
+
+    .footerText {
+        font-size: 12px;
+    }
+
+    #thirdBoxLanding {
+        padding: 20px;
+    }
 }

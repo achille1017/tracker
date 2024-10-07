@@ -19,3 +19,15 @@
     width: 10%;
     height: fit-content;
 }
+
+@media screen and (max-width: 720px) {
+    #assistant{
+        width: 86vw ;
+    }
+    #dailyAdivce{
+        padding: 10px;
+        width: calc(85% - 20px);
+        font-size: 12px;
+        line-height: 16px;
+    }
+}

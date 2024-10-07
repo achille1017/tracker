@@ -79,6 +79,7 @@
     width: 224px;
     color: white;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .habitExampleButton {
@@ -89,6 +90,7 @@
     border-radius: 10px;
     color: white;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .titleHabitExample {
@@ -107,12 +109,48 @@
 
 #hidden {
     opacity: 0;
-    overflow: hidden; /* Prevents content overflow */
-    transition: opacity 0.6s ease, height 0.6s ease; /* Smooth transition */
+    overflow: hidden;
+    /* Prevents content overflow */
+    transition: opacity 0.6s ease, height 0.6s ease;
+    /* Smooth transition */
 }
 
 #visible {
     opacity: 1;
-    height: auto; /* Set to auto to allow full height */
-    transition: opacity 0.6s ease, height 0.6s ease; /* Smooth transition */
+    height: auto;
+    /* Set to auto to allow full height */
+    transition: opacity 0.6s ease, height 0.6s ease;
+    /* Smooth transition */
+}
+
+@media screen and (max-width: 720px) {
+
+    .stepProfileSetter,
+    .step4ProfileSetter {
+        width: 86vw;
+    }
+
+    #habitExamples {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .step4ProfileSetter {
+        padding: 30px 0px;
+    }
+
+    .titleHabitExample {
+        margin-bottom: 10px;
+    }
+    .startProfile {
+        border: none;
+        background-color: rgb(76, 1, 220);
+        font-size: 16px;
+        padding: 6px;
+        border-radius: 10px;
+        width: unset;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
 }

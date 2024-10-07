@@ -1,3 +1,23 @@
+import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
+
+const useNavigateAndScroll = () => {
+  const navigate = useNavigate();
+
+  const navigateAndScroll = useCallback((path) => {
+    navigate(path);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Change to 'smooth' for smooth scrolling
+    });
+  }, [navigate]);
+
+  return navigateAndScroll;
+};
+
+export default useNavigateAndScroll;
+
+
 function getNextFourDays() {
     const dates = [];
     for (let i = 0; i < 2; i++) {
@@ -27,7 +47,7 @@ function parseDate(dateString) {
 function getDatesBetween(startDate) {
     startDate = parseDate(startDate)
     const endDate = new Date();
-    endDate.setDate(endDate.getDate() + 2);
+    endDate.setDate(endDate.getDate() + 1);
     const dates = [];
     let currentDate = new Date(startDate);
     currentDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000)
@@ -111,4 +131,17 @@ function getAverageFromObj(obj){
     let array = getNumericValues(obj)
     return sumArray(array)/array.length
 }
-export { getNextFourDays, findMostAdvancedDate, getDatesBetween, replaceValues, calculateAverages,getAverageFromObj }
+function checkKeyPosition(obj, inputString) { // TODO à déplacer
+    const keys = Object.keys(obj);
+    const index = keys.indexOf(inputString);
+    if (index === -1) {
+      return "Not found";
+    } else if (index === 0) {
+      return "First position";
+    } else if (index === keys.length - 1) {
+      return "Last position";
+    } else {
+      return "Other position";
+    }
+  }
+export { getNextFourDays, findMostAdvancedDate, getDatesBetween, replaceValues, calculateAverages,getAverageFromObj, useNavigateAndScroll,checkKeyPosition }

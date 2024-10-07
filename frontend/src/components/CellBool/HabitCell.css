@@ -21,6 +21,7 @@
     width: 120px;
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: white;
 
     border-top: 1px solid black;

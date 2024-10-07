@@ -1,39 +1,36 @@
-import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import "./Base.css"
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { SERVER_NAME } from '../../config.js';
-
+import { useNavigateAndScroll } from "../functions.js"
 const Base = (props) => {
     const [loginBoxState, setLoginBoxState] = useState("none")
-    const [username, setUsername] = useState("")
+    const [mail, setMail] = useState("")
     const [password, setPassword] = useState("")
+    const [loaded, setLoaded] = useState(false)
+    const location = useLocation();
+    const goRoute = useNavigateAndScroll()
     const navigate = useNavigate();
 
-    function closeLoginBox() {
-        setLoginBoxState("none")
-    }
-    function openLoginBox() {
-        setLoginBoxState("loginBox")
-    }
-    function login() {
-        fetch(SERVER_NAME + "/login", {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json', // Indicate that you're sending JSON
-            },
-            body: JSON.stringify({ "username": username, "password": password }) // Convert the JavaScript object to a JSON string
-        })
-            .then(response => {
-                if (response.status === 200) {
-                    props.updateLogged().then(
-                        () => { navigate('/tracker') }
-                    )
-                    closeLoginBox()
-                }
+    useEffect(() => {
+        if (props.logged) {
+            props.updatePlan().then((plan) => {
+                redirect(plan)
+                setLoaded(true)
             })
+        }
+    }, [props.logged])
+    useEffect(() => {
+        if (loaded) {
+            redirect(props.plan)
+        }
+    }, [location])
+    function redirect(plan) {
+        if (props.logged && plan.status === "inactive" && location.pathname !== "/subscribe" && location.pathname !== "/" && location.pathname !== "/payement") {
+            goRoute('/subscribe')
+        }
     }
     function logout() {
         fetch(SERVER_NAME + "/logout", {
@@ -46,37 +43,63 @@ const Base = (props) => {
             .then(response => {
                 if (response.status === 200) {
                     props.updateLogged()
+                    goRoute('/')
                 }
             })
     }
     return (
         <div id='bigBox'>
             <div id='navBar'>
-                <div className='leftBoxNavBar' id='linkLeftNavBar'>
-                    {props.logged ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : <Link to="/" className='linkNavBar'>Home</Link>}
-                    {props.logged ? <Link to="/profile" className='linkNavBar'>Profile</Link> : <a href="#pricing" className='linkNavBar'>Subscribe</a>}
-                </div>
-                <p id='productiveToday'>withar.co</p>
+                {
+                    props.logged ? loaded ?
+                        <div className='leftBoxNavBar' id='linkLeftNavBar'>
+                            {props.plan.status === "active" ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
+                            {props.plan.status === "active" ? <Link to="/profile" className='linkNavBar'>Profile</Link> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
+                        </div> : null :
+                        <div className='leftBoxNavBar' id='linkLeftNavBar'>
+                            <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>
+                            <button className='linkNavBar' onClick={() => {
+                                navigate('/#pricing')
+                            }}>Subscribe</button>
+                        </div>
+                }
+
+
+                {/*loaded ?
+                    <div className='leftBoxNavBar' id='linkLeftNavBar'>
+                        {props.plan.status === "active" && props.logged ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
+                        {props.plan.status === "active" && props.logged ? <Link to="/profile" className='linkNavBar'>Profile</Link> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
+                    </div>
+                    :
+                    <div className='leftBoxNavBar' id='linkLeftNavBar'>
+                        <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>
+                        <a className='linkNavBar' href="#pricing">Subscribe</a>
+                    </div>*/
+                }
+
+                <p id='withArco' onClick={() => goRoute('/')}>withar.co</p>
                 {props.logged ? <div className='rightBoxNavBar'><button id='logout' onClick={logout}>Logout</button> </div> :
                     <div className='rightBoxNavBar'><div id='loginBox1'>
-                        <button onClick={openLoginBox} id='getIn'>Get in</button>
-                        {loginBoxState !== "none" ? <ClickAwayListener onClickAway={closeLoginBox} touchEvent={false}>
+                        <button onClick={() => { goRoute('/login') }} id='getIn'>Get in</button>
+                        {/*<button onClick={openLoginBox} id='getIn'>Get in</button>*/}
+                        {/*loginBoxState !== "none" ? <ClickAwayListener onClickAway={closeLoginBox} touchEvent={false}>
                             <div id='loginBox'>
-                                <input onChange={(e) => setUsername(e.target.value)} className='inputLogin' type='text' placeholder='Username'></input>
+                                <input onChange={(e) => setMail(e.target.value)} className='inputLogin' type='text' placeholder='Mail'></input>
                                 <input onChange={(e) => setPassword(e.target.value)} className='inputLogin' type='password' placeholder='Password'></input>
                                 <button onClick={login} id='loginButton'>Login</button>
                                 <p id='orP'>or</p>
                                 <Link onClick={closeLoginBox} to="/register" id='linkRegister'>Register</Link>
                             </div>
-                        </ClickAwayListener> : null}
+                        </ClickAwayListener> : null*/}
                     </div></div>
                 }
             </div>
             <Outlet></Outlet>
             <div id='footer'>
-                <a href='https://achilledorier.com'>Who Am I ?</a>
-                <a>Contact</a>
-                <p>withar.co 2024</p>
+                <a className="footerText" href='https://achilledorier.com' target="_blank"
+                    rel="noopener noreferrer">Who Am I ?</a>
+                <a className="footerText">Contact</a>
+                <p className="footerText">withar.co 2024</p>
             </div>
         </div>
     );

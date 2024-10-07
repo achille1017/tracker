@@ -1,11 +1,11 @@
-#landing{
+#landing {
     width: 70vw;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#firstBoxLanding{
+#firstBoxLanding {
     display: flex;
     flex-direction: row;
     padding: 0px 0px 0px 0px;
@@ -15,12 +15,12 @@
     width: 100%;
 }
 
-#screenshot1{
+#screenshot1 {
     width: 30vw;
 }
 
 
-#secondBoxLanding{
+#secondBoxLanding {
     margin-top: 120px;
     display: flex;
     flex-direction: column;
@@ -29,14 +29,15 @@
     gap: 100px;
     margin-bottom: 120px;
 }
-#box2Texts{
+
+#box2Texts {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 40px;
 }
 
-.text1{
+.text1 {
     font-size: 50px;
     text-align: center;
     font-weight: bold;
@@ -44,32 +45,35 @@
     width: fit-content;
 }
 
-.box2TextP{
+.box2TextP {
     font-size: 30px;
     font-family: Tommy;
 }
 
-#whoMadeItP{
+#whoMadeItP {
     font-size: 20px;
     text-align: justify;
 }
 
-#titleBox{
+#titleBox {
     display: flex;
     flex-direction: column;
 }
-#title1{
+
+#title1 {
     font-size: 100px;
     font-weight: bold;
     font-family: 'UniSansBold';
 }
-#title2{
+
+#title2 {
     font-size: 100px;
     font-weight: bold;
     font-family: 'UniSansBold';
     align-self: center;
 }
-#title3{
+
+#title3 {
     font-size: 100px;
     font-weight: bold;
     font-family: 'UniSansBold';
@@ -77,41 +81,43 @@
 
 }
 
-#legend1{
+#legend1 {
     width: fit-content;
     font-family: TommyLight;
 }
 
-#screenshot1Box{
+#screenshot1Box {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
 }
 
-.validImg{
+.validImg {
     height: 30px;
 }
 
-.box2TextsDiv{
+.box2TextsDiv {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
 }
 
-.getStarted{
+.getStarted {
     padding: 20px;
-    font-size: 30px;
+    font-size: 20px;
     background-color: rgb(0, 167, 0);
     color: white;
-    width: fit-content;
     text-decoration: none;
     border-radius: 20px;
     font-family: TommyBold;
+    text-align: center;
+    border: none;
+    cursor: pointer;
 }
 
-#thirdBoxLanding{
+#thirdBoxLanding {
     display: flex;
     flex-direction: column;
     margin: 120px 0px;
@@ -123,24 +129,220 @@
     align-items: center;
 }
 
-#poweredByAI{
+#poweredByAI {}
 
-}
-
-#poweredByAI  {
+#poweredByAI {
     font-size: 24px;
     font-weight: bold;
     text-align: center;
-    background: linear-gradient(90deg, rgba(186,148,62,1) 0%, rgba(236,172,32,1) 20%, rgba(186,148,62,1) 39%, rgba(249,244,180,1) 50%, rgba(186,148,62,1) 60%, rgba(236,172,32,1) 80%, rgba(186,148,62,1) 100%);
+    background: linear-gradient(90deg, rgba(186, 148, 62, 1) 0%, rgba(236, 172, 32, 1) 20%, rgba(186, 148, 62, 1) 39%, rgba(249, 244, 180, 1) 50%, rgba(186, 148, 62, 1) 60%, rgba(236, 172, 32, 1) 80%, rgba(186, 148, 62, 1) 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;	
+    -webkit-text-fill-color: transparent;
     animation: shine 6s infinite;
     background-size: 200%;
     background-position: left;
     text-align: left;
-  
-  }
-  @keyframes shine {
-    to{background-position: right}
-   
-  }
+
+}
+
+@keyframes shine {
+    to {
+        background-position: right
+    }
+
+}
+
+#pricingBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
+#offersBox {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.offerDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+    border: 1px black solid;
+    border-radius: 12px;
+    flex: 1 1;
+    width: 300px;
+    background-color: #eefaff;
+}
+
+#pricing {
+    margin-bottom: 120px;
+
+}
+
+#toStartP {
+    font-size: 50px;
+    font-family: Tommy;
+}
+
+.offerDivP1 {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.offerDivP2 {
+    font-size: 20px;
+}
+
+.offerDivP3 {
+    font-size: 16px;
+}
+
+#offersBoxMobile {
+    display: none;
+}
+
+@media screen and (max-width: 1080px) {
+
+    #firstBoxLanding {
+        flex-direction: column;
+        min-height: calc(100vh - 260px);
+        padding-top: 60px;
+        padding-bottom: 60px;
+        gap: 60px;
+    }
+
+    #offersBox {
+        display: none;
+    }
+
+    #offersBoxMobile {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+        align-items: center;
+    }
+
+    #selectorOffersMobile {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        background-color: #eefaff;
+        border: 1px black solid;
+        border-radius: 12px;
+        justify-content: space-between;
+        gap: 20px;
+        width: calc(100% - 22px);
+    }
+
+    .selectorOffersMobileInactive {
+        flex: 1;
+        font-size: 24px;
+        padding: 10px;
+        border: none;
+        flex: 1 1 0%;
+        /* This is key for equal width */
+        min-width: 0;
+        /* Allow shrinking below content size */
+        white-space: nowrap;
+        /* Prevent text wrapping */
+        overflow: hidden;
+        /* Hide overflowing content */
+        text-overflow: ellipsis;
+        /* Show ellipsis for overflowing text */
+        border-radius: 20px;
+        background-color: transparent;
+        border: solid 1px grey;
+
+    }
+
+    .selectorOffersMobileActive {
+        flex: 1;
+
+        width: 30%;
+        font-size: 24px;
+        padding: 10px;
+        font-weight: bold;
+        border: none;
+        flex: 1 1 0%;
+        /* This is key for equal width */
+        min-width: 0;
+        /* Allow shrinking below content size */
+        white-space: nowrap;
+        /* Prevent text wrapping */
+        overflow: hidden;
+        /* Hide overflowing content */
+        text-overflow: ellipsis;
+        /* Show ellipsis for overflowing text */
+        border-radius: 20px;
+        background-color: #449DD1;
+        color: white;
+    }
+
+    #screenshot1 {
+        width: 70vw;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    #landing {
+        width: 86vw;
+    }
+
+    #title1 {
+        font-size: 50px;
+    }
+
+    #firstBoxLanding {
+        justify-content: unset;
+        padding-bottom: 0px;
+    }
+
+    .text1 {
+        font-size: 30px;
+    }
+
+    #secondBoxLanding {
+        margin-top: 0px;
+    }
+
+    .box2TextP {
+        font-size: 20px;
+    }
+
+    #poweredByAI {
+        font-size: 20px;
+
+    }
+
+    #pricing {
+        margin-bottom: 0px;
+    }
+
+    #toStartP {
+        font-size: 30px;
+    }
+
+    #pricingBox {
+        width: 100%;
+    }
+
+    .offerDiv {
+        width: calc(100% - 20px);
+        padding: 10px;
+    }
+
+    #whoMadeItP {
+        font-size: 16px;
+    }
+
+    .selectorOffersMobileActive,.selectorOffersMobileInactive {
+        font-size: 14px;
+    }
+    #selectorOffersMobile{
+        gap: 4px;
+    }
+}
