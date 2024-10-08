@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.92a6895c.css",
-    "main.js": "/static/js/main.d840afec.js",
+    "main.css": "/static/css/main.3b04e80f.css",
+    "main.js": "/static/js/main.3e4fbe6d.js",
     "static/media/open-sans.regular.ttf": "/static/media/open-sans.regular.17e98b9e5586529b13cc.ttf",
     "static/media/Goldplay-Black.ttf": "/static/media/Goldplay-Black.53789a34830a749bec29.ttf",
     "static/media/screenshot2.png": "/static/media/screenshot2.28a39cf5ca2afbde1e3e.png",
@@ -12,11 +12,11 @@
     "static/media/TommyLight.otf": "/static/media/TommyLight.baa9639fea2a3259ba0b.otf",
     "static/media/close.png": "/static/media/close.76608c97ea3351d43407.png",
     "index.html": "/index.html",
-    "main.92a6895c.css.map": "/static/css/main.92a6895c.css.map",
-    "main.d840afec.js.map": "/static/js/main.d840afec.js.map"
+    "main.3b04e80f.css.map": "/static/css/main.3b04e80f.css.map",
+    "main.3e4fbe6d.js.map": "/static/js/main.3e4fbe6d.js.map"
   },
   "entrypoints": [
-    "static/css/main.92a6895c.css",
-    "static/js/main.d840afec.js"
+    "static/css/main.3b04e80f.css",
+    "static/js/main.3e4fbe6d.js"
   ]
 }

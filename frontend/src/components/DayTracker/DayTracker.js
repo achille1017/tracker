@@ -29,7 +29,7 @@ const DayTracker = (props) => {
     return (
         <div className='dayLine'>
             <div className="dateCell" id={props["dataDay"]["date"]===`${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getFullYear()}`?"todayCell":null}>
-                    <p>{props["dataDay"]["date"]}</p>
+                    <p>{props["dataDay"]["date"].slice(0, -5)}</p>
                 </div> 
 
             {Object.keys(reorderObject(props.habitsUser,props.dataDay)).map((habit, index) => (

@@ -73,7 +73,7 @@
 }
 
 #overlayTextCellEditor {
-    position: absolute;
+    position: fixed;
     width: 40vw;
     height: calc(50vh - 30px);
     left: 30vw;
@@ -159,17 +159,17 @@
     #trackerApp {
         margin: 30px 0px;
         min-height: calc(100vh - 140px);
+        gap: 20px;
     }
 
     #spreadSheet {
-        width: 86vw;
-        max-width: unset;
-        justify-content: flex-end;
+        max-width: 86vw;
+       
     }
 
     .title,
     #dateCell2 {
-        width: 60px;
+        width: 50px;
         font-size: 10px;
         padding: 10.5px 3px;
     }
@@ -185,9 +185,9 @@
         right: 59px;
     }
 
-    #spreadSheet {
+    /*#spreadSheet {
         padding: 10px 0px 10px 10px;
-    }
+    }*/
 
     #hidder {
         padding: 5px;
@@ -198,13 +198,13 @@
     }
 
     .dateCell {
-        width: 60px;
+        width: 40px;
         font-size: 10px;
         padding:  10px 3px;
     }
 
     .habitCell {
-        width: 46px;
+        width: 26px;
     }
 
     #dateCell2,
@@ -220,5 +220,10 @@
     }
     .textCellEditor{
         width: unset;
+    }
+    #closeCellEditor {
+       width: 20px;
+       height: 20px;
+       padding: 0px;
     }
 }
