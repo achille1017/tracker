@@ -19,11 +19,6 @@ const WhiteList = (props) => {
             body: JSON.stringify({ "mail": mail }) // Convert the JavaScript object to a JSON string
         })
             .then(response => {
-                console.log(response.status)
-                console.log(response.status === 200)
-                console.log(response.status === 304)
-                console.log(response.status === 400)
-
                 if (response.status === 200) {
                     setMessage("You have been successfully added to the whitelist !")
                     setClassMessage("greenP")
