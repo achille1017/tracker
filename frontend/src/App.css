@@ -1,7 +1,9 @@
 *{margin: 0;}
 body{
     background-color: #E7F8FF;
-
+    background-image: linear-gradient(#c9effe 1px, transparent 1px), linear-gradient(to right, #c9effe 1px, transparent 1px);
+    background-size: 50px 50px;
+    
 }
 @font-face {
     font-family: 'GoldPlayBold'; /* Name of the font */

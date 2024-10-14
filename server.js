@@ -1,6 +1,6 @@
 import express from 'express';
 import session from 'express-session';
-import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription } from './db.js';
+import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList } from './db.js';
 import cors from 'cors'
 import { getToday } from "./tools.js"
 import path from 'path';
@@ -68,21 +68,21 @@ function verifyLemonSqueezyWebhook(req, res, next) {
     const signature = req.headers['x-signature'];
     const rawBody = req.rawBody;
     const signingSecret = LEMON_SQUEEZY_SIGNING_SECRET;
-  
+
     if (!signature) {
-      return res.status(400).send('No signature provided');
+        return res.status(400).send('No signature provided');
     }
-  
+
     const hmac = crypto.createHmac('sha256', signingSecret);
     const digest = Buffer.from(hmac.update(rawBody).digest('hex'), 'utf8');
     const providedSignature = Buffer.from(signature, 'utf8');
-  
+
     if (crypto.timingSafeEqual(digest, providedSignature)) {
-      next();
+        next();
     } else {
-      res.status(401).send('Invalid signature');
+        res.status(401).send('Invalid signature');
     }
-  }
+}
 
 app.use(cors({
     origin: FRONTEND_SERVER,
@@ -204,6 +204,10 @@ app.post('/register', async (req, res) => {
     else {
         res.status(400).send()
     }
+})
+app.post('/whitelist', async (req, res) => {
+    const whitelist = await addToWhiteList(req.body.mail)
+    res.status(whitelist).send()
 })
 
 //Payements 

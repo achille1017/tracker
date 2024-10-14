@@ -5,6 +5,8 @@ import { getYesterday, replaceObjectValues, moveKeyValuePair } from './tools.js'
 
 const db = new Sqlite('db.sqlite');
 db.prepare('CREATE TABLE IF NOT EXISTS users (mail TEXT PRIMARY KEY, password TEXT, data TEXT, habits TEXT,advice_daily TEXT,profile TEXT,plan TEXT)').run();
+db.prepare('CREATE TABLE IF NOT EXISTS whiteList (mail TEXT PRIMARY KEY, date TEXT)').run();
+
 function checkKeyExists(jsonObject, key) {
 	// Using the in operator
 	if (key in jsonObject) {
@@ -180,4 +182,17 @@ function updateSubscription(mail, status, date) {
 		WHERE mail = '${mail}'`)
 	update.run()
 }
-export { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription }
+async function addToWhiteList(mail) {
+	let result
+	try {
+		let insert = db.prepare(`insert into whiteList (mail,date) values (?,?)`);
+		insert.run(mail, getFormattedDate());
+		result = 200
+	} catch (e) {
+		console.log(e.code)
+		result = e.code === "SQLITE_CONSTRAINT_PRIMARYKEY" ? 304 : 400
+	}
+	return result
+}
+
+export { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList }

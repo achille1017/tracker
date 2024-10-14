@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.3b04e80f.css",
-    "main.js": "/static/js/main.3e4fbe6d.js",
+    "main.css": "/static/css/main.ddf845bd.css",
+    "main.js": "/static/js/main.52f9a64b.js",
+    "static/media/Arco1.png": "/static/media/Arco1.4b300ed1e05671ad1762.png",
     "static/media/open-sans.regular.ttf": "/static/media/open-sans.regular.17e98b9e5586529b13cc.ttf",
     "static/media/Goldplay-Black.ttf": "/static/media/Goldplay-Black.53789a34830a749bec29.ttf",
-    "static/media/screenshot2.png": "/static/media/screenshot2.28a39cf5ca2afbde1e3e.png",
-    "static/media/bot.png": "/static/media/bot.88c9d2dae2b4ee25ca00.png",
     "static/media/Uni Sans Heavy.otf": "/static/media/Uni Sans Heavy.de76b17291d74c0a03b0.otf",
     "static/media/TommyRegular.otf": "/static/media/TommyRegular.101be848d2d18e7296bc.otf",
     "static/media/TommyBold.otf": "/static/media/TommyBold.463024f431b0a3769ed9.otf",
+    "static/media/screenTracker.png": "/static/media/screenTracker.a3220241434c5509b469.png",
     "static/media/TommyLight.otf": "/static/media/TommyLight.baa9639fea2a3259ba0b.otf",
     "static/media/close.png": "/static/media/close.76608c97ea3351d43407.png",
     "index.html": "/index.html",
-    "main.3b04e80f.css.map": "/static/css/main.3b04e80f.css.map",
-    "main.3e4fbe6d.js.map": "/static/js/main.3e4fbe6d.js.map"
+    "main.ddf845bd.css.map": "/static/css/main.ddf845bd.css.map",
+    "main.52f9a64b.js.map": "/static/js/main.52f9a64b.js.map"
   },
   "entrypoints": [
-    "static/css/main.3b04e80f.css",
-    "static/js/main.3e4fbe6d.js"
+    "static/css/main.ddf845bd.css",
+    "static/js/main.52f9a64b.js"
   ]
 }

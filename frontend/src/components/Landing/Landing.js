@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import "./Landing.css"
-import screenshot1 from "../../assets/screenshot2.png"
+import screenshot1 from "../../assets/screenTracker.png"
 import valid from "../../assets/valid.png"
 import { useNavigateAndScroll } from "../functions.js"
 import { useLocation } from 'react-router-dom';
-
+import botImg from "../../assets/Arco1.png"
+import WhiteList from '../WhiteList/WhiteList.js';
+import blackDot from "../../assets/black-circle.png"
 
 const Landing = (props) => {
     const goRoute = useNavigateAndScroll()
@@ -12,14 +14,13 @@ const Landing = (props) => {
     const location = useLocation();
     useEffect(() => {
         if (location.pathname === '/' && location.hash === '#pricing') {
-            console.log("#pricing")
-          const element = document.getElementById("pricing");
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
+            const element = document.getElementById("pricing");
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
         }
-      }, [location]);
-    
+    }, [location]);
+
     return (
         <div id='landing'>
             <div id='firstBoxLanding'>
@@ -33,20 +34,26 @@ const Landing = (props) => {
             </div>
             <div id='secondBoxLanding'>
                 <p className='text1'>Start tracking your daily habits and improve your productivity. </p>
-                <div id="box2Texts">
-                    <div className='box2TextsDiv'><p className='box2TextP'>- Get yourself in a constant routine of good practices</p><img className='validImg' src={valid}></img></div>
-                    <div className='box2TextsDiv'>
-                        <p className='box2TextP'>- Receive advices from our virtual assistant <span id='poweredByAI'>Powered by AI</span>
-                        </p>
-                        <img className='validImg' src={valid}></img>
-                    </div>
-                    <div className='box2TextsDiv'><p className='box2TextP'>- Follow week after week your progression and be sure to do better</p><img className='validImg' src={valid}></img></div>
-                    <div className='box2TextsDiv'><p className='box2TextP'>- Beat bad habits FOREVER</p><img className='validImg' src={valid}></img></div>
-                    <div className='box2TextsDiv' id='pricing'><p className='box2TextP'>- No gamification, we're not here to play</p><img className='validImg' src={valid}></img></div>
+                <div id='boxArcoLanding'>
+                    <div id="box2Texts">
+                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'> Get yourself in a constant routine of good practices <img className='validImg' src={valid}></img></p></div>
+                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img>
+                            <p className='box2TextP'> Receive advices from our virtual assistant <span id='poweredByAI'>Powered by AI</span> <img className='validImg' src={valid}></img></p>
 
+                        </div>
+                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'> Follow week after week your progression and be sure to do better <img className='validImg' src={valid}></img></p></div>
+                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'>Beat bad habits FOREVER <img className='validImg' src={valid}></img></p></div>
+                        <div className='box2TextsDiv' id='pricing'><img className='blackDot' src={blackDot}></img> <p className='box2TextP'>No gamification, we're not here to play <img className='validImg' src={valid}></img></p></div>
+
+                    </div>
+                    <div id='arcoImgDiv'>
+                        <img id='arcoImg' src={botImg}></img>
+                        <p id='arcoText'>Meet Arco, our virtual assistant that will guide you to productivity.</p>
+                    </div>
                 </div>
+
             </div>
-            <div id='pricingBox'>
+            {/*<div id='pricingBox'>
                 <p id='toStartP'>To start to work with Arco</p>
                 <div id='offersBox'>
                     <div className='offerDiv'>
@@ -84,7 +91,8 @@ const Landing = (props) => {
                         <button className='getStarted' onClick={() => goRoute('/login')}>{offersBoxMobile === "lifetime" ? "BUY NOW" : "SUBSCRIBE NOW"}</button>
                     </div>
                 </div>
-            </div>
+            </div>*/}
+            <WhiteList></WhiteList>
             <div id='thirdBoxLanding'>
                 <p className='text1'>Why did I build withar.co ? </p>
                 <p id='whoMadeItP'>In 2024, I tried to launch with a bad timing a web3 project. Figuring out what my errors were, I quickly observed that my producitvity was the main problem. I was waking up at 11, sleeping at 2 or 3 and working too late.. Once that project I putted a lot of hope into was dead, I had to do something better and I started by working on myself tracking my daily habits to get productive for real. </p>

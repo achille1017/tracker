@@ -4,7 +4,9 @@
     flex-direction: column;
     align-items: center;
 }
-
+.blackDot{
+    height: 10px;
+}
 #firstBoxLanding {
     display: flex;
     flex-direction: row;
@@ -33,7 +35,7 @@
 #box2Texts {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 70%;
     gap: 40px;
 }
 
@@ -48,10 +50,15 @@
 .box2TextP {
     font-size: 30px;
     font-family: Tommy;
+    text-wrap: nowrap;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 }
 
 #whoMadeItP {
-    font-size: 20px;
+    font-size: 24px;
     text-align: justify;
 }
 
@@ -84,6 +91,7 @@
 #legend1 {
     width: fit-content;
     font-family: TommyLight;
+    text-align: center;
 }
 
 #screenshot1Box {
@@ -121,18 +129,18 @@
     display: flex;
     flex-direction: column;
     margin: 120px 0px;
-    padding: 30px;
+    padding: 60px;
     background-color: #449DD1;
     color: white;
     gap: 40px;
     border-radius: 10px;
     align-items: center;
+    margin-top: 120px;
 }
 
-#poweredByAI {}
 
 #poweredByAI {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     text-align: center;
     background: linear-gradient(90deg, rgba(186, 148, 62, 1) 0%, rgba(236, 172, 32, 1) 20%, rgba(186, 148, 62, 1) 39%, rgba(249, 244, 180, 1) 50%, rgba(186, 148, 62, 1) 60%, rgba(236, 172, 32, 1) 80%, rgba(186, 148, 62, 1) 100%);
@@ -177,10 +185,7 @@
     background-color: #eefaff;
 }
 
-#pricing {
-    margin-bottom: 120px;
-
-}
+#pricing {}
 
 #toStartP {
     font-size: 50px;
@@ -204,7 +209,81 @@
     display: none;
 }
 
+#boxArcoLanding {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+#arcoImgDiv {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#arcoImg {
+    width: 100%;
+}
+
+#arcoText {
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 16px;
+    background-color: #eefaff;
+
+}
+
 @media screen and (max-width: 1080px) {
+    .validImg {
+        display: none;
+    }
+
+    #arcoImgDiv {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        gap: 60px;
+    }
+
+    .box2TextP {
+        text-wrap: wrap;
+        display: unset;
+        font-size: 20px;
+    }
+
+    #poweredByAI {
+        font-size: 20px;
+
+    }
+
+    #box2Texts {
+        width: 80vw;
+    }
+
+    #secondBoxLanding {
+        margin-bottom: 0px;
+    }
+
+    #thirdBoxLanding{
+        padding: 30px;
+    }
+
+    #boxArcoLanding {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    #arcoImg {
+        width: 40vw;
+        margin-top: 60px;
+    }
 
     #firstBoxLanding {
         flex-direction: column;
@@ -212,6 +291,7 @@
         padding-top: 60px;
         padding-bottom: 60px;
         gap: 60px;
+        height: unset;
     }
 
     #offersBox {
@@ -288,6 +368,8 @@
 }
 
 @media screen and (max-width: 720px) {
+
+
     #landing {
         width: 86vw;
     }
@@ -298,23 +380,24 @@
 
     #firstBoxLanding {
         justify-content: unset;
-        padding-bottom: 0px;
+        padding-bottom: 120px;
     }
 
     .text1 {
-        font-size: 30px;
+        font-size: 34px;
     }
 
     #secondBoxLanding {
         margin-top: 0px;
+        gap: 80px;
     }
 
     .box2TextP {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     #poweredByAI {
-        font-size: 20px;
+        font-size: 16px;
 
     }
 
@@ -336,13 +419,19 @@
     }
 
     #whoMadeItP {
-        font-size: 16px;
-    }
-
-    .selectorOffersMobileActive,.selectorOffersMobileInactive {
         font-size: 14px;
     }
-    #selectorOffersMobile{
+
+    .selectorOffersMobileActive,
+    .selectorOffersMobileInactive {
+        font-size: 14px;
+    }
+
+    #selectorOffersMobile {
         gap: 4px;
+    }
+
+    #thirdBoxLanding {
+        padding: 16px;
     }
 }

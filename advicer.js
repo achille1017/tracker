@@ -53,5 +53,4 @@ function getRandomKeyWithZeroValue(obj) {
     const randomIndex = Math.floor(Math.random() * keysWithZeroValue.length);
     return keysWithZeroValue[randomIndex];
 }
-
 export {generateDailyAdvice}

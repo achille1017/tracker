@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./Assistant.css"
 import Typewriter from '../TypeWriter/TypeWriter';
-import botImg from "../../assets/bot.png"
+import botImg from "../../assets/Arco1.png"
 import { SERVER_NAME } from '../../config.js';
 
 const Assistant = (props) => {

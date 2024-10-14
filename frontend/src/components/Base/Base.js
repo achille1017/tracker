@@ -60,39 +60,17 @@ const Base = (props) => {
                             <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>
                             <button className='linkNavBar' onClick={() => {
                                 navigate('/#pricing')
-                            }}>Subscribe</button>
+                            }}>Get to whitelist</button>
                         </div>
                 }
-
-
-                {/*loaded ?
-                    <div className='leftBoxNavBar' id='linkLeftNavBar'>
-                        {props.plan.status === "active" && props.logged ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
-                        {props.plan.status === "active" && props.logged ? <Link to="/profile" className='linkNavBar'>Profile</Link> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
-                    </div>
-                    :
-                    <div className='leftBoxNavBar' id='linkLeftNavBar'>
-                        <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>
-                        <a className='linkNavBar' href="#pricing">Subscribe</a>
-                    </div>*/
-                }
-
                 <p id='withArco' onClick={() => goRoute('/')}>withar.co</p>
-                {props.logged ? <div className='rightBoxNavBar'><button id='logout' onClick={logout}>Logout</button> </div> :
-                    <div className='rightBoxNavBar'><div id='loginBox1'>
-                        <button onClick={() => { goRoute('/login') }} id='getIn'>Get in</button>
-                        {/*<button onClick={openLoginBox} id='getIn'>Get in</button>*/}
-                        {/*loginBoxState !== "none" ? <ClickAwayListener onClickAway={closeLoginBox} touchEvent={false}>
-                            <div id='loginBox'>
-                                <input onChange={(e) => setMail(e.target.value)} className='inputLogin' type='text' placeholder='Mail'></input>
-                                <input onChange={(e) => setPassword(e.target.value)} className='inputLogin' type='password' placeholder='Password'></input>
-                                <button onClick={login} id='loginButton'>Login</button>
-                                <p id='orP'>or</p>
-                                <Link onClick={closeLoginBox} to="/register" id='linkRegister'>Register</Link>
-                            </div>
-                        </ClickAwayListener> : null*/}
-                    </div></div>
-                }
+                {/*props.logged ? <div className='rightBoxNavBar'><button id='logout' onClick={logout}>Logout</button> </div> :
+                    <div className='rightBoxNavBar'>
+                        <div id='loginBox1'>
+                            <button onClick={() => { goRoute('/login') }} id='getIn'>Get in</button>
+                        </div>
+                    </div>
+              */  }<div className='rightBoxNavBar'></div>
             </div>
             <Outlet></Outlet>
             <div id='footer'>
