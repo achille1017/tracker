@@ -60,17 +60,18 @@ const Base = (props) => {
                             <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>
                             <button className='linkNavBar' onClick={() => {
                                 navigate('/#pricing')
-                            }}>Get to whitelist</button>
+                            }}>Whitelist</button>
                         </div>
                 }
-                <p id='withArco' onClick={() => goRoute('/')}>withar.co</p>
+                <p id='withArco' onClick={() => goRoute('/')}>With Arco</p>
                 {/*props.logged ? <div className='rightBoxNavBar'><button id='logout' onClick={logout}>Logout</button> </div> :
                     <div className='rightBoxNavBar'>
                         <div id='loginBox1'>
                             <button onClick={() => { goRoute('/login') }} id='getIn'>Get in</button>
                         </div>
                     </div>
-              */  }<div className='rightBoxNavBar'></div>
+              */  }
+                <div className='rightBoxNavBar'></div>
             </div>
             <Outlet></Outlet>
             <div id='footer'>
