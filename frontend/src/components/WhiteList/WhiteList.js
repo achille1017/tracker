@@ -52,8 +52,8 @@ const WhiteList = (props) => {
     return (
         <div id='whiteList'>
             <p id='whiteListText1'>WHITELIST</p>
-            <p id='whiteListText2'>Register now to the whitelist to get exclusive free beta access.</p>
-            <input id='email' className='inputRegister inputWhiteList' type="email" value={mail} onChange={(e) => { setMail(e.target.value) }} pattern=".+@example\.com" />
+            <p id='whiteListText2'>Register now to the whitelist with your email to get exclusive free beta access.</p>
+            <input id='email' placeholder='Enter your email address' className='inputRegister inputWhiteList' type="email" value={mail} onChange={(e) => { setMail(e.target.value) }} pattern=".+@example\.com" />
             <button id='registerButton' className='inputWhiteList2' onClick={() => { checkEmail(mail) }}>Register to whitelist</button>
             <p id='messageWhiteList' className={classMessage}>{message}</p>
         </div>
