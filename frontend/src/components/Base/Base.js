@@ -55,12 +55,12 @@ const Base = (props) => {
                         <div className='leftBoxNavBar' id='linkLeftNavBar'>
                             {props.plan.status === "active" ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
                             {props.plan.status === "active" ? <Link to="/profile" className='linkNavBar'>Profile</Link> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
+                            <a href="mailto:contact@withar.co" className='linkNavBar'>Contact</a>
                         </div> : null :
                         <div className='leftBoxNavBar' id='linkLeftNavBar'>
                             <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>
-                            <button className='linkNavBar' onClick={() => {
-                                navigate('/#pricing')
-                            }}>Whitelist</button>
+                            <button className='linkNavBar' onClick={() => {navigate('/#pricing')}}>Whitelist</button>
+                            <a href="mailto:contact@withar.co" className='linkNavBar'>Contact</a>
                         </div>
                 }
                 <p id='withArco' onClick={() => goRoute('/')}>With Arco</p>
@@ -77,7 +77,7 @@ const Base = (props) => {
             <div id='footer'>
                 <a className="footerText" href='https://achilledorier.com' target="_blank"
                     rel="noopener noreferrer">Who Am I ?</a>
-                <a className="footerText" href='https://linktr.ee/achilledev' target="_blank"
+                <a className="footerText" href='mailto:contact@withar.co' target="_blank"
                     rel="noopener noreferrer">Contact</a>
                 <p className="footerText">withar.co 2024</p>
             </div>
