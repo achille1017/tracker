@@ -77,7 +77,8 @@ const Base = (props) => {
             <div id='footer'>
                 <a className="footerText" href='https://achilledorier.com' target="_blank"
                     rel="noopener noreferrer">Who Am I ?</a>
-                <a className="footerText">Contact</a>
+                <a className="footerText" href='https://linktr.ee/achilledev' target="_blank"
+                    rel="noopener noreferrer">Contact</a>
                 <p className="footerText">withar.co 2024</p>
             </div>
         </div>
