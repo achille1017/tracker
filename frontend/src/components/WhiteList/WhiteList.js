@@ -33,11 +33,9 @@ const WhiteList = (props) => {
                 }
             })
     }
-    function isValidEmail(email) {
-        // Regular expression for email validation
-        const emailRegex = /^[a-zA-Z0-9_-]+(?:\.[a-zA-Z0-9_-]+)*@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/;
-        // Test the email against the regex
-        return emailRegex.test(email);
+    function isValidEmail(mail) {
+        const mailRegex = /^[a-zA-Z0-9_-]+(?:\.[a-zA-Z0-9_-]+)*@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/;
+        return mailRegex.test(mail);
     }
     function checkEmail(mail) {
         if (isValidEmail(mail)) {

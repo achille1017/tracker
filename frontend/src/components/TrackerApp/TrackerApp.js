@@ -24,7 +24,6 @@ const TrackerApp = (props) => {
     const [textCellEditor, setTextCellEditor] = useState("")
     const [dateCellEditor, setDateCellEditor] = useState("")
     const [habitCellEditor, setHabitCellEditor] = useState("")
-    const [profile, setProfile] = useState({})
     const goRoute = useNavigateAndScroll()
 
     const menuRef = useRef(null);
@@ -94,25 +93,13 @@ const TrackerApp = (props) => {
             })
         })
     }
-    function updateProfile() {
-        return new Promise((resolve, reject) => {
-            fetch(SERVER_NAME + "/profile", {
-                credentials: 'include',
-            }).then(res => {
-                if (res.status === 200) {
-                    res.json().then(
-                        data => { setProfile(data); resolve(data) }
-                    )
-                }
-            })
-        })
-    }
+    
     useEffect(() => {
-        if (dataLoaded && profile.profileSet === 1) {
+        if (dataLoaded && props.profile.profileSet === 1) {
             var container = document.getElementById("spreadSheet");
             container.scrollLeft = container.scrollWidth;
         }
-    }, [dataLoaded, profile.profileSet])
+    }, [dataLoaded, props.profile.profileSet])
     function updateData() {
         updateHabits().then((habitsUser) => {
             fetch(SERVER_NAME + "/data", {
@@ -143,7 +130,7 @@ const TrackerApp = (props) => {
     }
 
     useEffect(() => {
-        updateProfile().then(updateData()
+        props.updateProfile().then(updateData()
         )
     }, [])
     useEffect(() => {
@@ -168,8 +155,8 @@ const TrackerApp = (props) => {
     }, [dataTracker])
     return (
         <div>
-            {dataLoaded && profile.profileSet === 1 ? <div id='trackerApp'>
-                <Assistant name={profile.name}></Assistant>
+            {dataLoaded && props.profile.profileSet === 1 ? <div id='trackerApp'>
+                <Assistant name={props.profile.name}></Assistant>
                 <div id='spreadSheet'>
                     {dataTracker.map((dataDay, index) => (
                         <DayTracker openTextCellEditor={openTextCellEditor} habitsUser={habitsUser} changeCellValue={changeCellValue} key={index} columns={columns} dataDay={dataDay}></DayTracker>
@@ -212,7 +199,7 @@ const TrackerApp = (props) => {
                     </div>
                 }
 
-            </div> : dataLoaded && profile.profileSet === 0 ? <ProfileSetter updateProfile={updateProfile} updateData={updateData} updateHabits={updateHabits}></ProfileSetter> : <div id="appWaiter"></div>}
+            </div> : dataLoaded && props.profile.profileSet === 0 ? <ProfileSetter updateProfile={props.updateProfile} updateData={updateData} updateHabits={updateHabits}></ProfileSetter> : <div id="appWaiter"></div>}
         </div>
     );
 };

@@ -7,6 +7,7 @@
     border: solid 2px lightblue;
     border-radius: 10px;
     width: fit-content;
+    background-color: #eefaff;
 }
 
 #newHabitType {
@@ -48,6 +49,7 @@
         flex-direction: column;
         width: calc(100% - 20px);
         padding: 10px;
+        gap: 10px;
     }
 
     #newHabitType,

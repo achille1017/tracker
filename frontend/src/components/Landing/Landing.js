@@ -53,7 +53,7 @@ const Landing = (props) => {
                 </div>
 
             </div>
-            {/*<div id='pricingBox'>
+            {<div id='pricingBox'>
                 <p id='toStartP'>To start to work with Arco</p>
                 <div id='offersBox'>
                     <div className='offerDiv'>
@@ -91,8 +91,12 @@ const Landing = (props) => {
                         <button className='getStarted' onClick={() => goRoute('/login')}>{offersBoxMobile === "lifetime" ? "BUY NOW" : "SUBSCRIBE NOW"}</button>
                     </div>
                 </div>
-            </div>*/}
-            <WhiteList></WhiteList>
+            </div>}
+            <div id='alreadyDiv'>
+                <p id='alreadyP'>Already working with Arco ?</p>
+                <button id='alreadyButton' onClick={()=>{goRoute('/login')}}>LOGIN</button>
+            </div>
+            {/*<WhiteList></WhiteList>*/}
             <div id='thirdBoxLanding'>
                 <p className='text1'>Why did I build withar.co ? </p>
                 <p id='whoMadeItP'>In 2024, I tried to launch with a bad timing a web3 project. Figuring out what my errors were, I quickly observed that my producitvity was the main problem. I was waking up at 11, sleeping at 2 or 3 and working too late.. Once that project I putted a lot of hope into was dead, I had to do something better and I started by working on myself tracking my daily habits to get productive for real. </p>

@@ -4,8 +4,8 @@ import fs from 'fs';
 
 const keys = JSON.parse(fs.readFileSync('keys.json', 'utf8'));
 const transporter = createTransport({
-  host: 'mail.spacemail.com', 
-  port: 465, 
+  host: 'mail.spacemail.com',
+  port: 465,
   secure: true,
   auth: {
     user: keys["email"],
@@ -13,20 +13,27 @@ const transporter = createTransport({
   }
 });
 
-async function sendEmail() {
-    try {
-      let info = await transporter.sendMail({
-        from: '"With Arco" <no-reply@withar.co>',
-        to: "achillerondo@gmail.com",
-        subject: "Test Email from Node.js",
-        text: "This is a test email sent from Node.js using Nodemailer",
-        html: "<b>This is a test email sent from Node.js using Nodemailer</b>"
-      });
-  
-      console.log("Message sent: %s", info.messageId);
-    } catch (error) {
-      console.error("Error sending email:", error);
-    }
+async function sendConfirmationEmail(mail, link) {
+
+  try {
+    let info = await transporter.sendMail({
+      from: '"With Arco" <no-reply@withar.co>',
+      to: mail,
+      subject: "Confirm your email address on withar.co",
+      html:
+        `<div style="display: block;">
+        <p>Please click on the link to activate your withar.co account</p> 
+        <a href="${link}">Activate my account</a> 
+        </div>`
+    });
+    console.log("Message sent: %s", info.messageId);
+    return true
+
+  } catch (error) {
+
+    console.error("Error sending email:", error); return false
+
   }
-  
-  sendEmail();
+}
+
+export { sendConfirmationEmail }

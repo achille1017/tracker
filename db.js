@@ -2,9 +2,12 @@ import Sqlite from 'better-sqlite3'
 import bcrypt from 'bcrypt'
 import { generateDailyAdvice } from "./advicer.js"
 import { getYesterday, replaceObjectValues, moveKeyValuePair } from './tools.js'
+import { sendConfirmationEmail } from './mail.js'
+
+
 
 const db = new Sqlite('db.sqlite');
-db.prepare('CREATE TABLE IF NOT EXISTS users (mail TEXT PRIMARY KEY, password TEXT, data TEXT, habits TEXT,advice_daily TEXT,profile TEXT,plan TEXT)').run();
+db.prepare('CREATE TABLE IF NOT EXISTS users (mail TEXT PRIMARY KEY, password TEXT, data TEXT, habits TEXT,advice_daily TEXT,profile TEXT,plan TEXT, confirmation_token TEXT, token_expires TEXT, is_confirmed INTEGER)').run();
 db.prepare('CREATE TABLE IF NOT EXISTS whiteList (mail TEXT PRIMARY KEY, date TEXT)').run();
 
 function checkKeyExists(jsonObject, key) {
@@ -117,7 +120,7 @@ function changeOrderHabit(mail, habit, order) {
 	let update = db.prepare(`update users set habits=? where mail = '${mail}'`)
 	update.run(JSON.stringify(newhabits))
 }
-async function register(mail, password) {
+async function register(mail, password, token) {
 	const saltRounds = 10;
 	let result;
 	await new Promise(async next => {
@@ -129,16 +132,17 @@ async function register(mail, password) {
 				return;
 			}
 
-			bcrypt.hash(password, salt, (err, hash) => {
+			bcrypt.hash(password, salt, async (err, hash) => {
 				if (err) {
 					console.log(err)
 					result = false
 					return;
 				}
 				try {
-					let insert = db.prepare(`insert into users (mail,password,data,habits,advice_daily,profile,plan) values (?,?,?,?,?,?,?)`);
-					insert.run(mail, hash, `[{"date":"${getFormattedDate()}"}]`, '{}', `{"${getFormattedDate()}":"firstAdvice"}`, '{"profileSet":0,"name":"","job":"","language":""}', `{"status":"inactive","updated":"${getFormattedDate()}"}`);
-					result = true
+					let insert = db.prepare(`insert into users (mail,password,data,habits,advice_daily,profile,plan,confirmation_token,is_confirmed) values (?,?,?,?,?,?,?,?,?)`);
+					insert.run(mail, hash, `[{"date":"${getFormattedDate()}"}]`, '{}', `{"${getFormattedDate()}":"firstAdvice"}`, '{"profileSet":0,"name":"","job":"","language":""}', `{"status":"active","updated":"${getFormattedDate()}"}`, token, 0);
+
+					result = await sendConfirmationEmail(mail, `http://localhost:4000/verify-email?token=${token}`) ? true : false
 				} catch (e) {
 					console.log(e)
 					result = false
@@ -148,6 +152,26 @@ async function register(mail, password) {
 		});
 	})
 	return result
+}
+async function confirmEmail(decoded, token) {
+	let status
+	await new Promise(async next => {
+		try {
+			const updateStmt = db.prepare('UPDATE users SET is_confirmed = 1 WHERE mail = ? AND confirmation_token = ?');
+			const result = updateStmt.run(decoded.mail, token);
+			if (result.changes === 0) {
+				status = 401; next()
+			}
+			else {
+				status = 200; next()
+			}
+		}
+		catch (e) {
+			console.log(e)
+			status = 500; next()
+		}
+	})
+	return status
 }
 function updateProfile(mail, newProfile) {
 	let profile = getProfile(mail)
@@ -194,5 +218,18 @@ async function addToWhiteList(mail) {
 	}
 	return result
 }
-
-export { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList }
+function generateRandomSixDigitNumber() {
+	return String(Math.floor(100000 + Math.random() * 900000)).padStart(6, '0');
+}
+function isEmailInWhiteList(mail) {
+	if (!isValidValue(mail)) { return false }
+	else {
+		const stmt = db.prepare('SELECT COUNT(*) as count FROM whiteList WHERE mail = ?');
+		const result = stmt.get(mail);
+		return result.count > 0;
+	}
+}
+function isValidValue(value) {
+	return value !== undefined && value !== null;
+}
+export { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList }

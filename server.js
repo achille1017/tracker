@@ -1,6 +1,6 @@
 import express from 'express';
 import session from 'express-session';
-import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList } from './db.js';
+import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList } from './db.js';
 import cors from 'cors'
 import { getToday } from "./tools.js"
 import path from 'path';
@@ -10,12 +10,14 @@ import { Server } from 'socket.io';
 import http from "http"
 import fs from 'fs';
 import crypto from "crypto"
+import jwt from "jsonwebtoken"
+
 
 const keys = JSON.parse(fs.readFileSync('keys.json', 'utf8'));
 const LEMON_SQUEEZY_SIGNING_SECRET = keys["lemonSqueezySigningSecret"]
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+const SECRET_KEY = keys["secretKey"]
 const app = express();
 const port = 4000;
 const sessionMiddleware = session({
@@ -197,7 +199,17 @@ app.post('/logout', (req, res) => {
     });
 })
 app.post('/register', async (req, res) => {
-    const registration = await register(req.body.mail, req.body.password)
+    console.log(req.body.mail)
+    if (req.body.mail === undefined || req.body.mail === null || req.body.mail === "") {
+        console.log("email provided null")
+        return res.status(400).send()
+    }
+    if (!isEmailInWhiteList(req.body.mail)) {
+        console.log("email provided not in WL")
+        return res.status(400).send()
+    }
+    const token = jwt.sign({ "mail": req.body.mail }, SECRET_KEY, { expiresIn: '1h' });
+    const registration = await register(req.body.mail, req.body.password, token)
     if (registration) {
         res.status(200).send()
     }
@@ -205,6 +217,24 @@ app.post('/register', async (req, res) => {
         res.status(400).send()
     }
 })
+app.get('/verify-email', (req, res) => {
+    const { token } = req.query;
+
+    jwt.verify(token, SECRET_KEY, async (err, decoded) => {
+        if (err) {
+            res.redirect(FRONTEND_SERVER + "/error?code=401")
+            return
+        }
+        const status = await confirmEmail(decoded, token)
+        if (status === 200) {
+            res.redirect(FRONTEND_SERVER + "/confirmation")
+        }
+        else {
+            res.redirect(FRONTEND_SERVER + "/error?code=" + status)
+        }
+
+    });
+});
 app.post('/whitelist', async (req, res) => {
     const whitelist = await addToWhiteList(req.body.mail)
     res.status(whitelist).send()

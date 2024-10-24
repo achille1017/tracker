@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.ddf845bd.css",
-    "main.js": "/static/js/main.4d8f509d.js",
+    "main.css": "/static/css/main.a9b3703c.css",
+    "main.js": "/static/js/main.6c0dcf7d.js",
     "static/media/Arco1.png": "/static/media/Arco1.4b300ed1e05671ad1762.png",
     "static/media/open-sans.regular.ttf": "/static/media/open-sans.regular.17e98b9e5586529b13cc.ttf",
     "static/media/Goldplay-Black.ttf": "/static/media/Goldplay-Black.53789a34830a749bec29.ttf",
@@ -10,13 +10,14 @@
     "static/media/TommyBold.otf": "/static/media/TommyBold.463024f431b0a3769ed9.otf",
     "static/media/screenTracker.png": "/static/media/screenTracker.a3220241434c5509b469.png",
     "static/media/TommyLight.otf": "/static/media/TommyLight.baa9639fea2a3259ba0b.otf",
+    "static/media/hamburger.png": "/static/media/hamburger.4469ebbac28dc09c68f0.png",
     "static/media/close.png": "/static/media/close.76608c97ea3351d43407.png",
     "index.html": "/index.html",
-    "main.ddf845bd.css.map": "/static/css/main.ddf845bd.css.map",
-    "main.4d8f509d.js.map": "/static/js/main.4d8f509d.js.map"
+    "main.a9b3703c.css.map": "/static/css/main.a9b3703c.css.map",
+    "main.6c0dcf7d.js.map": "/static/js/main.6c0dcf7d.js.map"
   },
   "entrypoints": [
-    "static/css/main.ddf845bd.css",
-    "static/js/main.4d8f509d.js"
+    "static/css/main.a9b3703c.css",
+    "static/js/main.6c0dcf7d.js"
   ]
 }

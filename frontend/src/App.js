@@ -10,11 +10,26 @@ import SubscriptionManager from './components/SubscriptionManager/SubscriptionMa
 import PayementWaiter from './components/PayementWaiter/PayementWaiter.js';
 import Login from './components/Login/Login.js';
 import Error from "./components/Error/Error.js"
+import Confirmation from './components/Confirmation/Confirmation.js';
 
 function App() {
   const [logged, setLogged] = useState()
   const [plan, setPlan] = useState()
+  const [profile, setProfile] = useState({})
 
+  function updateProfile() {
+    return new Promise((resolve, reject) => {
+        fetch(SERVER_NAME + "/profile", {
+            credentials: 'include',
+        }).then(res => {
+            if (res.status === 200) {
+                res.json().then(
+                    data => { setProfile(data); resolve(data) }
+                )
+            }
+        })
+    })
+}
   async function updateLogged() {
     return new Promise((resolve, reject) => {
 
@@ -61,11 +76,15 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Base updateLogged={updateLogged} logged={logged} updatePlan={updatePlan} plan={plan}></Base>}>
+        <Route path="/" element={<Base updateLogged={updateLogged} logged={logged} updatePlan={updatePlan} plan={plan} profile={profile}></Base>}>
           <Route path="/" element={<Landing></Landing>} />
-
+          <Route path="/tracker" element={<TrackerApp profile={profile} updateProfile={updateProfile} logged={logged}></TrackerApp>} />
+          <Route path="/login" element={<Login updateLogged={updateLogged}></Login>} />
+          <Route path="/profile" element={<Profile updatePlan={updatePlan} plan={plan}></Profile>} />
+          <Route path='/subscribe' element={<SubscriptionManager logged={logged}></SubscriptionManager>}></Route>
+          <Route path='/payement' element={<PayementWaiter updateLogged={updateLogged} updatePlan={updatePlan}></PayementWaiter>}></Route>
+          <Route path='/confirmation' element={<Confirmation></Confirmation>}></Route>
           <Route path="/*" element={<Error></Error>}></Route>
-
         </Route>
       </Routes>
     </BrowserRouter >
@@ -76,13 +95,6 @@ function App() {
 }
 
 export default App;
-/*
- <Route path="/tracker" element={<TrackerApp logged={logged}></TrackerApp>} />
-          <Route path="/login" element={<Login updateLogged={updateLogged}></Login>} />
-          <Route path="/profile" element={<Profile updatePlan={updatePlan} plan={plan}></Profile>} />
-          <Route path='/subscribe' element={<SubscriptionManager logged={logged}></SubscriptionManager>}></Route>
-          <Route path='/payement' element={<PayementWaiter updateLogged={updateLogged} updatePlan={updatePlan}></PayementWaiter>}></Route>
-          give me a strategy to get my first 5 users then 100 users for my saas. My saas is a website that allows user to tracker their daily habits and get daily advices from a virtual assistant powered by ai that analyse data of the user
-          */
 
-          
+
+

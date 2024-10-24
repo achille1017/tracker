@@ -60,7 +60,7 @@ const Login = (props) => {
                 <input onChange={(e) => setMail1(e.target.value)} className='inputRegister' type='text' placeholder='Your mail'></input>
                 <input onChange={(e) => setMail2(e.target.value)} className='inputRegister' type='text' placeholder='Confirm your mail'></input>
                 <input onChange={(e) => setPassword(e.target.value)} className='inputRegister' type='password' placeholder='Your password'></input>
-                {messageState === "none" ? <button onClick={register} id='registerButton'>Register</button> : <p className={messageState}>Your account has been created, you can now log in.</p>}
+                {messageState === "none" ? <button onClick={register} id='registerButton'>Register</button> : <p className={messageState}>A confirmation email has been sent to your registered email address.</p>}
                 {errorRegister !== "" && <p> {errorRegister} </p>}
             </div>
             <div id="verticalLineLogin"></div>
