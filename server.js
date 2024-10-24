@@ -176,6 +176,7 @@ app.post('/changeorderhabit', (req, res) => {
     }
 })
 app.post('/login', async (req, res) => {
+    console.log(req.body)
     const login = await allowLogin(req.body.mail, req.body.password)
     if (login==="ok") {
         req.session.logged = true;
@@ -200,6 +201,7 @@ app.post('/logout', (req, res) => {
     });
 })
 app.post('/register', async (req, res) => {
+    console.log(req.body)
     if (req.body.mail === undefined || req.body.mail === null || req.body.mail === "") {
         console.log("email provided null")
         return res.status(400).send()
