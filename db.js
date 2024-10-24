@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import { generateDailyAdvice } from "./advicer.js"
 import { getYesterday, replaceObjectValues, moveKeyValuePair } from './tools.js'
 import { sendConfirmationEmail } from './mail.js'
-
+import { BACKEND_SERVER } from './payements.js'
 
 
 const db = new Sqlite('db.sqlite');
@@ -142,7 +142,7 @@ async function register(mail, password, token) {
 					let insert = db.prepare(`insert into users (mail,password,data,habits,advice_daily,profile,plan,confirmation_token,is_confirmed) values (?,?,?,?,?,?,?,?,?)`);
 					insert.run(mail, hash, `[{"date":"${getFormattedDate()}"}]`, '{}', `{"${getFormattedDate()}":"firstAdvice"}`, '{"profileSet":0,"name":"","job":"","language":""}', `{"status":"active","updated":"${getFormattedDate()}"}`, token, 0);
 
-					result = await sendConfirmationEmail(mail, `http://localhost:4000/verify-email?token=${token}`) ? true : false
+					result = await sendConfirmationEmail(mail, `${BACKEND_SERVER}/verify-email?token=${token}`) ? true : false
 				} catch (e) {
 					console.log(e)
 					result = false

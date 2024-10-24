@@ -9,7 +9,7 @@ const LIFE_ID = 541239
 const variantIds = [MONTHLY_ID, ANNUAL_ID, LIFE_ID];
 const STORE_ID = keys["storeId"];
 const FRONTEND_SERVER = keys["env"] ==="dev" ?"http://localhost:3000": "https://withar.co"
-
+const BACKEND_SERVER = keys["env"] ==="dev" ?"http://localhost:4000": "https://withar.co"
 lemonSqueezySetup({
     apiKey: LEMON_SQUEEZY_API_KEY,
 });
@@ -51,4 +51,4 @@ async function getThreeCheckoutLinks(mail) {
 }
 
 
-export { getThreeCheckoutLinks, FRONTEND_SERVER }
+export { getThreeCheckoutLinks, FRONTEND_SERVER, BACKEND_SERVER }
