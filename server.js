@@ -176,13 +176,14 @@ app.post('/changeorderhabit', (req, res) => {
     }
 })
 app.post('/login', async (req, res) => {
-    if (await allowLogin(req.body.mail, req.body.password)) {
+    const login = await allowLogin(req.body.mail, req.body.password)
+    if (login==="ok") {
         req.session.logged = true;
         req.session.mail = req.body.mail
         res.status(200).send()
     }
     else {
-        res.status(401).send()
+        res.status(401).send({"message":login})
     }
 })
 app.get('/islogged', (req, res) => {
@@ -199,7 +200,6 @@ app.post('/logout', (req, res) => {
     });
 })
 app.post('/register', async (req, res) => {
-    console.log(req.body.mail)
     if (req.body.mail === undefined || req.body.mail === null || req.body.mail === "") {
         console.log("email provided null")
         return res.status(400).send()

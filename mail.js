@@ -26,7 +26,7 @@ async function sendConfirmationEmail(mail, link) {
         <a href="${link}">Activate my account</a> 
         </div>`
     });
-    console.log("Message sent: %s", info.messageId);
+    console.log(`Message sent to ${mail}`);
     return true
 
   } catch (error) {

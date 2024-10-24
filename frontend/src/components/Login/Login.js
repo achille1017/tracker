@@ -5,23 +5,21 @@ import { useNavigateAndScroll } from "../functions.js"
 
 const Login = (props) => {
     const [mail1, setMail1] = useState("")
-    const [mail2, setMail2] = useState("")
     const [password, setPassword] = useState("")
     const [mailLogin, setMailLogin] = useState("")
     const [passwordLogin, setPasswordLogin] = useState("")
     const [messageState, setMessageState] = useState("none")
     const [errorRegister, setErrorRegister] = useState("")
+    const [messageLogin, setMessageLogin] = useState("")
+    const [classMessage, setClassMessage] = useState("")
+
     const goRoute = useNavigateAndScroll()
     useEffect(()=>{window.scrollTo({
         top: 0,
         behavior: 'auto' // Change to 'smooth' for smooth scrolling
       });},[])
     function register() {
-        if (mail1 !== mail2) {
-            setErrorRegister("Mail addresses don't match")
-            setTimeout(() => { setErrorRegister("") }, 4000)
-            return
-        }
+        if (isValidEmail(mail1)) {
         fetch(SERVER_NAME + "/register", {
             method: 'POST',
             credentials: 'include',
@@ -34,7 +32,17 @@ const Login = (props) => {
                 if (response.status === 200) {
                     setMessageState('')
                 }
-            })
+            })}else{
+               
+                setErrorRegister("Please enter a valid email address.")
+                    setClassMessage("redP")
+                    setTimeout(() => { setErrorRegister("") }, 5000)
+                
+            }
+    }
+    function isValidEmail(mail) {
+        const mailRegex = /^[a-zA-Z0-9_-]+(?:\.[a-zA-Z0-9_-]+)*@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/;
+        return mailRegex.test(mail);
     }
     function login() {
         fetch(SERVER_NAME + "/login", {
@@ -51,25 +59,32 @@ const Login = (props) => {
                         () => { goRoute('/tracker') }
                     )
                 }
+                if (response.status === 401) {
+                    response.json().then(data => {
+                        setMessageLogin(data.message==="unfound"?"We did not find an account activated with this email address.":data.message==="bad"?"Invalid password":"Something went wrong")
+
+                    })
+                }
             })
     }
     return (
         <div id="loginPage">
             <div id='register'>
                 <p id='createYour'>Create your account and let's get productive</p>
-                <input onChange={(e) => setMail1(e.target.value)} className='inputRegister' type='text' placeholder='Your mail'></input>
-                <input onChange={(e) => setMail2(e.target.value)} className='inputRegister' type='text' placeholder='Confirm your mail'></input>
-                <input onChange={(e) => setPassword(e.target.value)} className='inputRegister' type='password' placeholder='Your password'></input>
+                <input onChange={(e) => setMail1(e.target.value)} className='inputRegister' type='email'  placeholder='Your email' id="email" pattern=".+@example\.com" ></input>
+                <input onChange={(e) => setPassword(e.target.value)} className='inputRegister' type='password' placeholder='Your password' ></input>
                 {messageState === "none" ? <button onClick={register} id='registerButton'>Register</button> : <p className={messageState}>A confirmation email has been sent to your registered email address.</p>}
-                {errorRegister !== "" && <p> {errorRegister} </p>}
+                {errorRegister !== "" && <p className={classMessage}> {errorRegister} </p>}
             </div>
             <div id="verticalLineLogin"></div>
             <div id='login'>
                 <p id='createYour'>Log in and track your day now</p>
 
-                <input onChange={(e) => setMailLogin(e.target.value)} className='inputRegister' type='text' placeholder='Mail'></input>
-                <input onChange={(e) => setPasswordLogin(e.target.value)} className='inputRegister' type='password' placeholder='Password'></input>
+                <input onChange={(e) => setMailLogin(e.target.value)} className='inputRegister'  type='email' placeholder='Mail' id="email" pattern=".+@example\.com"></input>
+                <input onChange={(e) => setPasswordLogin(e.target.value)} className='inputRegister' type='password' placeholder='Password' ></input>
                 <button onClick={login} id='registerButton'>Login</button>
+                {messageLogin !== "" && <p> {messageLogin} </p>}
+
             </div>
         </div>
     );

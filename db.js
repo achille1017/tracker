@@ -91,8 +91,8 @@ function deleteHabit(mail, habitName) {
 	deleteRequest.run()
 }
 async function allowLogin(mail, userProvidedPassword) {
-	let select = db.prepare(`SELECT password FROM users WHERE mail = '${mail}'`);
-	if (select.get() === undefined) { return false }
+	let select = db.prepare(`SELECT password FROM users WHERE mail = '${mail}' and is_confirmed=1`);
+	if (select.get() === undefined) { return "unfound" }
 	let storedHash = select.get()["password"];
 	let login;
 	await new Promise(async next => {
@@ -101,9 +101,9 @@ async function allowLogin(mail, userProvidedPassword) {
 				return;
 			}
 			if (result) {
-				login = true
+				login = "ok"
 			} else {
-				login = false
+				login = "bad"
 			}
 			next()
 		});

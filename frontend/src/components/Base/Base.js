@@ -17,14 +17,12 @@ const Base = (props) => {
     const location = useLocation();
     const preGoRoute = useNavigateAndScroll()
     const goRoute = (route) => {
-        console.log("using goRoute")
         setMenuMobile("linksBarMobile")
         document.body.style.overflow = ''
         preGoRoute(route)
     }
     const navigate = useNavigate();
     function toggleMenu() {
-        console.log("toggling to " + menuMobile === "linksBarMobile" ? "linksBarMobileActive" : "linksBarMobile")
         setMenuMobile(menuMobile === "linksBarMobile" ? "linksBarMobileActive" : "linksBarMobile")
         document.body.style.overflow = menuMobile === "linksBarMobile" ? 'hidden' : ''
     }

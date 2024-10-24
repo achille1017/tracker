@@ -35,7 +35,6 @@ function moveKeyValuePair(obj, key, direction) {
   const keys = Object.keys(obj);
   const currentIndex = keys.indexOf(key);
   if (currentIndex === -1) {
-    console.log("Key not found in the object.");
     return obj;
   }
 
@@ -45,11 +44,9 @@ function moveKeyValuePair(obj, key, direction) {
   } else if (direction === "down") {
     newIndex = Math.min(keys.length - 1, currentIndex + 1);
   } else {
-    console.log("Invalid direction. Use 'up' or 'down'.");
     return obj;
   }
   if (newIndex === currentIndex) {
-    console.log("Cannot move further in that direction.");
     return obj;
   }
   const newObj = {};
