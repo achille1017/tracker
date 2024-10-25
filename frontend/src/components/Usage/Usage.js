@@ -63,6 +63,8 @@ const Usage = (props) => {
                             <button onClick={()=>goRoute("/docs/track/bool")} className='subbuttonNavBarDocs'>Yes/no habits</button>
                             <button onClick={()=>goRoute("/docs/track/number")} className='subbuttonNavBarDocs'>Numeric habits</button>
                             <button onClick={()=>goRoute("/docs/track/text")} className='subbuttonNavBarDocs'>Text habits</button>
+                            <button onClick={()=>goRoute("/docs/track/manage")} className='subbuttonNavBarDocs'>Move/delete an habit</button>
+
                         </div>
                         <button onClick={()=>goRoute("/docs/arco" )}className='buttonNavBarDocs'>Arco</button>
                     </div>
