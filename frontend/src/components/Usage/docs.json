@@ -1,0 +1,22 @@
+{
+    "bool": {
+        "title": "Yes/no habits",
+        "text": "To track your Yes/no habit, just click/touch on the cell and make it green if you completed it, red if you did not and empty if you want to ignore it. On the extreme right, you can see an average of completion of your daily habit."
+    },
+    "text": {
+        "title": "Text habits",
+        "text": "To track your text habit, just click/touch on the cell and use the text area to write anything you want !"
+    },
+    "number": {
+        "title": "Numeric habits",
+        "text": "To track your numeric habit, just click/touch on the cell and enter a number."
+    },
+    "add":{
+        "title":"Track a new habit",
+        "text":"To track a new habit, select the type of habit you want to track, give it a name and start to track it !"
+    },
+    "manage":{
+        "title":"Move or delete an habit",
+        "text":"If you want to move or delete an habit, hold down one the name of the habit until you see the tab to move or delete the habit."
+    }
+}

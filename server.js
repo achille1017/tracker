@@ -220,6 +220,8 @@ app.post('/register', async (req, res) => {
     }
 })
 app.get('/verify-email', (req, res) => {
+    console.log('GET /verify-email')
+
     const { token } = req.query;
 
     jwt.verify(token, SECRET_KEY, async (err, decoded) => {

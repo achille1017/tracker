@@ -1,0 +1,31 @@
+.gifDocs {
+    width: 30%;
+    background-color: #E7F8FF;
+    padding: 20px;
+    border-radius: 24px;
+}
+
+.trackDocs {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.titleTrackDocs {
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.textTrackDocs {
+    font-size: 20px;
+    line-height: 28px;
+}
+#arcoDocs{
+    width: 200px;
+}
+@media screen and (max-width: 720px) {
+
+    .gifDocs {
+        width: unset;
+    }
+}

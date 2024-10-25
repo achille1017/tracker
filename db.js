@@ -54,41 +54,43 @@ function updateData(mail, newData) {
 function insertHabit(mail, newHabit, newHabitType) {
 	let habitExists = checkKeyExists(getHabits(mail), newHabit)
 	if (habitExists) { return false }
-	let update = db.prepare(`update users SET habits = json_insert(habits, '$.${newHabit}', '${newHabitType}') where mail = '${mail}'`)
-	update.run()
-	update = db.prepare(`UPDATE users
-	SET data = (
-		SELECT json_group_array(
-			json_set(value, '$.${newHabit}', '${newHabitType === "bool" ? 2 : ""}')
-		)
-		FROM json_each(data)
-		WHERE data IS NOT NULL and mail='${mail}'
-	)
-	WHERE data IS NOT NULL and mail='${mail}';
-	`)
-	update.run()
+	let update = db.prepare(`update users SET habits = json_insert(habits, '$.' || ?,?) where mail = '${mail}'`)
+	update.run(newHabit, newHabitType)
+	update = db.prepare(`
+    UPDATE users
+    SET data = (
+      SELECT json_group_array(json_set(value, '$.' || ?, ?))
+      FROM json_each(data)
+      WHERE data IS NOT NULL AND mail = ?)
+    WHERE data IS NOT NULL AND mail = ?;
+    `);
+	update.run(newHabit, newHabitType === "bool" ? 2 : "", mail, mail);
 	return true
 }
 function deleteHabit(mail, habitName) {
-	let deleteRequest = db.prepare(`UPDATE users
-	SET data = (
-		SELECT json_group_array(
-			json_remove(value, '$."${habitName}"')
-		)
-		FROM (
-			SELECT json_each.value
-			FROM users,
-			json_each(data)
-			WHERE data IS NOT NULL and mail='${mail}'
-		)
-		WHERE data IS NOT NULL and mail='${mail}'
-	)
-	WHERE data IS NOT NULL and mail='${mail}';`)
-	deleteRequest.run()
-	deleteRequest = db.prepare(`UPDATE users
-	SET habits = json_remove(habits, '$."${habitName}"')
-	WHERE habits IS NOT NULL and mail='${mail}';`)
-	deleteRequest.run()
+	const deleteRequest1 = db.prepare(`
+    UPDATE users
+    SET data = (
+      SELECT json_group_array(
+        json_remove(value, '$.' || json_quote(?))
+      )
+      FROM (
+        SELECT json_each.value
+        FROM users,
+        json_each(data)
+        WHERE data IS NOT NULL AND mail = ?
+      )
+      WHERE data IS NOT NULL AND mail = ?
+    )
+    WHERE data IS NOT NULL AND mail = ?;
+  `);
+	deleteRequest1.run(habitName, mail, mail, mail);
+	const deleteRequest2 = db.prepare(`
+    UPDATE users
+    SET habits = json_remove(habits, '$.' || json_quote(?))
+    WHERE habits IS NOT NULL AND mail = ?;`
+	);
+	deleteRequest2.run(habitName, mail);
 }
 async function allowLogin(mail, userProvidedPassword) {
 	let select = db.prepare(`SELECT password FROM users WHERE mail = '${mail}' and is_confirmed=1`);

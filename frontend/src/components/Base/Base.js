@@ -18,13 +18,13 @@ const Base = (props) => {
     const preGoRoute = useNavigateAndScroll()
     const goRoute = (route) => {
         setMenuMobile("linksBarMobile")
-        document.body.style.overflow = ''
+        props.setScrollDocument('')
         preGoRoute(route)
     }
     const navigate = useNavigate();
     function toggleMenu() {
         setMenuMobile(menuMobile === "linksBarMobile" ? "linksBarMobileActive" : "linksBarMobile")
-        document.body.style.overflow = menuMobile === "linksBarMobile" ? 'hidden' : ''
+        props.setScrollDocument(menuMobile === "linksBarMobile" ? 'hidden' : '')
     }
     useEffect(() => {
         if (props.logged) {
@@ -67,12 +67,12 @@ const Base = (props) => {
                         <div className='leftBoxNavBar' id='linkLeftNavBar'>
                             {props.plan.status === "active" ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
                             {props.plan.status === "active" ? props.profile.profileSet === 0 ? null : <Link to="/profile" className='linkNavBar'>Profile</Link> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
-                            <a href="mailto:contact@withar.co" className='linkNavBar'>Contact</a>
+                            <button className='linkNavBar' onClick={() => { goRoute('/docs/intro') }}>Usage</button>
                         </div> : null :
                         <div className='leftBoxNavBar' id='linkLeftNavBar'>
                             <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>
                             <button className='linkNavBar' onClick={() => { navigate('/#pricing') }}>Subscribe</button>
-                            <a href="mailto:contact@withar.co" className='linkNavBar'>Contact</a>
+                            <button className='linkNavBar' onClick={() => { goRoute('/docs/intro') }}>Usage</button>
                         </div>
                 }
                 <p id='withArco' onClick={() => goRoute('/')}>With Arco</p>
@@ -93,11 +93,14 @@ const Base = (props) => {
                                         {props.plan.status === "active" ? <button className='linkNavBar' onClick={() => goRoute('/tracker')}>Tracker</button> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
                                         {props.plan.status === "active" ? props.profile.profileSet === 0 ? null : <button className='linkNavBar' onClick={() => goRoute('/profile')}>Profile</button> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
                                         <a href="mailto:contact@withar.co" className='linkNavBar' id='contactMobile'>Contact</a>
+                                        <button className='linkNavBar' onClick={() => goRoute('/docs/intro')}>Usage</button>
                                         <button id='logoutMobile' onClick={logout}>Logout</button>
                                     </> : null :
                                     < >
                                         <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>
-                                        <button className='linkNavBar' onClick={() => {setMenuMobile("linksBarMobile"); document.body.style.overflow = ''; navigate('/#pricing')}}>Subscribe</button>
+                                        <button className='linkNavBar' onClick={() => { setMenuMobile("linksBarMobile"); props.setScrollDocument(''); navigate('/#pricing') }}>Subscribe</button>
+                                        <button className='linkNavBar' onClick={() => goRoute('/docs/intro')}>Usage</button>
+
                                         <a href="mailto:contact@withar.co" className='linkNavBar' id='contactMobile'>Contact</a>
                                         <button onClick={() => { goRoute('/login') }} id='getInMobile'>Get in</button>
 

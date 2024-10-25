@@ -11,12 +11,15 @@ import PayementWaiter from './components/PayementWaiter/PayementWaiter.js';
 import Login from './components/Login/Login.js';
 import Error from "./components/Error/Error.js"
 import Confirmation from './components/Confirmation/Confirmation.js';
+import Usage from './components/Usage/Usage.js';
 
 function App() {
   const [logged, setLogged] = useState()
   const [plan, setPlan] = useState()
   const [profile, setProfile] = useState({})
-
+  function setScrollDocument(scroll){
+    document.body.style.overflow = scroll
+  }
   function updateProfile() {
     return new Promise((resolve, reject) => {
         fetch(SERVER_NAME + "/profile", {
@@ -76,13 +79,16 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Base updateLogged={updateLogged} logged={logged} updatePlan={updatePlan} plan={plan} profile={profile}></Base>}>
+        <Route path="/" element={<Base setScrollDocument={setScrollDocument} updateLogged={updateLogged} logged={logged} updatePlan={updatePlan} plan={plan} profile={profile}></Base>}>
           <Route path="/" element={<Landing></Landing>} />
           <Route path="/tracker" element={<TrackerApp profile={profile} updateProfile={updateProfile} logged={logged}></TrackerApp>} />
           <Route path="/login" element={<Login updateLogged={updateLogged}></Login>} />
           <Route path="/profile" element={<Profile updatePlan={updatePlan} plan={plan}></Profile>} />
           <Route path='/subscribe' element={<SubscriptionManager logged={logged}></SubscriptionManager>}></Route>
           <Route path='/payement' element={<PayementWaiter updateLogged={updateLogged} updatePlan={updatePlan}></PayementWaiter>}></Route>
+          <Route path='/docs' element={<Usage setScrollDocument={setScrollDocument}></Usage>}></Route>
+          <Route path='/docs/:document' element={<Usage setScrollDocument={setScrollDocument}></Usage>}></Route>
+          <Route path='/docs/:document/:section' element={<Usage setScrollDocument={setScrollDocument}></Usage>}></Route>
           <Route path='/confirmation' element={<Confirmation></Confirmation>}></Route>
           <Route path="/*" element={<Error></Error>}></Route>
         </Route>

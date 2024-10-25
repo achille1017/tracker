@@ -47,7 +47,7 @@ const ContextMenu = ({ habitsUser, position, onClose, onSelect, habit, updateDat
     >
       <p className='habitNameContextMenu'>{habit}</p>
       {checkKeyPosition(habitsUser, habit) !== "First position" && <button onClick={(e) => { changeOrderHabit(habit, "up") }} className='contextMenuButton'>Move up</button>}
-      <button className='contextMenuButton' onClick={deleteColumn}>Delete column</button>
+      <button className='contextMenuButton' onClick={deleteColumn}>Delete habit</button>
       {checkKeyPosition(habitsUser, habit) !== "Last position" && <button onClick={(e) => { changeOrderHabit(habit, "down") }} className='contextMenuButton'>Move down</button>}
 
     </div>

@@ -28,11 +28,11 @@ const HabitsManager = (props) => {
         <div id={props.id} className='habitsManager'>
             <p id='addANewHabit'>Add a new habit tracker : </p>
             <select id='newHabitType' value={newHabitType} onChange={(e) => setNewHabitType(e.target.value)}>
-                <option value="bool">Bool</option>
-                <option value="text">Text</option>
+                <option value="bool">Yes/no</option>
                 <option value="number">Number</option>
+                <option value="text">Text</option>
             </select>
-            <input id="newHabitName" type='text' value={newHabit} onChange={(e) => setNewHabit(e.target.value)} placeholder='name of new habit'></input>
+            <input id="newHabitName" type='text' value={newHabit} onChange={(e) => setNewHabit(e.target.value)} placeholder='Name of new habit'></input>
             {buttonStatus === "normal" ? <button onClick={createNewHabit} id='newTracker'>New tracker</button> : <img className='validHabitExampleHabitManager' src={valid}></img>}
         </div>
     );

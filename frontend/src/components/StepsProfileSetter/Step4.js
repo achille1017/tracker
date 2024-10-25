@@ -53,7 +53,7 @@ const Step4 = (props) => {
     return (
         <div className='step4ProfileSetter'>
             <Typewriter className={"textProfileSetter"} delay={30} text={"Let's determine which habit you should track."}></Typewriter>
-            {id1 !== "hidden" && <Typewriter delay={20} text={"You can track 3 types of habits, the one that are done or not done, the one that will be counted (example : cigarettes smoked) and the one that needs some text (example : notes taking)."}></Typewriter>}
+            {id1 !== "hidden" && <Typewriter delay={20} text={"You can track 3 types of habits, the ones that are done or not done, the ones that will be counted (example : cigarettes smoked) and the ones that needs some text (example : notes taking)."}></Typewriter>}
             <div id='habitExamples'>
                 <div className='habitExamplesColumn'>
                     <p id={id9} className='titleHabitExample'>Physical health</p>

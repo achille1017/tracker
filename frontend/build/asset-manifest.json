@@ -1,7 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.a9b3703c.css",
-    "main.js": "/static/js/main.ba660a99.js",
+    "main.css": "/static/css/main.09e6a001.css",
+    "main.js": "/static/js/main.d91f66e4.js",
+    "static/media/text.gif": "/static/media/text.f037cbe64730722298b0.gif",
+    "static/media/manage.gif": "/static/media/manage.5821670cfddee6eaae02.gif",
+    "static/media/bool.gif": "/static/media/bool.2fc6b2f0f408832d2dfd.gif",
+    "static/media/number.gif": "/static/media/number.5b8992a340dcd7723048.gif",
+    "static/media/addHabit.gif": "/static/media/addHabit.ce43fa8d58c70bcdd069.gif",
     "static/media/Arco1.png": "/static/media/Arco1.4b300ed1e05671ad1762.png",
     "static/media/open-sans.regular.ttf": "/static/media/open-sans.regular.17e98b9e5586529b13cc.ttf",
     "static/media/Goldplay-Black.ttf": "/static/media/Goldplay-Black.53789a34830a749bec29.ttf",
@@ -13,11 +18,11 @@
     "static/media/hamburger.png": "/static/media/hamburger.4469ebbac28dc09c68f0.png",
     "static/media/close.png": "/static/media/close.76608c97ea3351d43407.png",
     "index.html": "/index.html",
-    "main.a9b3703c.css.map": "/static/css/main.a9b3703c.css.map",
-    "main.ba660a99.js.map": "/static/js/main.ba660a99.js.map"
+    "main.09e6a001.css.map": "/static/css/main.09e6a001.css.map",
+    "main.d91f66e4.js.map": "/static/js/main.d91f66e4.js.map"
   },
   "entrypoints": [
-    "static/css/main.a9b3703c.css",
-    "static/js/main.ba660a99.js"
+    "static/css/main.09e6a001.css",
+    "static/js/main.d91f66e4.js"
   ]
 }

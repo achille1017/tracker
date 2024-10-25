@@ -1,0 +1,17 @@
+#introBox {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.sectionIntro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.blocIntro {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

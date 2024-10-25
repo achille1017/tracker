@@ -12,8 +12,8 @@
     "socket.io-client": "^4.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "REACT_APP_ENVIRONMENT=prod; react-scripts build",
+    "start": "REACT_APP_ENVIRONMENT=dev react-scripts start",
+    "build": "REACT_APP_ENVIRONMENT=prod react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

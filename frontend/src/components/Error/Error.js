@@ -7,7 +7,6 @@ const Error = (props) => {
     const [searchParams] = useSearchParams();
     const [message, setMessage] = useState("")
     useEffect(() => {
-        console.log(searchParams.get("code"))
         setMessage(searchParams.get("code") === null || searchParams.get("code") === undefined ? "Nothing here..." :
             searchParams.get("code") == 401 ? "Email verification failed. The link may be invalid or expired." :
                 searchParams.get("code") == 500 ? "Something went wrong from our side.. sorry for the inconvenience." :

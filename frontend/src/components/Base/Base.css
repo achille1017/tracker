@@ -94,12 +94,13 @@
 }
 
 .linkNavBar {
+    font-family: TommyBold;
     text-decoration: none;
     color: white;
     font-size: 20px;
-    border: 2px white solid;
+    border: none;
     border-radius: 20px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     font-weight: bold;
     background-color: transparent;
     cursor: pointer;
@@ -175,10 +176,11 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 40vh;
         justify-content: space-around;
         background-color: #449dd1;
         z-index: 60;
+        padding-bottom: 40px;
+        gap: 20px;
     }
 
     #getInMobile {
