@@ -16,7 +16,7 @@
         "text":"To track a new habit, select the type of habit you want to track, give it a name and start to track it !"
     },
     "manage":{
-        "title":"Move or delete an habit",
-        "text":"If you want to move or delete an habit, hold down one the name of the habit until you see the tab to move or delete the habit."
+        "title":"Move, rename or delete an habit",
+        "text":"If you want to move, rename or delete an habit, hold down one the name of the habit until you see the menu to manage the habit."
     }
 }

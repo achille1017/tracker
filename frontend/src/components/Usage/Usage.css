@@ -71,7 +71,9 @@
 #navBarDocsMobile {
     display: none;
 }
-
+.textUsageMid{
+    font-size: 18px;
+}
 .buttonNavBarDocs,
 .subbuttonNavBarDocs {
     background: none;
@@ -122,9 +124,9 @@
 
     #navBarMobileButton {
         display: unset;
-        width: 60px;
+        width: 40px;
         background-color: #eefaff;
-        padding: 20px;
+        padding: 20px 10px;
         border: none;
         position: fixed;
         top: calc(5vh + 228px);

@@ -10,7 +10,7 @@ const TrackIt = (props) => {
 
     return (
         <div id='introBox'>
-            <p className='textUsage'> The Importance of Daily Habit Tracking for Productivity and Success </p>
+            <p className='textUsageMid'> The Importance of Daily Habit Tracking for Productivity and Success </p>
             <p className='textUsage'> Tracking your habits every day is a powerful tool for enhancing productivity and achieving success. Here’s why it matters: </p>
             <div className='blocIntro'>
                 <p className='titleUsage'>1. Increased Awareness</p>

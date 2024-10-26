@@ -14,7 +14,7 @@ const Landing = (props) => {
     const location = useLocation();
     useEffect(() => {
         if (location.pathname === '/' && location.hash === '#pricing') {
-            const element = document.getElementById("pricing");
+            const element = document.getElementById("toStartP");
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
