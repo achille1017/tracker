@@ -25,7 +25,8 @@ const TrackerApp = (props) => {
     const [dateCellEditor, setDateCellEditor] = useState("")
     const [habitCellEditor, setHabitCellEditor] = useState("")
     const goRoute = useNavigateAndScroll()
-
+    const longPressTimer = useRef(null);
+    const longPressDuration = 500; // milliseconds
     const menuRef = useRef(null);
     const handleContextMenu = (event, habit) => {
         event.preventDefault();
@@ -36,7 +37,22 @@ const TrackerApp = (props) => {
             habit: habit
         });
     };
+    const handleTouchStart = (event, habit) => {
+        longPressTimer.current = setTimeout(() => {
+            setContextMenu({
+                visible: true,
+                x: event.pageX,
+                y: event.pageY,
+                habit: habit
+            });
+        }, longPressDuration);
+    };
 
+    const handleTouchEnd = () => {
+        if (longPressTimer.current) {
+            clearTimeout(longPressTimer.current);
+        }
+    };
     const handleClose = () => {
         setContextMenu({ ...contextMenu, visible: false });
     };
@@ -156,7 +172,8 @@ const TrackerApp = (props) => {
 
                     <div className='dayLine' id='habitsColumn'>
                         <p className="title" id='dateCell2'>Date</p>
-                        {Object.keys(habitsUser).map((columnName, index) => (<div className="title no-select" key={columnName} onContextMenu={(event) => handleContextMenu(event, columnName)}><p className='no-select' key={columnName} >{columnName}</p></div>))}
+                        {Object.keys(habitsUser).map((columnName, index) => (<div className="title no-select" key={columnName} onTouchStart={(e) => handleTouchStart(e, columnName)}
+                            onTouchEnd={handleTouchEnd} onContextMenu={(event) => handleContextMenu(event, columnName)}><p className='no-select' key={columnName} >{columnName}</p></div>))}
                     </div>
                     <div className='dayLine' id='averagesColumn'>
                         <p className="moyenne" id='dateCell1'>{isNaN(Math.round(averageTotal * 10) / 10) ? null : Math.round(averageTotal * 10) / 10 + " %"}</p>
@@ -165,20 +182,20 @@ const TrackerApp = (props) => {
                     <div id='hidder'></div>
                 </div>
                 <HabitsManager updateData={updateData}></HabitsManager>
-                {contextMenu.visible && 
+                {contextMenu.visible &&
                     <ClickAwayListener onClickAway={handleClose} touchEvent={false}>
                         <div>
-                        <ContextMenu
-                            habitsUser={habitsUser}
-                            position={{ x: contextMenu.x, y: contextMenu.y }}
-                            onClose={handleClose}
-                            onSelect={handleClick}
-                            habit={contextMenu.habit}
-                            updateData={updateData}
-                        />
+                            <ContextMenu
+                                habitsUser={habitsUser}
+                                position={{ x: contextMenu.x, y: contextMenu.y }}
+                                onClose={handleClose}
+                                onSelect={handleClick}
+                                habit={contextMenu.habit}
+                                updateData={updateData}
+                            />
                         </div>
                     </ClickAwayListener>}
-                    {(contextMenu.visible && window.innerWidth <= 1080) &&
+                {(contextMenu.visible && window.innerWidth <= 1080) &&
                     <div id='overlayMenu'></div>}
                 {editorState === "none" ? null :
                     <div className={editorState}>
