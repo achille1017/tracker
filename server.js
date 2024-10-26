@@ -1,6 +1,6 @@
 import express from 'express';
 import session from 'express-session';
-import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList } from './db.js';
+import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, renameHabit,addToWhiteList, confirmEmail, isEmailInWhiteList } from './db.js';
 import cors from 'cors'
 import { getToday } from "./tools.js"
 import path from 'path';
@@ -172,6 +172,15 @@ app.post('/changeorderhabit', (req, res) => {
     }
     else {
         changeOrderHabit(req.session.mail, req.body.habit, req.body.order)
+        res.status(200).send()
+    }
+})
+app.post('/renamehabit', (req, res) => {
+    if (req.session.logged !== true) {
+        res.status(401).send()
+    }
+    else {
+        renameHabit(req.session.mail, req.body.habit, req.body.name)
         res.status(200).send()
     }
 })

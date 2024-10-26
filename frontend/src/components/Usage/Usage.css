@@ -103,8 +103,10 @@
 
     #navBarDocsMobile {
         position: fixed;
-        top: calc(5vh + 228px);
-        left: 0px;
+        top: 50%;
+        left: 50%;
+        transform: translate(0%, -50%);
+                left: 0px;
         display: flex;
         flex-direction: column;
         gap: 30px;

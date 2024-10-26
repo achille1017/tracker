@@ -45,11 +45,7 @@ const TrackerApp = (props) => {
         alert(`You selected: ${action}`);
         handleClose();
     };
-    const handleClickAway = (event) => {
-        if (menuRef.current && !menuRef.current.contains(event.target)) {
-            handleClose();
-        }
-    };
+
     function openTextCellEditor(text, date, habit) {
         setTextCellEditor(text)
         setDateCellEditor(date)
@@ -63,10 +59,6 @@ const TrackerApp = (props) => {
         if (props.logged === false) {
             goRoute('/')
         }
-        document.addEventListener('click', handleClickAway);
-        return () => {
-            document.removeEventListener('click', handleClickAway);
-        };
     }, []);
     useEffect(() => {
         if (props.logged === false) {
@@ -93,7 +85,7 @@ const TrackerApp = (props) => {
             })
         })
     }
-    
+
     useEffect(() => {
         if (dataLoaded && props.profile.profileSet === 1) {
             var container = document.getElementById("spreadSheet");
@@ -164,7 +156,7 @@ const TrackerApp = (props) => {
 
                     <div className='dayLine' id='habitsColumn'>
                         <p className="title" id='dateCell2'>Date</p>
-                        {Object.keys(habitsUser).map((columnName, index) => (<div className="title" key={columnName} onContextMenu={(event) => handleContextMenu(event, columnName)}><p  key={columnName} >{columnName}</p></div>))}
+                        {Object.keys(habitsUser).map((columnName, index) => (<div className="title" key={columnName} onContextMenu={(event) => handleContextMenu(event, columnName)}><p key={columnName} >{columnName}</p></div>))}
                     </div>
                     <div className='dayLine' id='averagesColumn'>
                         <p className="moyenne" id='dateCell1'>{isNaN(Math.round(averageTotal * 10) / 10) ? null : Math.round(averageTotal * 10) / 10 + " %"}</p>
@@ -173,8 +165,9 @@ const TrackerApp = (props) => {
                     <div id='hidder'></div>
                 </div>
                 <HabitsManager updateData={updateData}></HabitsManager>
-                {contextMenu.visible && (
-                    <div ref={menuRef}>
+                {contextMenu.visible && 
+                    <ClickAwayListener onClickAway={handleClose} touchEvent={false}>
+                        <div>
                         <ContextMenu
                             habitsUser={habitsUser}
                             position={{ x: contextMenu.x, y: contextMenu.y }}
@@ -183,8 +176,10 @@ const TrackerApp = (props) => {
                             habit={contextMenu.habit}
                             updateData={updateData}
                         />
-                    </div>
-                )}
+                        </div>
+                    </ClickAwayListener>}
+                    {(contextMenu.visible && window.innerWidth <= 1080) &&
+                    <div id='overlayMenu'></div>}
                 {editorState === "none" ? null :
                     <div className={editorState}>
                         <ClickAwayListener onClickAway={closeTextCellEditor} touchEvent={false}>

@@ -122,6 +122,26 @@ function changeOrderHabit(mail, habit, order) {
 	let update = db.prepare(`update users set habits=? where mail = '${mail}'`)
 	update.run(JSON.stringify(newhabits))
 }
+function renameHabit(mail, habit, name) {
+	let update = db.prepare(`UPDATE users
+	SET data = json(
+	replace(
+		data,
+		?,
+		?
+	)
+	) WHERE mail = ?;`)
+	update.run(habit, name, mail)
+	update = db.prepare(`UPDATE users
+		SET habits = json(
+		replace(
+			habits,
+			?,
+			?
+		)
+		) WHERE mail = ?;`)
+	update.run(habit, name, mail)
+}
 async function register(mail, password, token) {
 	const saltRounds = 10;
 	let result;
@@ -234,4 +254,4 @@ function isEmailInWhiteList(mail) {
 function isValidValue(value) {
 	return value !== undefined && value !== null;
 }
-export { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList }
+export { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, renameHabit, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList }
