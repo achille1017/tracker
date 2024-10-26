@@ -8,8 +8,8 @@ const ANNUAL_ID = 539248
 const LIFE_ID = 541239
 const variantIds = [MONTHLY_ID, ANNUAL_ID, LIFE_ID];
 const STORE_ID = keys["storeId"];
-const FRONTEND_SERVER = keys["env"] ==="dev" ?"http://localhost:3000": "https://withar.co"
-const BACKEND_SERVER = keys["env"] ==="dev" ?"http://localhost:4000": "https://withar.co"
+const FRONTEND_SERVER = keys["env"] ==="dev" ?"http://192.168.1.67:3000": "https://withar.co"
+const BACKEND_SERVER = keys["env"] ==="dev" ?"http://192.168.1.67:4000": "https://withar.co"
 lemonSqueezySetup({
     apiKey: LEMON_SQUEEZY_API_KEY,
 });

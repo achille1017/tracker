@@ -1,6 +1,6 @@
 import express from 'express';
 import session from 'express-session';
-import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, renameHabit,addToWhiteList, confirmEmail, isEmailInWhiteList } from './db.js';
+import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, renameHabit, addToWhiteList, confirmEmail, isEmailInWhiteList } from './db.js';
 import cors from 'cors'
 import { getToday } from "./tools.js"
 import path from 'path';
@@ -185,15 +185,14 @@ app.post('/renamehabit', (req, res) => {
     }
 })
 app.post('/login', async (req, res) => {
-    console.log(req.body)
     const login = await allowLogin(req.body.mail, req.body.password)
-    if (login==="ok") {
+    if (login === "ok") {
         req.session.logged = true;
         req.session.mail = req.body.mail
         res.status(200).send()
     }
     else {
-        res.status(401).send({"message":login})
+        res.status(401).send({ "message": login })
     }
 })
 app.get('/islogged', (req, res) => {
@@ -210,15 +209,15 @@ app.post('/logout', (req, res) => {
     });
 })
 app.post('/register', async (req, res) => {
-    console.log(req.body)
+    console.log('POST /register req.body.mail')
     if (req.body.mail === undefined || req.body.mail === null || req.body.mail === "") {
         console.log("email provided null")
         return res.status(400).send()
     }
-    if (!isEmailInWhiteList(req.body.mail)) {
+    /*if (!isEmailInWhiteList(req.body.mail)) {
         console.log("email provided not in WL")
         return res.status(400).send()
-    }
+    }*/
     const token = jwt.sign({ "mail": req.body.mail }, SECRET_KEY, { expiresIn: '1h' });
     const registration = await register(req.body.mail, req.body.password, token)
     if (registration) {
@@ -230,9 +229,7 @@ app.post('/register', async (req, res) => {
 })
 app.get('/verify-email', (req, res) => {
     console.log('GET /verify-email')
-
     const { token } = req.query;
-
     jwt.verify(token, SECRET_KEY, async (err, decoded) => {
         if (err) {
             res.redirect(FRONTEND_SERVER + "/error?code=401")
@@ -249,6 +246,7 @@ app.get('/verify-email', (req, res) => {
     });
 });
 app.post('/whitelist', async (req, res) => {
+    console.log('POST /whitelist')
     const whitelist = await addToWhiteList(req.body.mail)
     res.status(whitelist).send()
 })
@@ -256,15 +254,17 @@ app.post('/whitelist', async (req, res) => {
 //Payements 
 
 app.get('/checkout', (req, res) => {
-    getThreeCheckoutLinks(req.session.mail).then(links => res.json(links)
-    )
+    console.log('GET /checkout')
+    getThreeCheckoutLinks(req.session.mail).then(links => res.json(links))
 })
 
 app.get('/plan', (req, res) => {
+    console.log('GET /plan')
     res.json({ "plan": getPlan(req.session.mail) })
 })
 
 app.post('/subscription_callback', verifyLemonSqueezyWebhook, (req, res) => {
+    console.log('POST /subscription_callback')
     console.log(req.body.meta.custom_data.mail + " updated his subscription to " + req.body.data.attributes.status)
     updateSubscription(req.body.meta.custom_data.mail, req.body.data.attributes.status, req.body.data.attributes.updated_at)
     io.to(req.body.meta.custom_data.mail).emit("subscription_updated");
@@ -280,7 +280,7 @@ app.get('/static/:dir/:file', (req, res) => {
 })
 
 app.get('/favicon.ico', (req, res) => {
-    console.log('GET /')
+    //console.log('GET /favicon.ico')
     res.sendFile(__dirname + "/frontend/public/favicon.ico");
 })
 

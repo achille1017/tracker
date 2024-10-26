@@ -156,7 +156,7 @@ const TrackerApp = (props) => {
 
                     <div className='dayLine' id='habitsColumn'>
                         <p className="title" id='dateCell2'>Date</p>
-                        {Object.keys(habitsUser).map((columnName, index) => (<div className="title" key={columnName} onContextMenu={(event) => handleContextMenu(event, columnName)}><p key={columnName} >{columnName}</p></div>))}
+                        {Object.keys(habitsUser).map((columnName, index) => (<div className="title no-select" key={columnName} onContextMenu={(event) => handleContextMenu(event, columnName)}><p className='no-select' key={columnName} >{columnName}</p></div>))}
                     </div>
                     <div className='dayLine' id='averagesColumn'>
                         <p className="moyenne" id='dateCell1'>{isNaN(Math.round(averageTotal * 10) / 10) ? null : Math.round(averageTotal * 10) / 10 + " %"}</p>

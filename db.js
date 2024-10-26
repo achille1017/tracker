@@ -162,7 +162,7 @@ async function register(mail, password, token) {
 				}
 				try {
 					let insert = db.prepare(`insert into users (mail,password,data,habits,advice_daily,profile,plan,confirmation_token,is_confirmed) values (?,?,?,?,?,?,?,?,?)`);
-					insert.run(mail, hash, `[{"date":"${getFormattedDate()}"}]`, '{}', `{"${getFormattedDate()}":"firstAdvice"}`, '{"profileSet":0,"name":"","job":"","language":""}', `{"status":"active","updated":"${getFormattedDate()}"}`, token, 0);
+					insert.run(mail, hash, `[{"date":"${getFormattedDate()}"}]`, '{}', `{"${getFormattedDate()}":"firstAdvice"}`, '{"profileSet":0,"name":"","job":"","language":""}', `{"status":"inactive","updated":"${getFormattedDate()}"}`, token, 0);
 
 					result = await sendConfirmationEmail(mail, `${BACKEND_SERVER}/verify-email?token=${token}`) ? true : false
 				} catch (e) {

@@ -99,6 +99,15 @@
     height: calc(100% - 40px);
 }
 
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .textCellEditor {
     background-color: #e3e3e3;
     padding: 10px;
@@ -154,14 +163,16 @@
 #appWaiter {
     min-height: calc(100vh - 80px);
 }
-#overlayMenu{
+
+#overlayMenu {
     width: 100vw;
     height: 100vh;
-    background-color: rgb(0,0,0,0.4);
+    background-color: rgb(0, 0, 0, 0.4);
     position: fixed;
     top: 0px;
     left: 0px;
 }
+
 @media screen and (max-width: 720px) {
     #trackerApp {
         margin: 30px 0px;
@@ -171,7 +182,7 @@
 
     #spreadSheet {
         max-width: 86vw;
-       
+
     }
 
     .title,
@@ -207,7 +218,7 @@
     .dateCell {
         width: 40px;
         font-size: 10px;
-        padding:  10px 3px;
+        padding: 10px 3px;
     }
 
     .habitCell {
@@ -220,17 +231,19 @@
         padding: 10px 3px;
     }
 
-    #overlayTextCellEditor{
+    #overlayTextCellEditor {
         width: calc(80vw - 20px);
         left: 10vw;
         padding: 10px;
     }
-    .textCellEditor{
+
+    .textCellEditor {
         width: unset;
     }
+
     #closeCellEditor {
-       width: 20px;
-       height: 20px;
-       padding: 0px;
+        width: 20px;
+        height: 20px;
+        padding: 0px;
     }
 }
