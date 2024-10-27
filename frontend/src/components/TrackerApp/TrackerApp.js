@@ -118,9 +118,11 @@ const TrackerApp = (props) => {
                         data => {
                             setDataLoaded(true)
                             let datesToAdd = getDatesBetween(findMostAdvancedDate(data)["date"])
+                            console.log(datesToAdd)
                             for (let d in datesToAdd) {
                                 let newDay = replaceValues(habitsUser)
                                 newDay["date"] = datesToAdd[d]
+                                console.log(datesToAdd[d])
                                 data.push(newDay)
                             }
                             data.sort((a, b) => {
