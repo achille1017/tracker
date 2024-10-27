@@ -44,28 +44,17 @@ function parseDate(dateString) {
     return new Date(parts[2], parts[1] - 1, parts[0]);
 }
 function getDatesBetween(startDate) {
-    console.log(startDate)
     startDate = parseDate(startDate)
-    console.log(startDate)
     const endDate = new Date();
-    console.log(endDate)
-
     endDate.setDate(endDate.getDate() + 1);
-    console.log(endDate)
-
     const dates = [];
     let currentDate = new Date(startDate);
-    console.log(currentDate)
-
-    currentDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000)
-    console.log(currentDate)
-
+    currentDate.setDate(currentDate.getDate() + 1);
     while (currentDate <= endDate) {
         const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${currentDate.getFullYear()}`;
         dates.push(formattedDate);
         currentDate.setDate(currentDate.getDate() + 1);
     }
-    console.log(dates)
     return dates;
 }
 function replaceValues(obj) {
