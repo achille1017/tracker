@@ -8,13 +8,14 @@ const Profile = (props) => {
     const [name, setName] = useState('')
     const [language, setLanguage] = useState('')
     const [job, setJob] = useState('')
+    const [objectives, setObjectives] = useState('')
     const [loaded, setLoaded] = useState(false)
     useEffect(() => {
         updateProfile()
         props.updatePlan()
     }, [])
     function setProfileServer() {
-        const profile = { "profileSet": 1, "name": name, "job": job, "language": language }
+        const profile = { "profileSet": 1, "name": name, "job": job, "language": language,"objectives":objectives }
         fetch(SERVER_NAME + "/setprofile", {
             method: 'POST',
             headers: {
@@ -52,7 +53,10 @@ const Profile = (props) => {
                         <option value="french">Français</option>
                         <option value="spanish">Español</option>
                     </select></div>
+                    
                     <div className='profileDiv'><p className="profileP">Job : </p><input onChange={(e) => { setJob(e.target.value) }} value={job} type='text' className="inputProfile"></input></div>
+                    <div className='profileDiv'><p className="profileP">Goals and objectives : </p><textarea  onChange={(e) => { setObjectives(e.target.value) }} value={objectives} type='text' className="textareaProfile"></textarea></div>
+
                     <div className='profileDiv'><p className="profileP">Plan : {props.plan !== undefined ? props.plan.status : null}</p><a href="https://witharco.lemonsqueezy.com/billing">Manage</a></div>
                     <button id="saveChanges" onClick={setProfileServer}>Save changes</button>
                 </div>

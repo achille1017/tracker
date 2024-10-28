@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import "./ProfileSetter.css"
 import Step1 from '../StepsProfileSetter/Step1';
 import Step2 from '../StepsProfileSetter/Step2';
+import Step2Bis from '../StepsProfileSetter/Step2Bis';
+
 import Step3 from '../StepsProfileSetter/Step3';
 import Step4 from '../StepsProfileSetter/Step4';
 import { SERVER_NAME } from '../../config.js';
@@ -14,11 +16,12 @@ const ProfileSetter = (props) => {
     const [name, setName] = useState("")
     const [job, setJob] = useState("")
     const [plan, setPlan] = useState()
+    const [objectives,setObjectives] = useState("")
     const goRoute = useNavigateAndScroll()
 
     const [language, setLanguage] = useState("english")
     function setProfile() {
-        const profile = { "profileSet": 1, "name": name, "job": job, "language": language }
+        const profile = { "profileSet": 1, "name": name, "job": job, "language": language,"objectives":objectives }
         fetch(SERVER_NAME + "/setprofile", {
             method: 'POST',
             headers: {
@@ -52,7 +55,7 @@ const ProfileSetter = (props) => {
     }, [])
     return (
         <div id='profileSetter'>
-            {step === 0 ? null : step === 1 ? <Step1 setStep={setStep} setName={setName}></Step1> : step === 2 ? <Step2 setJob={setJob} name={name} setStep={setStep}></Step2> : step === 3 ? <Step3 setLanguage={setLanguage} setStep={setStep}></Step3> : step === 4 ? <Step4 setStep={setStep} updateData={props.updateData} setProfile={setProfile}></Step4> : null}
+            {step === 0 ? null : step === 1 ? <Step1 setStep={setStep} setName={setName}></Step1> : step === 2 ? <Step2 setJob={setJob} name={name} setStep={setStep}></Step2> :step === "2bis" ? <Step2Bis setObjectives={setObjectives}  setStep={setStep}></Step2Bis> : step === 3 ? <Step3 setLanguage={setLanguage} setStep={setStep}></Step3> : step === 4 ? <Step4 setStep={setStep} updateData={props.updateData} setProfile={setProfile}></Step4> : null}
         </div>
     );
 };

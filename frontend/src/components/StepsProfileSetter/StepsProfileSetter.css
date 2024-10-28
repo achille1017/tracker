@@ -54,7 +54,14 @@
     display: none;
 }
 
-
+.textareaProfileSetter{
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    width: calc(50%);
+    height: 20vh !important;
+    resize: none;
+}
 
 #habitExamples {
     display: flex;

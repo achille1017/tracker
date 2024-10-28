@@ -55,7 +55,15 @@
     border-radius: 10px;
     width: calc(50%);
 }
+.textareaProfile{
+    resize: none;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    width: calc(50%);
+    height: 80px;
 
+}
 @media screen and (max-width: 1080px) {
     #profile {
         width: 86vw;

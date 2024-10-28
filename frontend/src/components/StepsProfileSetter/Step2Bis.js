@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import "./StepsProfileSetter.css"
 import Typewriter from '../TypeWriter/TypeWriter';
 
-const Step2 = (props) => {
-    const [jobStep2, setJobStep2] = useState("")
+const Step2Bis = (props) => {
+    const [objectivesStep2Bis, setObjectivesStep2Bis] = useState("")
     const [id1, setId1] = useState("hidden")
     const [id2, setId2] = useState("hidden")
     const [id3, setId3] = useState("hidden")
     function nextStep() {
-        props.setJob(jobStep2)
-        props.setStep("2bis")
+        props.setObjectives(objectivesStep2Bis)
+        props.setStep(3)
     }
     useEffect(() => {
         setTimeout(() => {
@@ -24,14 +24,14 @@ const Step2 = (props) => {
     }, [])
     return (
         <div className='stepProfileSetter'>
-            <Typewriter className={"textProfileSetter"} delay={30} text={`Hi${props.name===""?"":" "+props.name}, what's your job ?`}></Typewriter>
-            <input id={id1} value={jobStep2} onChange={(e) => { setJobStep2(e.target.value) }} className='textInputProfileSetter' type='text' placeholder='Bread maker'></input>
+            <Typewriter className={"textProfileSetter"} delay={30} text={"Tell me about your objectives..."}></Typewriter>
+            <textarea id={id1} value={objectivesStep2Bis} onChange={(e) => { setObjectivesStep2Bis(e.target.value) }} className='textareaProfileSetter' placeholder='I want to...'></textarea>
             <div className='navigatorProfileSetter'>
-                <button id={id2} className='simpleNavigatorButton' onClick={() => props.setStep(1)}>Previous step</button>
+                <button id={id2} className='simpleNavigatorButton' onClick={() => props.setStep(2)}>Previous step</button>
                 <button id={id3} className='simpleNavigatorButton' onClick={nextStep}>Next</button>
             </div>
         </div>
     )
 };
 
-export default Step2;
+export default Step2Bis;
