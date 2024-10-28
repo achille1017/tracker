@@ -92,10 +92,11 @@ const Landing = (props) => {
                     </div>
                 </div>
             </div>}
-            <div id='alreadyDiv'>
-                <p id='alreadyP'>Already working with Arco ?</p>
-                <button id='alreadyButton' onClick={()=>{goRoute('/login')}}>LOGIN</button>
-            </div>
+            {!props.logged &&
+                <div id='alreadyDiv'>
+                    <p id='alreadyP'>Already working with Arco ?</p>
+                    <button id='alreadyButton' onClick={() => { goRoute('/login') }}>LOGIN</button>
+                </div>}
             {/*<WhiteList></WhiteList>*/}
             <div id='thirdBoxLanding'>
                 <p className='text1'>Why did I build withar.co ? </p>

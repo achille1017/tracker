@@ -17,22 +17,23 @@ function App() {
   const [logged, setLogged] = useState()
   const [plan, setPlan] = useState()
   const [profile, setProfile] = useState({})
-  function setScrollDocument(scroll){
+
+  function setScrollDocument(scroll) {
     document.body.style.overflow = scroll
   }
   function updateProfile() {
     return new Promise((resolve, reject) => {
-        fetch(SERVER_NAME + "/profile", {
-            credentials: 'include',
-        }).then(res => {
-            if (res.status === 200) {
-                res.json().then(
-                    data => { setProfile(data); resolve(data) }
-                )
-            }
-        })
+      fetch(SERVER_NAME + "/profile", {
+        credentials: 'include',
+      }).then(res => {
+        if (res.status === 200) {
+          res.json().then(
+            data => { setProfile(data); resolve(data) }
+          )
+        }
+      })
     })
-}
+  }
   async function updateLogged() {
     return new Promise((resolve, reject) => {
 
@@ -80,7 +81,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Base setScrollDocument={setScrollDocument} updateLogged={updateLogged} logged={logged} updatePlan={updatePlan} plan={plan} profile={profile}></Base>}>
-          <Route path="/" element={<Landing></Landing>} />
+          <Route path="/" element={<Landing logged={logged}></Landing>} />
           <Route path="/tracker" element={<TrackerApp profile={profile} updateProfile={updateProfile} logged={logged}></TrackerApp>} />
           <Route path="/login" element={<Login updateLogged={updateLogged}></Login>} />
           <Route path="/profile" element={<Profile updatePlan={updatePlan} plan={plan}></Profile>} />

@@ -58,7 +58,7 @@ function SubscriptionManager(props) {
 
   return (
     <div id='subscriptionManager'>
-      <div id='pricingBox'>
+      <div id='pricingBox2'>
         <p id='toStartP'>To start to work with Arco</p>
         {loaded ? <div id='offersBox'>
           <div className='offerDiv'>

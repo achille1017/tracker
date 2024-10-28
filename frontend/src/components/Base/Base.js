@@ -29,18 +29,19 @@ const Base = (props) => {
     useEffect(() => {
         if (props.logged) {
             props.updatePlan().then((plan) => {
+                console.log(plan)
                 redirect(plan)
                 setLoaded(true)
             })
         }
     }, [props.logged])
     useEffect(() => {
-        if (loaded) {
+        /*if (loaded) {
             redirect(props.plan)
-        }
+        }*/
     }, [location])
     function redirect(plan) {
-        if (props.logged && plan.status === "inactive" && location.pathname !== "/subscribe" && location.pathname !== "/" && location.pathname !== "/payement") {
+        if (props.logged && plan.status === "inactive" && location.pathname !== "/subscribe" && location.pathname !== "/payement") {
             goRoute('/subscribe')
         }
     }

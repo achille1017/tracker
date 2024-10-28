@@ -36,6 +36,7 @@ async function getThreeCheckoutLinks(mail) {
                 STORE_ID,
                 variantId, newCheckout
             );
+            console.log(checkout.data)
             return checkout.data.data.attributes.url;
         }));
 

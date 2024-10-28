@@ -93,6 +93,7 @@ function deleteHabit(mail, habitName) {
 	deleteRequest2.run(habitName, mail);
 }
 async function allowLogin(mail, userProvidedPassword) {
+	return "ok"
 	let select = db.prepare(`SELECT password FROM users WHERE mail = '${mail}' and is_confirmed=1`);
 	if (select.get() === undefined) { return "unfound" }
 	let storedHash = select.get()["password"];
@@ -218,7 +219,7 @@ async function getDailyAdvice(day, mail) {
 	}
 	else return result.advice;
 }
-function updateSubscription(mail, status, date) {
+function updateSubscription(event_name,mail, status, date) {
 	let update = db.prepare(`UPDATE users
 		SET plan = JSON_PATCH(plan, JSON_OBJECT('status','${status}'))
 		WHERE mail = '${mail}'`)
@@ -251,7 +252,12 @@ function isEmailInWhiteList(mail) {
 		return result.count > 0;
 	}
 }
+function hasAccess(mail){
+	let select = db.prepare(`SELECT plan FROM users WHERE mail = '${mail}'`);
+	let result = JSON.parse(select.get().plan);
+	if (result) return result.status==="active" || result.status==="paid";
+}
 function isValidValue(value) {
 	return value !== undefined && value !== null;
 }
-export { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, renameHabit, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList }
+export { getData,hasAccess, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, renameHabit, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList }

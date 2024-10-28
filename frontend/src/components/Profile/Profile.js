@@ -36,7 +36,7 @@ const Profile = (props) => {
             }).then(res => {
                 if (res.status === 200) {
                     res.json().then(
-                        data => { setProfile(data); setLanguage(data.language); setJob(data.job); setName(data.name); setLoaded(true); resolve(data) }
+                        data => { setProfile(data); setLanguage(data.language); setJob(data.job); setName(data.name); setLoaded(true);setObjectives(data.objectives); resolve(data) }
                     )
                 }
             })

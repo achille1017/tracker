@@ -168,7 +168,12 @@
     align-items: center;
     gap: 60px;
 }
-
+#pricingBox2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
 #offersBox {
     display: flex;
     flex-direction: row;
@@ -466,7 +471,9 @@
     #pricingBox {
         width: 100%;
     }
-
+    #pricingBox2 {
+        width: 100%;
+    }
     .offerDiv {
         width: calc(100% - 20px);
         padding: 10px;

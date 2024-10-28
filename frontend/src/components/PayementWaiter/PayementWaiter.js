@@ -13,7 +13,7 @@ const PayementWaiter = (props) => {
         withCredentials: true
     });
     function updatePlan() {
-        props.updatePlan().then(plan => { console.log(plan); if (plan.status === "active") { setPlanActive(true) } })
+        props.updatePlan().then(plan => { console.log(plan); if (plan.status === "active" || plan.status === "paid") { setPlanActive(true) } })
         setTimeout(updatePlan,15000)
     }
 

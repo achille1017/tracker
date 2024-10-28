@@ -43,7 +43,7 @@
     padding: 0px 38.5px;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 1080px) {
     .habitsManager {
         flex-direction: column;
         width: calc(100% - 20px);

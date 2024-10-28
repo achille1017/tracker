@@ -1,6 +1,6 @@
 import express from 'express';
 import session from 'express-session';
-import { getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, renameHabit, addToWhiteList, confirmEmail, isEmailInWhiteList } from './db.js';
+import {hasAccess, getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, renameHabit, addToWhiteList, confirmEmail, isEmailInWhiteList } from './db.js';
 import cors from 'cors'
 import { getToday } from "./tools.js"
 import path from 'path';
@@ -108,7 +108,7 @@ app.get('/profile', (req, res) => {
     }
 });
 app.post('/advice', async (req, res) => {
-    if (req.session.logged !== true) {
+    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
         res.status(401).send()
     }
     else {
@@ -119,7 +119,7 @@ app.post('/advice', async (req, res) => {
     }
 });
 app.post('/setprofile', (req, res) => {
-    if (req.session.logged !== true) {
+    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
         res.status(401).send()
     }
     else {
@@ -136,7 +136,7 @@ app.get('/habits', (req, res) => {
     }
 });
 app.post('/updatedata', (req, res) => {
-    if (req.session.logged !== true) {
+    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
         res.status(401).send()
     }
     else {
@@ -145,7 +145,7 @@ app.post('/updatedata', (req, res) => {
     }
 });
 app.post('/newhabit', (req, res) => {
-    if (req.session.logged !== true) {
+    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
         res.status(401).send()
     }
     else {
@@ -158,7 +158,7 @@ app.post('/newhabit', (req, res) => {
     }
 })
 app.post('/deletehabit', (req, res) => {
-    if (req.session.logged !== true) {
+    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
         res.status(401).send()
     }
     else {
@@ -167,7 +167,7 @@ app.post('/deletehabit', (req, res) => {
     }
 })
 app.post('/changeorderhabit', (req, res) => {
-    if (req.session.logged !== true) {
+    if (req.session.logged !== true|| !hasAccess(req.session.mail)) {
         res.status(401).send()
     }
     else {
@@ -176,7 +176,7 @@ app.post('/changeorderhabit', (req, res) => {
     }
 })
 app.post('/renamehabit', (req, res) => {
-    if (req.session.logged !== true) {
+    if (req.session.logged !== true|| !hasAccess(req.session.mail)) {
         res.status(401).send()
     }
     else {
@@ -245,11 +245,11 @@ app.get('/verify-email', (req, res) => {
 
     });
 });
-app.post('/whitelist', async (req, res) => {
+/*app.post('/whitelist', async (req, res) => {
     console.log('POST /whitelist')
     const whitelist = await addToWhiteList(req.body.mail)
     res.status(whitelist).send()
-})
+})*/
 
 //Payements 
 
@@ -259,14 +259,17 @@ app.get('/checkout', (req, res) => {
 })
 
 app.get('/plan', (req, res) => {
-    console.log('GET /plan')
+    //console.log('GET /plan')
     res.json({ "plan": getPlan(req.session.mail) })
 })
 
 app.post('/subscription_callback', verifyLemonSqueezyWebhook, (req, res) => {
     console.log('POST /subscription_callback')
-    console.log(req.body.meta.custom_data.mail + " updated his subscription to " + req.body.data.attributes.status)
-    updateSubscription(req.body.meta.custom_data.mail, req.body.data.attributes.status, req.body.data.attributes.updated_at)
+    const event = req.body
+    const event_name = event.meta.event_name
+    console.log(event_name + " " + req.body.meta.custom_data.mail)
+    console.log(`${req.body.meta.custom_data.mail} ${event_name === "subscription_updated" ? " updated his subscription to " : event_name === "order_created" ? " created an order that is " : ""} ${req.body.data.attributes.status}`)
+    updateSubscription(event_name, req.body.meta.custom_data.mail, req.body.data.attributes.status, req.body.data.attributes.updated_at)
     io.to(req.body.meta.custom_data.mail).emit("subscription_updated");
     res.status(200).send()
 })

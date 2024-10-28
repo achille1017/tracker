@@ -54,7 +54,7 @@
     display: none;
 }
 
-.textareaProfileSetter{
+.textareaProfileSetter {
     border: none;
     padding: 10px;
     border-radius: 10px;
@@ -130,8 +130,28 @@
     /* Smooth transition */
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 1080px) {
+    .stepProfileSetter,
+    .step4ProfileSetter {
+        width: 70vw;
+    }
 
+    .textareaProfileSetter {
+        width: calc(100% - 20px);
+    }#habitExamples {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .step4ProfileSetter {
+        padding: 30px 0px;
+    }
+
+}
+
+@media screen and (max-width: 720px) {
+    .textProfileSetter{
+        font-size: 24px;
+    }
     .stepProfileSetter,
     .step4ProfileSetter {
         width: 86vw;
@@ -149,6 +169,7 @@
     .titleHabitExample {
         margin-bottom: 10px;
     }
+
     .startProfile {
         border: none;
         background-color: rgb(76, 1, 220);
@@ -159,5 +180,5 @@
         color: white;
         font-weight: bold;
         cursor: pointer;
-      }
+    }
 }

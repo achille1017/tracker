@@ -23,7 +23,7 @@ async function generateDailyAdvice(data, name, job, language, objectives) {
                   Do not use quotation marks when talking about the name of a daily habit, make a sentence including the daily habit but not quoting it. 
                   It will be used as a motivational message trough an application. String returned should be directly ready to be displayed so without any markups.
                   Use various forms of greeting.`
-                  console.log(prompt)
+    //console.log(prompt)
     const completion = await openai.chat.completions.create({
         model: model,
         messages: [
@@ -56,11 +56,8 @@ async function generateWeeklyAdvice(dataWeek) {
 
 function getOneHabitFromData(obj) {
     const keysWithZeroValue = Object.keys(obj).filter(key => obj[key] === 0);
-    console.log(keysWithZeroValue)
     if (keysWithZeroValue.length === 0) {
         const keysWithOneValue = Object.keys(obj).filter(key => obj[key] === 1);
-        console.log(keysWithOneValue)
-
         if (keysWithOneValue.length === 0) {
             //did not track
             return null

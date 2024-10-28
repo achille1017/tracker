@@ -205,7 +205,7 @@
     }
     #overlay {
         width: 100vw;
-        height: calc(100vh - 80px);
+        height: calc(80vh - 80px);
         position: fixed;
         left: 0px;
         bottom: 0px;
