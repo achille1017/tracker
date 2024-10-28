@@ -93,7 +93,7 @@ function deleteHabit(mail, habitName) {
 	deleteRequest2.run(habitName, mail);
 }
 async function allowLogin(mail, userProvidedPassword) {
-	return "ok"
+	//return "ok"
 	let select = db.prepare(`SELECT password FROM users WHERE mail = '${mail}' and is_confirmed=1`);
 	if (select.get() === undefined) { return "unfound" }
 	let storedHash = select.get()["password"];
