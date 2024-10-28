@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.bcd94d44.css",
-    "main.js": "/static/js/main.aa81dc88.js",
+    "main.css": "/static/css/main.8eaa16e8.css",
+    "main.js": "/static/js/main.8322aa28.js",
     "static/media/text.gif": "/static/media/text.f037cbe64730722298b0.gif",
     "static/media/manage.gif": "/static/media/manage.5821670cfddee6eaae02.gif",
     "static/media/bool.gif": "/static/media/bool.2fc6b2f0f408832d2dfd.gif",
     "static/media/number.gif": "/static/media/number.5b8992a340dcd7723048.gif",
     "static/media/addHabit.gif": "/static/media/addHabit.ce43fa8d58c70bcdd069.gif",
-    "static/media/Arco1.png": "/static/media/Arco1.4b300ed1e05671ad1762.png",
     "static/media/open-sans.regular.ttf": "/static/media/open-sans.regular.17e98b9e5586529b13cc.ttf",
     "static/media/Goldplay-Black.ttf": "/static/media/Goldplay-Black.53789a34830a749bec29.ttf",
     "static/media/Uni Sans Heavy.otf": "/static/media/Uni Sans Heavy.de76b17291d74c0a03b0.otf",
     "static/media/TommyRegular.otf": "/static/media/TommyRegular.101be848d2d18e7296bc.otf",
     "static/media/TommyBold.otf": "/static/media/TommyBold.463024f431b0a3769ed9.otf",
+    "static/media/Arco1.png": "/static/media/Arco1.c74a12087a62cf33a280.png",
     "static/media/screenTracker.png": "/static/media/screenTracker.a3220241434c5509b469.png",
     "static/media/TommyLight.otf": "/static/media/TommyLight.baa9639fea2a3259ba0b.otf",
     "static/media/hamburger.png": "/static/media/hamburger.4469ebbac28dc09c68f0.png",
     "static/media/close.png": "/static/media/close.76608c97ea3351d43407.png",
     "index.html": "/index.html",
-    "main.bcd94d44.css.map": "/static/css/main.bcd94d44.css.map",
-    "main.aa81dc88.js.map": "/static/js/main.aa81dc88.js.map"
+    "main.8eaa16e8.css.map": "/static/css/main.8eaa16e8.css.map",
+    "main.8322aa28.js.map": "/static/js/main.8322aa28.js.map"
   },
   "entrypoints": [
-    "static/css/main.bcd94d44.css",
-    "static/js/main.aa81dc88.js"
+    "static/css/main.8eaa16e8.css",
+    "static/js/main.8322aa28.js"
   ]
 }

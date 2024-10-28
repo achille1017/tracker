@@ -32,12 +32,12 @@ async function getThreeCheckoutLinks(mail) {
     };
     try {
         const checkoutLinks = await Promise.all(variantIds.map(async (variantId) => {
+            try{
             const checkout = await createCheckout(
                 STORE_ID,
                 variantId, newCheckout
             );
-            console.log(checkout.data)
-            return checkout.data.data.attributes.url;
+            return checkout.data.data.attributes.url;}catch(e){console.log(e)}
         }));
 
         return {

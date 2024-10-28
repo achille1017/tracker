@@ -80,7 +80,9 @@ const Base = (props) => {
                 {props.logged ? <div className='rightBoxNavBar'><button id='logout' onClick={logout}>Logout</button> </div> :
                     <div className='rightBoxNavBar'>
                         <div id='loginBox1'>
-                            <button onClick={() => { goRoute('/login') }} id='getIn'>Get in</button>
+                            <button onClick={() => { goRoute('/login') }} id='getIn'>Login</button>
+
+                            <button onClick={() => { goRoute('/register') }} id='getIn' className='registerButtonColors'>Sign up</button>
                         </div>
                     </div>
                 }
@@ -103,7 +105,8 @@ const Base = (props) => {
                                         <button className='linkNavBar' onClick={() => goRoute('/docs/intro')}>Usage</button>
 
                                         <a href="mailto:contact@withar.co" className='linkNavBar' id='contactMobile'>Contact</a>
-                                        <button onClick={() => { goRoute('/login') }} id='getInMobile'>Get in</button>
+                                        <button onClick={() => { goRoute('/login') }} id='getInMobile'>Login</button>
+                                        <button onClick={() => { goRoute('/register') }} id='getInMobile' className='registerButtonColors'>Sign up</button>
 
                                     </>
                             }
