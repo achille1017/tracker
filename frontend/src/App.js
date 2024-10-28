@@ -23,7 +23,7 @@ function App() {
   }
   function updateProfile() {
     return new Promise((resolve, reject) => {
-      fetch(SERVER_NAME + "/profile", {
+      fetch(SERVER_NAME + "/getprofile", {
         credentials: 'include',
       }).then(res => {
         if (res.status === 200) {
