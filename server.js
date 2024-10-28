@@ -99,7 +99,7 @@ app.get('/data', (req, res) => {
         res.json(getData(req.session.mail));
     }
 });
-app.get('/profile', (req, res) => {
+app.get('/getprofile', (req, res) => {
     if (req.session.logged !== true) {
         res.status(401).send()
     }
