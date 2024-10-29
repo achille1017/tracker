@@ -1,14 +1,16 @@
 .gifDocs {
-    width: 30%;
+    width: 70%;
     background-color: #E7F8FF;
     padding: 20px;
     border-radius: 24px;
+    border: solid 1px black;
 }
 
 .trackDocs {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    margin-bottom: 60px;
 }
 
 .titleTrackDocs {
@@ -20,9 +22,27 @@
     font-size: 20px;
     line-height: 28px;
 }
-#arcoDocs{
-    width: 200px;
+
+#arcoDocs {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 60px;
 }
+
+#arcoDocsImg {
+    width: 15%;
+    height: fit-content;
+}
+
+#boxUsageArco {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
 @media screen and (max-width: 720px) {
 
     .gifDocs {

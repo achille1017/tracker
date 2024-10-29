@@ -17,6 +17,6 @@
     },
     "manage":{
         "title":"Move, rename or delete an habit",
-        "text":"If you want to move, rename or delete an habit, hold down one the name of the habit until you see the menu to manage the habit."
+        "text":"If you want to move, rename or delete an habit, right click or hold down on the name of the habit until you see the menu to manage the habit."
     }
 }

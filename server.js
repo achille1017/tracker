@@ -176,6 +176,7 @@ app.post('/changeorderhabit', (req, res) => {
     }
 })
 app.post('/renamehabit', (req, res) => {
+    console.log('POST /renamehabit')
     if (req.session.logged !== true|| !hasAccess(req.session.mail)) {
         res.status(401).send()
     }

@@ -49,6 +49,7 @@ const Landing = (props) => {
                     <div id='arcoImgDiv'>
                         <img id='arcoImg' src={botImg}></img>
                         <p id='arcoText'>Meet Arco, our virtual assistant that will guide you to productivity.</p>
+                        <button className='howDoesItWorks' onClick={()=>goRoute('/docs/intro')}>How does it works ?</button>
                     </div>
                 </div>
 

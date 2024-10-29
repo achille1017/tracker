@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import "./Usage.css"
 import botImg from "../../assets/Arco1.png"
-import {  useSearchParams, useParams } from 'react-router-dom';
+import { useSearchParams, useParams } from 'react-router-dom';
 import Intro from './Intro';
 import TrackDocs from './TrackDocs';
+
 import boolGif from "./bool.gif"
-import addGif from "./addHabit.gif"
+import addGif from "./add.gif"
 import numberGif from "./number.gif"
 import textGif from "./text.gif"
 import manageGif from "./manage.gif"
+
+
+import boolGifMobile from "./boolMobile.gif"
+import addGifMobile from "./addMobile.gif"
+import numberGifMobile from "./numberMobile.gif"
+import textGifMobile from "./textMobile.gif"
+import manageGifMobile from "./manageMobile.gif"
+
+
 import docs from "./docs.json"
 import TrackIt from './TrackIt';
 import Arco from './Arco';
@@ -36,19 +46,27 @@ const Usage = (props) => {
             <p id='bigTitleUsage'>How to work with Arco ?</p>
             <div id='docsBox'>
                 <div id='navBarDocs'>
-                    <button onClick={()=>goRoute("/docs/intro")} className='buttonNavBarDocs'>Introduction</button>
-                    <button onClick={()=>goRoute("/docs/track")} className='buttonNavBarDocs titleNavBarDocs'>Habits tracking</button>
+                    <button onClick={() => goRoute("/docs/intro")} className='buttonNavBarDocs'>Introduction</button>
+                    <button onClick={() => goRoute("/docs/track")} className='buttonNavBarDocs titleNavBarDocs'>Habits tracking</button>
                     <div className='sectionNavBarUsage'>
-                        <button onClick={()=>goRoute("/docs/track/add")} className='subbuttonNavBarDocs'>Track a new habit</button>
-                        <button onClick={()=>goRoute("/docs/track/bool")} className='subbuttonNavBarDocs'>Yes/no habits</button>
-                        <button onClick={()=>goRoute("/docs/track/number")} className='subbuttonNavBarDocs'>Numeric habits</button>
-                        <button onClick={()=>goRoute("/docs/track/text")} className='subbuttonNavBarDocs'>Text habits</button>
-                        <button onClick={()=>goRoute("/docs/track/manage")} className='subbuttonNavBarDocs'>Manage an habit</button>
+                        <button onClick={() => goRoute("/docs/track/add")} className='subbuttonNavBarDocs'>Track a new habit</button>
+                        <button onClick={() => goRoute("/docs/track/bool")} className='subbuttonNavBarDocs'>Yes/no habits</button>
+                        <button onClick={() => goRoute("/docs/track/number")} className='subbuttonNavBarDocs'>Numeric habits</button>
+                        <button onClick={() => goRoute("/docs/track/text")} className='subbuttonNavBarDocs'>Text habits</button>
+                        <button onClick={() => goRoute("/docs/track/manage")} className='subbuttonNavBarDocs'>Manage an habit</button>
                     </div>
-                    <button onClick={()=>goRoute("/docs/arco" )}className='buttonNavBarDocs'>Arco</button>
+                    <button onClick={() => goRoute("/docs/arco")} className='buttonNavBarDocs'>Arco</button>
                 </div>
                 <div id='boxUsage'>
-                    {document === "intro" ? <Intro></Intro> : document === "track" ? section === undefined ? <TrackIt></TrackIt> : <TrackDocs img={section === "bool" ? boolGif : section === "add" ? addGif : section === "number" ? numberGif : section === "text" ? textGif :section==="manage"?manageGif: null} title={docs[section].title} text={docs[section].text}></TrackDocs> : document === "arco" ? <Arco></Arco> : null}
+                    {document === "intro" ? <Intro></Intro> :
+                        document === "track" ? section === undefined ? <TrackIt></TrackIt> :
+                            <TrackDocs img={
+                                section === "bool" ? [boolGif,boolGifMobile] :
+                                    section === "add" ? [addGif,addGifMobile] :
+                                        section === "number" ? [numberGif,numberGifMobile] :
+                                            section === "text" ? [textGif,textGifMobile] :
+                                                section === "manage" ? [manageGif,manageGifMobile] : null}
+                                title={docs[section].title} text={docs[section].text}></TrackDocs> : document === "arco" ? <Arco></Arco> : null}
                 </div>
             </div>
             {!navBarMobile && <button id='navBarMobileButton' onClick={toggleNavBarMobile}><img id='chevron' src={chevron}></img></button>}
@@ -56,21 +74,21 @@ const Usage = (props) => {
                 <ClickAwayListener onClickAway={toggleNavBarMobile} touchEvent={false}>
 
                     <div id='navBarDocsMobile'>
-                        <button onClick={()=>goRoute("/docs/intro")} className='buttonNavBarDocs'>Introduction</button>
-                        <button onClick={()=>goRoute("/docs/track")} className='buttonNavBarDocs titleNavBarDocs'>Habits tracking</button>
+                        <button onClick={() => goRoute("/docs/intro")} className='buttonNavBarDocs'>Introduction</button>
+                        <button onClick={() => goRoute("/docs/track")} className='buttonNavBarDocs titleNavBarDocs'>Habits tracking</button>
                         <div className='sectionNavBarUsage'>
-                            <button onClick={()=>goRoute("/docs/track/add")} className='subbuttonNavBarDocs'>Track a new habit</button>
-                            <button onClick={()=>goRoute("/docs/track/bool")} className='subbuttonNavBarDocs'>Yes/no habits</button>
-                            <button onClick={()=>goRoute("/docs/track/number")} className='subbuttonNavBarDocs'>Numeric habits</button>
-                            <button onClick={()=>goRoute("/docs/track/text")} className='subbuttonNavBarDocs'>Text habits</button>
-                            <button onClick={()=>goRoute("/docs/track/manage")} className='subbuttonNavBarDocs'>Manage an habit</button>
+                            <button onClick={() => goRoute("/docs/track/add")} className='subbuttonNavBarDocs'>Track a new habit</button>
+                            <button onClick={() => goRoute("/docs/track/bool")} className='subbuttonNavBarDocs'>Yes/no habits</button>
+                            <button onClick={() => goRoute("/docs/track/number")} className='subbuttonNavBarDocs'>Numeric habits</button>
+                            <button onClick={() => goRoute("/docs/track/text")} className='subbuttonNavBarDocs'>Text habits</button>
+                            <button onClick={() => goRoute("/docs/track/manage")} className='subbuttonNavBarDocs'>Manage an habit</button>
 
                         </div>
-                        <button onClick={()=>goRoute("/docs/arco" )}className='buttonNavBarDocs'>Arco</button>
+                        <button onClick={() => goRoute("/docs/arco")} className='buttonNavBarDocs'>Arco</button>
                     </div>
                 </ClickAwayListener>}
-                {navBarMobile &&
-                    <div id='overlayNavBarMobile'></div>}
+            {navBarMobile &&
+                <div id='overlayNavBarMobile'></div>}
         </div>
     );
 };

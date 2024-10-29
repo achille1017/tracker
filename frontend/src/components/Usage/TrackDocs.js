@@ -11,7 +11,7 @@ const TrackDocs = (props) => {
     return (<div className='trackDocs'>
         <p className='titleTrackDocs'>{props.title}</p>
         <p className='textTrackDocs'>{props.text}</p>
-        <img className='gifDocs' src={props.img}></img>
+        <img className='gifDocs' src={window.innerWidth > 1080?props.img[0]:props.img[1]}></img>
     </div>
     );
 };

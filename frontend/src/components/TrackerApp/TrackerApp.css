@@ -74,10 +74,11 @@
 
 #overlayTextCellEditor {
     position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
     width: 40vw;
     height: calc(50vh - 30px);
-    left: 30vw;
-    top: calc(25vh - 80px);
     background-color: rgb(0, 0, 0, 0.4);
     border-radius: 20px;
     display: flex;
@@ -233,7 +234,6 @@
 
     #overlayTextCellEditor {
         width: calc(80vw - 20px);
-        left: 10vw;
         padding: 10px;
     }
 

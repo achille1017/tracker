@@ -168,12 +168,14 @@
     align-items: center;
     gap: 60px;
 }
+
 #pricingBox2 {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 60px;
 }
+
 #offersBox {
     display: flex;
     flex-direction: row;
@@ -281,9 +283,27 @@
     width: 400px;
 }
 
+.howDoesItWorks {
+    font-family: TommyBold;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 10px;
+    font-weight: bold;
+    background-color: transparent;
+    cursor: pointer;
+    background-color: #449DD1;
+}
+
 @media screen and (max-width: 1200px) {
+    .howDoesItWorks{
+        width: 100%;
+    }
     #alreadyDiv {
         width: calc(100% - 48px);
+        gap: 40px;
     }
 
     #alreadyButton {
@@ -426,7 +446,7 @@
 }
 
 @media screen and (max-width: 720px) {
-
+   
 
     #landing {
         width: 86vw;
@@ -471,9 +491,11 @@
     #pricingBox {
         width: 100%;
     }
+
     #pricingBox2 {
         width: 100%;
     }
+
     .offerDiv {
         width: calc(100% - 20px);
         padding: 10px;
