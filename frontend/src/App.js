@@ -85,7 +85,6 @@ function App() {
           <Route path="/tracker" element={<TrackerApp profile={profile} updateProfile={updateProfile} logged={logged}></TrackerApp>} />
           <Route path="/login" element={<Login updateLogged={updateLogged}></Login>} />
           <Route path="/register" element={<Register updateLogged={updateLogged}></Register>} />
-
           <Route path="/profile" element={<Profile updatePlan={updatePlan} plan={plan}></Profile>} />
           <Route path='/subscribe' element={<SubscriptionManager logged={logged}></SubscriptionManager>}></Route>
           <Route path='/payement' element={<PayementWaiter updateLogged={updateLogged} updatePlan={updatePlan}></PayementWaiter>}></Route>

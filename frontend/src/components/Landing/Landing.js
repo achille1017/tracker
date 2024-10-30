@@ -62,21 +62,21 @@ const Landing = (props) => {
                         <p className='offerDivP2'>3$/month</p>
                         <p className='offerDivP3'>Try it just one month..</p>
 
-                        <button className='getStarted' onClick={() => goRoute('/login')}>SUBSCRIBE NOW</button>
+                        <button className='getStarted' onClick={() => goRoute(props.logged?'/subscribe':'/register')}>SUBSCRIBE NOW</button>
                     </div>
                     <div className='offerDiv'>
                         <p className='offerDivP1'>Yearly</p>
                         <p className='offerDivP2'>25$/year</p>
                         <p className='offerDivP3'>30% cheaper than monthly bill</p>
 
-                        <button className='getStarted' onClick={() => goRoute('/login')}>SUBSCRIBE NOW</button>
+                        <button className='getStarted' onClick={() => goRoute(props.logged?'/subscribe':'/register')}>SUBSCRIBE NOW</button>
                     </div>
                     <div className='offerDiv'>
                         <p className='offerDivP1'>Lifetime</p>
                         <p className='offerDivP2'>60$</p>
                         <p className='offerDivP3'>Work with Arco forever</p>
 
-                        <button className='getStarted' onClick={() => goRoute('/login')}>BUY NOW</button>
+                        <button className='getStarted' onClick={() => goRoute(props.logged?'/subscribe':'/register')}>BUY NOW</button>
                     </div>
                 </div>
                 <div id='offersBoxMobile'>
@@ -89,7 +89,7 @@ const Landing = (props) => {
                         <p className='offerDivP1'>{offersBoxMobile === "monthly" ? "Monthly" : offersBoxMobile === "annual" ? "Annual" : "Lifetime"}</p>
                         <p className='offerDivP2'>{offersBoxMobile === "monthly" ? "3$/month" : offersBoxMobile === "annual" ? "25$/year" : "60$"}</p>
                         <p className='offerDivP3'>{offersBoxMobile === "monthly" ? "Try it just one month.." : offersBoxMobile === "annual" ? "30% cheaper than monthly bill" : "Work with Arco forever"}</p>
-                        <button className='getStarted' onClick={() => goRoute('/login')}>{offersBoxMobile === "lifetime" ? "BUY NOW" : "SUBSCRIBE NOW"}</button>
+                        <button className='getStarted' onClick={() => goRoute(props.logged?'/subscribe':'/register')}>{offersBoxMobile === "lifetime" ? "BUY NOW" : "SUBSCRIBE NOW"}</button>
                     </div>
                 </div>
             </div>}
