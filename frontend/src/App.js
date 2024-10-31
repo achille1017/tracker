@@ -13,6 +13,7 @@ import Error from "./components/Error/Error.js"
 import Confirmation from './components/Confirmation/Confirmation.js';
 import Usage from './components/Usage/Usage.js';
 import Register from "./components/Register/Register.js"
+import PasswordForgotten from './components/PasswordForgotten/PasswordForgotten.js';
 function App() {
   const [logged, setLogged] = useState()
   const [plan, setPlan] = useState()
@@ -87,6 +88,7 @@ function App() {
           <Route path="/register" element={<Register updateLogged={updateLogged}></Register>} />
           <Route path="/profile" element={<Profile updatePlan={updatePlan} plan={plan}></Profile>} />
           <Route path='/subscribe' element={<SubscriptionManager logged={logged}></SubscriptionManager>}></Route>
+          <Route path='/reset-password' element={<PasswordForgotten></PasswordForgotten>}></Route>
           <Route path='/payement' element={<PayementWaiter updateLogged={updateLogged} updatePlan={updatePlan}></PayementWaiter>}></Route>
           <Route path='/docs' element={<Usage setScrollDocument={setScrollDocument}></Usage>}></Route>
           <Route path='/docs/:document' element={<Usage setScrollDocument={setScrollDocument}></Usage>}></Route>

@@ -6,9 +6,7 @@
     justify-content: center;
 }
 
-#payementLoader {
-    width: 48px;
-    height: 48px;
+.loader {
     border: 5px solid black;
     border-bottom-color: transparent;
     border-radius: 50%;
@@ -17,6 +15,10 @@
     animation: rotation 1s linear infinite;
 }
 
+#payementLoader{
+    width: 48px;
+    height: 48px;
+}
 @keyframes rotation {
     0% {
         transform: rotate(0deg);

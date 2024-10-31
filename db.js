@@ -143,6 +143,39 @@ function renameHabit(mail, habit, name) {
 		) WHERE mail = ?;`)
 	update.run(habit, name, mail)
 }
+async function setNewPassword(mail,password){
+	const saltRounds = 10;
+	let result;
+	await new Promise(async next => {
+
+		bcrypt.genSalt(saltRounds, (err, salt) => {
+			if (err) {
+				console.log(err)
+				result = false
+				return;
+			}
+
+			bcrypt.hash(password, salt, async (err, hash) => {
+				if (err) {
+					console.log(err)
+					result = false
+					return;
+				}
+				try {
+					let insert = db.prepare(`update users set password = ? where mail = ? `);
+					insert.run(hash,mail);
+
+					result = true
+				} catch (e) {
+					console.log(e)
+					result = false
+				}
+				next()
+			});
+		});
+	})
+	return result
+}
 async function register(mail, password, token) {
 	const saltRounds = 10;
 	let result;
@@ -260,4 +293,11 @@ function hasAccess(mail){
 function isValidValue(value) {
 	return value !== undefined && value !== null;
 }
-export { getData,hasAccess, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, renameHabit, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList }
+function userExist(mail){
+	const user = db.prepare('SELECT * FROM users WHERE mail = ?').get(mail);
+    if (!user) {
+        return false;
+    }
+    return true;
+}
+export {setNewPassword, userExist,getData,hasAccess, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, renameHabit, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList }

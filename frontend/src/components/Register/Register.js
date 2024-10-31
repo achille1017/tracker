@@ -8,13 +8,9 @@ import { Link } from 'react-router-dom';
 const Register = (props) => {
     const [mail1, setMail1] = useState("")
     const [password, setPassword] = useState("")
-    const [mailLogin, setMailLogin] = useState("")
-    const [passwordLogin, setPasswordLogin] = useState("")
-    const [messageState, setMessageState] = useState("none")
     const [errorRegister, setErrorRegister] = useState("")
-    const [messageLogin, setMessageLogin] = useState("")
     const [classMessage, setClassMessage] = useState("")
-
+    const [stateRegister, setStateRegister] = useState(0)
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -23,6 +19,8 @@ const Register = (props) => {
     }, [])
     function register() {
         if (isValidEmail(mail1)) {
+            setStateRegister(1)
+
             fetch(SERVER_NAME + "/register", {
                 method: 'POST',
                 credentials: 'include',
@@ -33,7 +31,7 @@ const Register = (props) => {
             })
                 .then(response => {
                     if (response.status === 200) {
-                        setMessageState('')
+                        setStateRegister(2)
                     }
                 })
         } else {
@@ -62,9 +60,10 @@ const Register = (props) => {
                 <p id='createYour'>Create your account and let's get productive</p>
                 <input onChange={(e) => setMail1(e.target.value)} className='inputRegister' type='email' placeholder='Your email' id="email" pattern=".+@example\.com" ></input>
                 <input onChange={(e) => setPassword(e.target.value)} className='inputRegister' type='password' placeholder='Your password' ></input>
-                {messageState === "none" ? <button onClick={register} id='registerButton' className='registerButtonColors'>Register</button> : <p className={messageState}>A confirmation email has been sent to your registered email address.</p>}
+                {stateRegister === 0 ? <button onClick={register} id='registerButton' className='registerButtonColors'>Register</button> : 
+                stateRegister===2?<p>A confirmation email has been sent to your email address.</p>:<div id="registerLoader" className='loader'></div>}
                 {errorRegister !== "" && <p className={classMessage}> {errorRegister} </p>}
-                
+
             </div>
             <p className='linkLogin2'>You already have an account ? <Link to="/login">Login</Link></p>
 

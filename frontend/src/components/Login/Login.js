@@ -70,8 +70,10 @@ const Login = (props) => {
                 <p id='createYour'>Log in and track your day now</p>
                 <input onChange={(e) => setMailLogin(e.target.value)} className='inputRegister' type='email' placeholder='Your email' id="email" pattern=".+@example\.com"></input>
                 <input onChange={(e) => setPasswordLogin(e.target.value)} className='inputRegister' type='password' placeholder='Your password' ></input>
-                <button onClick={login} id='registerButton'>Login</button>
+                <button onClick={login} className='registerButtonColors' id='registerButton'>Login</button>
                 {messageLogin !== "" && <p> {messageLogin} </p>}
+                <Link className='linkLogin' to="/reset-password">Forgot your password ?</Link>
+                <Link className='linkLogin2' to="/reset-password">Forgot your password ?</Link>
 
             </div>
             <p className='linkLogin2'>You don't have an account yet ? <Link to="/register">Sign up.</Link></p>

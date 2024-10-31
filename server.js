@@ -1,6 +1,6 @@
 import express from 'express';
 import session from 'express-session';
-import {hasAccess, getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, renameHabit, addToWhiteList, confirmEmail, isEmailInWhiteList } from './db.js';
+import { setNewPassword,userExist, hasAccess, getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, renameHabit, addToWhiteList, confirmEmail, isEmailInWhiteList } from './db.js';
 import cors from 'cors'
 import { getToday } from "./tools.js"
 import path from 'path';
@@ -11,7 +11,7 @@ import http from "http"
 import fs from 'fs';
 import crypto from "crypto"
 import jwt from "jsonwebtoken"
-
+import { sendResetPasswordEmail } from "./mail.js"
 
 const keys = JSON.parse(fs.readFileSync('keys.json', 'utf8'));
 const LEMON_SQUEEZY_SIGNING_SECRET = keys["lemonSqueezySigningSecret"]
@@ -167,7 +167,7 @@ app.post('/deletehabit', (req, res) => {
     }
 })
 app.post('/changeorderhabit', (req, res) => {
-    if (req.session.logged !== true|| !hasAccess(req.session.mail)) {
+    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
         res.status(401).send()
     }
     else {
@@ -177,7 +177,7 @@ app.post('/changeorderhabit', (req, res) => {
 })
 app.post('/renamehabit', (req, res) => {
     console.log('POST /renamehabit')
-    if (req.session.logged !== true|| !hasAccess(req.session.mail)) {
+    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
         res.status(401).send()
     }
     else {
@@ -246,6 +246,34 @@ app.get('/verify-email', (req, res) => {
 
     });
 });
+
+
+app.post('/api/forgot-password', async (req, res) => {
+    const mail = req.body.mail;
+    const token = jwt.sign({ "mailResetingPassword": mail }, SECRET_KEY, { expiresIn: '15m' });
+    const resetLink = userExist(mail)?`${FRONTEND_SERVER}/reset-password?token=${token}`:404
+    if (resetLink === 404) {
+        res.status(404).json({ message: 'User not found' })
+    }
+    const mailSent = await sendResetPasswordEmail(mail, resetLink)
+    console.log(resetLink)
+    res.status(mailSent ? 200 : 500).send()
+})
+
+// Reset password
+app.post('/api/reset-password', async (req, res) => {
+    try {
+        const  mailResetingPassword  = jwt.verify(req.body.token, SECRET_KEY);
+        const passwordSet = await setNewPassword(mailResetingPassword.mailResetingPassword,req.body.password)
+        res.status(passwordSet?200:500).json({ message: passwordSet?'ok':"error" });
+
+
+    } catch (error) {
+        res.status(400).json({ message: 'Invalid or expired token' });
+    }
+});
+
+
 /*app.post('/whitelist', async (req, res) => {
     console.log('POST /whitelist')
     const whitelist = await addToWhiteList(req.body.mail)

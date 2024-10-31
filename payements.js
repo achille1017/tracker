@@ -13,8 +13,8 @@ const MONTHLY_ID_TEST = 539584
 const ANNUAL_ID_TEST = 539248
 const variantIds = [MONTHLY_ID, ANNUAL_ID, LIFE_ID];
 const STORE_ID = keys["storeId"];
-const FRONTEND_SERVER = keys["env"] ==="dev" ?"http://192.168.1.67:3000": "https://withar.co"
-const BACKEND_SERVER = keys["env"] ==="dev" ?"http://192.168.1.67:4000": "https://withar.co"
+const FRONTEND_SERVER = keys["env"] === "dev" ? "http://192.168.1.67:3000" : "https://withar.co"
+const BACKEND_SERVER = keys["env"] === "dev" ? "http://192.168.1.67:4000" : "https://withar.co"
 lemonSqueezySetup({
     apiKey: LEMON_SQUEEZY_API_KEY,
 });
@@ -35,17 +35,33 @@ async function getThreeCheckoutLinks(mail) {
         preview: true,
         testMode: false,
     };
+    async function createCheckoutWithRetry(STORE_ID, variantId, newCheckout) {
+        for (let attempt = 0; attempt < 2; attempt++) {
+            try {
+                const checkout = await createCheckout(STORE_ID, variantId, newCheckout);
+                if (checkout && checkout.data && checkout.data.data && checkout.data.data.attributes) {
+                    return checkout.data.data.attributes.url;
+                }
+            } catch (e) {
+                console.log(`Attempt ${attempt + 1} failed:`, e);
+                if (attempt === 1) {
+                    return null; // Return null on second failure
+                }
+            }
+        }
+        return null; // Return null if both attempts fail
+    }
+    
     try {
         const checkoutLinks = await Promise.all(variantIds.map(async (variantId) => {
-            try{
-            const checkout = await createCheckout(
-                STORE_ID,
-                variantId, newCheckout
-            );
-            console.log(checkout.data)
-            return checkout.data.data.attributes.url;}catch(e){console.log(e)}
+            return await createCheckoutWithRetry(STORE_ID, variantId, newCheckout);
         }));
-
+    
+        // Check if any of the checkout creations failed
+        if (checkoutLinks.some(link => link === null)) {
+            return { "error": "error creating checkout" };
+        }
+    
         return {
             "monthly": checkoutLinks[0],
             "annual": checkoutLinks[1],
@@ -53,7 +69,7 @@ async function getThreeCheckoutLinks(mail) {
         };
     } catch (error) {
         console.error('Error creating checkouts:', error);
-        throw error;
+        return { "error": "error creating checkout" };
     }
 }
 

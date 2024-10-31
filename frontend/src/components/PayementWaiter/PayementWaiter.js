@@ -42,7 +42,7 @@ const PayementWaiter = (props) => {
         <div id='payementWaiter'>
             {!planActive ? <div id="payementWaiterBox">
                 <p id="title1Payement">Waiting for confirmation...  </p>
-                <div id="payementLoader"></div>
+                <div className="loader" id='payementLoader'></div>
             </div> : <div id="payementWaiterBox"><p id="title1Payement">Everything is ready !</p><Link to="/tracker" id="continue">Continue</Link></div>}
         </div>
     );
