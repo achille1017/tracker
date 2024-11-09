@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
 
 const useNavigateAndScroll = () => {
+
     const navigate = useNavigate();
 
     const navigateAndScroll = useCallback((path) => {

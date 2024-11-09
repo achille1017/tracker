@@ -14,13 +14,20 @@ import Confirmation from './components/Confirmation/Confirmation.js';
 import Usage from './components/Usage/Usage.js';
 import Register from "./components/Register/Register.js"
 import PasswordForgotten from './components/PasswordForgotten/PasswordForgotten.js';
+import Blog from './components/Blog/Blog.js';
+import Article from './components/Blog/Article.js'
+
 function App() {
   const [logged, setLogged] = useState()
   const [plan, setPlan] = useState()
   const [profile, setProfile] = useState({})
 
   function setScrollDocument(scroll) {
-    document.body.style.overflow = scroll
+    return new Promise((resolve,reject)=>{
+      document.body.style.overflow = scroll
+      resolve()
+
+    })
   }
   function updateProfile() {
     return new Promise((resolve, reject) => {
@@ -94,6 +101,8 @@ function App() {
           <Route path='/docs/:document' element={<Usage setScrollDocument={setScrollDocument}></Usage>}></Route>
           <Route path='/docs/:document/:section' element={<Usage setScrollDocument={setScrollDocument}></Usage>}></Route>
           <Route path='/confirmation' element={<Confirmation></Confirmation>}></Route>
+          <Route path="/blog" element={<Blog></Blog>} />
+          <Route path="/blog/:title" element={<Article></Article>} />
           <Route path="/*" element={<Error></Error>}></Route>
         </Route>
       </Routes>

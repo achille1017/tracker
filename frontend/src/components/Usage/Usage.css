@@ -5,13 +5,14 @@
     min-height: calc(100vh - 80px);
     gap: 100px;
     width: 70vw;
-    padding-top: 5vh;
+    padding: 10vh 0vh;
 }
 
 #bigTitleUsage {
     font-size: 40px;
     width: fit-content;
     font-weight: bold;
+    font-family: UniSansBold;
 }
 
 .titleUsage {
@@ -22,7 +23,11 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 80%;
+    width: calc(80% - 120px);
+    background-color: #E7F8FF;
+    padding: 60px;
+    border: none;
+    border-radius: 24px;
 }
 
 #docsBox {
@@ -72,7 +77,6 @@
     display: none;
 }
 .textUsageMid{
-    font-size: 18px;
 }
 .buttonNavBarDocs,
 .subbuttonNavBarDocs {
@@ -142,6 +146,10 @@
         width: 100%;
         height: 100%;
     }
+    #boxUsage{
+        padding: 30px;
+        width: calc(100% - 60px);
+    }
 }
 
 @media screen and (max-width: 720px) {
@@ -158,7 +166,8 @@
     }
 
     #boxUsage {
-        width: 100%;
+        width: calc(100% - 20px);
+        padding: 30px 10px ;
     }
 
 }

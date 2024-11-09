@@ -4,6 +4,7 @@ import "./PayementWaiter.css"
 import { SERVER_NAME } from '../../config.js';
 import { io } from 'socket.io-client'
 import { useNavigateAndScroll } from "../functions.js"
+import { Helmet } from 'react-helmet';
 
 const PayementWaiter = (props) => {
     const goRoute = useNavigateAndScroll()
@@ -40,6 +41,13 @@ const PayementWaiter = (props) => {
     }, [])
     return (
         <div id='payementWaiter'>
+            <Helmet>
+                <title>{"With Arco | "+planActive?"Payement confirmed":"Waiting for confirmation..."}</title>
+                <meta name="description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
+                <meta property="og:title" content="With Arco | Get productive today"/>
+                <meta property="og:description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
+                <meta property="og:image" content="https://withar.co/static/media/Arco1.c74a12087a62cf33a280.png" />
+            </Helmet>
             {!planActive ? <div id="payementWaiterBox">
                 <p id="title1Payement">Waiting for confirmation...  </p>
                 <div className="loader" id='payementLoader'></div>

@@ -10,6 +10,7 @@ import Assistant from '../Assistant/Assistant.js';
 import ProfileSetter from '../ProfileSetter/ProfileSetter.js';
 import { SERVER_NAME } from '../../config.js';
 import { useNavigateAndScroll } from "../functions.js"
+import { Helmet } from 'react-helmet';
 
 const TrackerApp = (props) => {
     const [authorized, setAuthorized] = useState(false)
@@ -163,6 +164,13 @@ const TrackerApp = (props) => {
     }, [dataTracker])
     return (
         <div>
+            <Helmet>
+                <title>With Arco | Track your day now</title>
+                <meta name="description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
+                <meta property="og:title" content="With Arco | Track your day now" />
+                <meta property="og:description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
+                <meta property="og:image" content="https://withar.co/static/media/Arco1.c74a12087a62cf33a280.png" />
+            </Helmet>
             {dataLoaded && props.profile.profileSet === 1 ? <div id='trackerApp'>
                 <Assistant name={props.profile.name}></Assistant>
                 <div id='spreadSheet'>

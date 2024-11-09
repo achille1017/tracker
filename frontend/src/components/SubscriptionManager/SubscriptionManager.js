@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useLemonSqueezy from './useLemonSqueezy';
 import { SERVER_NAME } from '../../config.js';
 import { useNavigateAndScroll } from "../functions.js"
+import { Helmet } from 'react-helmet';
 
 
 import "./SubscriptionManager.css"
@@ -58,6 +59,13 @@ function SubscriptionManager(props) {
 
   return (
     <div id='subscriptionManager'>
+      <Helmet>
+                <title>With Arco | Get productive today</title>
+                <meta name="description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
+                <meta property="og:title" content="With Arco | Get productive today" />
+                <meta property="og:description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
+                <meta property="og:image" content="https://withar.co/static/media/Arco1.c74a12087a62cf33a280.png" />
+            </Helmet>
       <div id='pricingBox2'>
         <p id='toStartP'>To start to work with Arco</p>
         {loaded ? <div id='offersBox'>

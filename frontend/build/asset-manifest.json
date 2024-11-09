@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.c0ef6330.css",
-    "main.js": "/static/js/main.757ff8e5.js",
+    "main.css": "/static/css/main.59ea9035.css",
+    "main.js": "/static/js/main.e4629d31.js",
     "static/media/manageMobile.gif": "/static/media/manageMobile.85c3267fe0eae12bdaff.gif",
     "static/media/addMobile.gif": "/static/media/addMobile.74b27a0aa6ca7a20eb67.gif",
     "static/media/boolMobile.gif": "/static/media/boolMobile.abb36d38e4bea05bc5fd.gif",
@@ -13,6 +13,7 @@
     "static/media/number.gif": "/static/media/number.e8c1e5297c12873bd8c9.gif",
     "static/media/manage.gif": "/static/media/manage.19d0dc6db94030400856.gif",
     "static/media/open-sans.regular.ttf": "/static/media/open-sans.regular.17e98b9e5586529b13cc.ttf",
+    "static/media/from-data-to-action-using-ai-insights-to-refine-your-daily-habits.jpg": "/static/media/from-data-to-action-using-ai-insights-to-refine-your-daily-habits.035942fe87eaad257506.jpg",
     "static/media/Goldplay-Black.ttf": "/static/media/Goldplay-Black.53789a34830a749bec29.ttf",
     "static/media/Uni Sans Heavy.otf": "/static/media/Uni Sans Heavy.de76b17291d74c0a03b0.otf",
     "static/media/TommyRegular.otf": "/static/media/TommyRegular.101be848d2d18e7296bc.otf",
@@ -23,11 +24,11 @@
     "static/media/hamburger.png": "/static/media/hamburger.4469ebbac28dc09c68f0.png",
     "static/media/close.png": "/static/media/close.76608c97ea3351d43407.png",
     "index.html": "/index.html",
-    "main.c0ef6330.css.map": "/static/css/main.c0ef6330.css.map",
-    "main.757ff8e5.js.map": "/static/js/main.757ff8e5.js.map"
+    "main.59ea9035.css.map": "/static/css/main.59ea9035.css.map",
+    "main.e4629d31.js.map": "/static/js/main.e4629d31.js.map"
   },
   "entrypoints": [
-    "static/css/main.c0ef6330.css",
-    "static/js/main.757ff8e5.js"
+    "static/css/main.59ea9035.css",
+    "static/js/main.e4629d31.js"
   ]
 }

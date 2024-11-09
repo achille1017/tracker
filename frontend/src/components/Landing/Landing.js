@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom';
 import botImg from "../../assets/Arco1.png"
 import WhiteList from '../WhiteList/WhiteList.js';
 import blackDot from "../../assets/black-circle.png"
+import { Helmet } from 'react-helmet';
 
 const Landing = (props) => {
     const goRoute = useNavigateAndScroll()
@@ -23,17 +24,24 @@ const Landing = (props) => {
 
     return (
         <div id='landing'>
+            <Helmet>
+                <title>With Arco | Get productive today</title>
+                <meta name="description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
+                <meta property="og:title" content="With Arco | Get productive today" />
+                <meta property="og:description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
+                <meta property="og:image" content="https://withar.co/static/media/Arco1.c74a12087a62cf33a280.png" />
+            </Helmet>
             <div id='firstBoxLanding'>
                 <div id='titleBox'>
-                    <p id='title1'>GET</p>
-                    <p id='title1'>PRODUCTIVE</p>
-                    <p id='title1'>WITH ARCO</p>
-                    <p id='poweredByAI'>Powered by AI</p>
+                    <h1 id='title1'>GET</h1>
+                    <h1 id='title1'>PRODUCTIVE</h1>
+                    <h1 id='title1'>WITH ARCO</h1>
+                    <h4 id='poweredByAI'>Powered by AI</h4>
                 </div>
                 <div id='screenshot1Box'><img id='screenshot1' src={screenshot1}></img><p id='legend1'>Get daily habits and track your progress towards success </p></div>
             </div>
             <div id='secondBoxLanding'>
-                <p className='text1'>Start tracking your daily habits and improve your productivity. </p>
+                <h2 className='text1'>Start tracking your daily habits and improve your productivity. </h2>
                 <div id='boxArcoLanding'>
                     <div id="box2Texts">
                         <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'> Get yourself in a constant routine of good practices <img className='validImg' src={valid}></img></p></div>
@@ -49,34 +57,34 @@ const Landing = (props) => {
                     <div id='arcoImgDiv'>
                         <img id='arcoImg' src={botImg}></img>
                         <p id='arcoText'>Meet Arco, our virtual assistant that will guide you to productivity.</p>
-                        <button className='howDoesItWorks' onClick={()=>goRoute('/docs/intro')}>How does it works ?</button>
+                        <button className='howDoesItWorks' onClick={() => goRoute('/docs/intro')}>How does it works ?</button>
                     </div>
                 </div>
 
             </div>
             {<div id='pricingBox'>
-                <p id='toStartP'>To start to work with Arco</p>
+                <h2 id='toStartP'>To start to work with Arco</h2>
                 <div id='offersBox'>
                     <div className='offerDiv'>
                         <p className='offerDivP1'>Monthly</p>
                         <p className='offerDivP2'>3$/month</p>
                         <p className='offerDivP3'>Try it just one month..</p>
 
-                        <button className='getStarted' onClick={() => goRoute(props.logged?'/subscribe':'/register')}>SUBSCRIBE NOW</button>
+                        <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>SUBSCRIBE NOW</button>
                     </div>
                     <div className='offerDiv'>
                         <p className='offerDivP1'>Yearly</p>
                         <p className='offerDivP2'>25$/year</p>
                         <p className='offerDivP3'>30% cheaper than monthly bill</p>
 
-                        <button className='getStarted' onClick={() => goRoute(props.logged?'/subscribe':'/register')}>SUBSCRIBE NOW</button>
+                        <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>SUBSCRIBE NOW</button>
                     </div>
                     <div className='offerDiv'>
                         <p className='offerDivP1'>Lifetime</p>
                         <p className='offerDivP2'>60$</p>
                         <p className='offerDivP3'>Work with Arco forever</p>
 
-                        <button className='getStarted' onClick={() => goRoute(props.logged?'/subscribe':'/register')}>BUY NOW</button>
+                        <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>BUY NOW</button>
                     </div>
                 </div>
                 <div id='offersBoxMobile'>
@@ -89,7 +97,7 @@ const Landing = (props) => {
                         <p className='offerDivP1'>{offersBoxMobile === "monthly" ? "Monthly" : offersBoxMobile === "annual" ? "Annual" : "Lifetime"}</p>
                         <p className='offerDivP2'>{offersBoxMobile === "monthly" ? "3$/month" : offersBoxMobile === "annual" ? "25$/year" : "60$"}</p>
                         <p className='offerDivP3'>{offersBoxMobile === "monthly" ? "Try it just one month.." : offersBoxMobile === "annual" ? "30% cheaper than monthly bill" : "Work with Arco forever"}</p>
-                        <button className='getStarted' onClick={() => goRoute(props.logged?'/subscribe':'/register')}>{offersBoxMobile === "lifetime" ? "BUY NOW" : "SUBSCRIBE NOW"}</button>
+                        <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>{offersBoxMobile === "lifetime" ? "BUY NOW" : "SUBSCRIBE NOW"}</button>
                     </div>
                 </div>
             </div>}
@@ -100,7 +108,7 @@ const Landing = (props) => {
                 </div>}
             {/*<WhiteList></WhiteList>*/}
             <div id='thirdBoxLanding'>
-                <p className='text1'>Why did I build withar.co ? </p>
+                <h2 className='text1'>Why did I build withar.co ? </h2>
                 <p id='whoMadeItP'>In 2024, I tried to launch with a bad timing a web3 project. Figuring out what my errors were, I quickly observed that my producitvity was the main problem. I was waking up at 11, sleeping at 2 or 3 and working too late.. Once that project I putted a lot of hope into was dead, I had to do something better and I started by working on myself tracking my daily habits to get productive for real. </p>
             </div>
         </div>

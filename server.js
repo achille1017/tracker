@@ -315,7 +315,12 @@ app.get('/favicon.ico', (req, res) => {
     //console.log('GET /favicon.ico')
     res.sendFile(__dirname + "/frontend/public/favicon.ico");
 })
-
+app.get('/robots.txt', (req, res) => {
+    res.sendFile(__dirname + "/robots.txt")
+})
+app.get('/sitemap.xml', (req, res) => {
+    res.sendFile(__dirname + "/sitemap.xml")
+})
 app.get('/*', (req, res) => {
     console.log('GET /')
     res.sendFile(__dirname + "/frontend/build/index.html");

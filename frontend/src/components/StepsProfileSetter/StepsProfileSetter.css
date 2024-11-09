@@ -117,17 +117,13 @@
 #hidden {
     opacity: 0;
     overflow: hidden;
-    /* Prevents content overflow */
     transition: opacity 0.6s ease, height 0.6s ease;
-    /* Smooth transition */
 }
 
 #visible {
     opacity: 1;
     height: auto;
-    /* Set to auto to allow full height */
     transition: opacity 0.6s ease, height 0.6s ease;
-    /* Smooth transition */
 }
 
 @media screen and (max-width: 1080px) {

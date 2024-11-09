@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./Profile.css"
-
+import { Helmet } from 'react-helmet';
 import { SERVER_NAME } from '../../config.js';
 
 const Profile = (props) => {
@@ -44,6 +44,13 @@ const Profile = (props) => {
     }
     return (
         <div id="appWaiter">
+            <Helmet>
+                <title>With Arco | My profile</title>
+                <meta name="description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
+                <meta property="og:title" content="With Arco | My profile" />
+                <meta property="og:description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
+                <meta property="og:image" content="https://withar.co/static/media/Arco1.c74a12087a62cf33a280.png" />
+            </Helmet>
             {loaded ? <div id='profile'>
                 <p id='title1Profile'>Hello, {name}.</p>
                 <div id='bigProfileDiv'>

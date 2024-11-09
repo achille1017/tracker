@@ -14,8 +14,10 @@
 }
 
 .titleTrackDocs {
-    font-weight: bold;
-    font-size: 26px;
+    font-weight: normal;
+    font-family: UniSansBold;
+    font-size: 30px;
+    margin-bottom: 40px;
 }
 
 .textTrackDocs {
@@ -28,7 +30,6 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
-    margin-bottom: 60px;
 }
 
 #arcoDocsImg {
@@ -41,6 +42,19 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+}
+
+@media screen and (max-width: 1080px) {
+    #boxUsageArco {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+
+    }
+
+    #arcoDocs {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 720px) {

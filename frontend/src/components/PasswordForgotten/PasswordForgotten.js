@@ -5,6 +5,7 @@ import { useNavigateAndScroll } from "../functions.js"
 import botImg from "../../assets/Arco1.png"
 import Typewriter from '../TypeWriter/TypeWriter.js';
 import { Link, useSearchParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 
 
@@ -26,7 +27,7 @@ const PasswordForgotten = (props) => {
     useEffect(() => {
         window.scrollTo({
             top: 0,
-            behavior: 'auto' // Change to 'smooth' for smooth scrolling
+            behavior: 'auto' 
         });
 
         setMode(searchParams.get("token") !== null ? 2 : 1)
@@ -82,6 +83,13 @@ const PasswordForgotten = (props) => {
 
     return (
         <div id="loginPage">
+            <Helmet>
+                <title>With Arco | Password forgotten</title>
+                <meta name="description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
+                <meta property="og:title" content="With Arco | Get productive today" />
+                <meta property="og:description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
+                <meta property="og:image" content="https://withar.co/static/media/Arco1.c74a12087a62cf33a280.png" />
+            </Helmet>
             <div id='leftBoxLogin1'>
                 <div id='leftBoxLogin'>
                     <img id='botLogin' src={botImg}></img>

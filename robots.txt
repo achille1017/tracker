@@ -1,0 +1,50 @@
+# Complete robots.txt template
+
+# Allow all robots full access
+User-agent: *
+Allow: /
+
+Disallow: /tracker
+Disallow: /profile
+Disallow: /reset-password
+Disallow: /payement
+Disallow: /confirmation
+
+# Block access to specific file types
+Disallow: /*.pdf$
+Disallow: /*.png$
+Disallow: /*.jpg$
+
+# Allow access to specific files within blocked folders
+# Allow: /private/public-file.html
+
+# Block a specific page
+# Disallow: /do-not-index-this-page.html
+
+# Block access to URLs containing certain query parameters
+# Disallow: /*?q=
+
+# Specific rules for Googlebot
+# User-agent: Googlebot
+# Disallow: /googlebot-specific-folder/
+
+# Specific rules for Bingbot
+# User-agent: Bingbot
+# Disallow: /bingbot-specific-folder/
+
+# Slow down the crawl rate
+# Crawl-delay: 10
+
+# Link to your XML sitemap(s)
+Sitemap: https://withar.co/sitemap.xml
+
+# Block all bots from a specific section
+# User-agent: *
+# Disallow: /not-for-bots/
+
+# Allow specific bot full access to a blocked section
+# User-agent: Googlebot-Image
+# Allow: /not-for-bots/images/
+
+# Add a comment (ignored by bots)
+# This is a comment explaining a specific rule
