@@ -129,7 +129,7 @@
 @media screen and (max-width: 1080px) {
     .stepProfileSetter,
     .step4ProfileSetter {
-        width: 70vw;
+        width: 70%;
     }
 
     .textareaProfileSetter {

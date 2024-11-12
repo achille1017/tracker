@@ -9,7 +9,7 @@
 #loginPage {
     display: flex;
     flex-direction: row;
-    width: 70vw;
+    width: 70%;
     margin: 60px 0px;
     align-items: center;
     min-height: calc(100vh - 200px);

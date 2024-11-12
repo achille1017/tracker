@@ -163,7 +163,7 @@ const TrackerApp = (props) => {
         }, 1000)
     }, [dataTracker])
     return (
-        <div>
+        <>
             <Helmet>
                 <title>With Arco | Track your day now</title>
                 <meta name="description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
@@ -220,7 +220,7 @@ const TrackerApp = (props) => {
                 }
 
             </div> : dataLoaded && props.profile.profileSet === 0 ? <ProfileSetter updateProfile={props.updateProfile} updateData={updateData} updateHabits={updateHabits}></ProfileSetter> : <div id="appWaiter"></div>}
-        </div>
+        </>
     );
 };
 
