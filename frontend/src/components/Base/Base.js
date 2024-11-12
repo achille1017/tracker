@@ -18,8 +18,8 @@ const Base = (props) => {
     const preGoRoute = useNavigateAndScroll()
     const goRoute = (route) => {
         setMenuMobile("linksBarMobile")
-        props.setScrollDocument('').then(      ()=>  preGoRoute(route)
-    )
+        props.setScrollDocument('').then(() => preGoRoute(route)
+        )
     }
     const navigate = useNavigate();
     function toggleMenu() {
@@ -80,7 +80,9 @@ const Base = (props) => {
 
                         </div>
                 }
-                <p id='withArco' onClick={() => goRoute('/')}>With Arco</p>
+  <p id='withArco' onClick={() => goRoute('/')}>With Arco</p>
+
+
                 {props.logged ? <div className='rightBoxNavBar'><button id='logout' onClick={logout}>Logout</button> </div> :
                     <div className='rightBoxNavBar'>
                         <div id='loginBox1'>
@@ -91,36 +93,34 @@ const Base = (props) => {
                     </div>
                 }
                 <button onClick={toggleMenu} id='hamburger'><img src={hamburger} id='hamburgerImg'></img></button>
+               {!props.logged? <button onClick={() => { goRoute('/login') }} className='getInMobile'>Login</button>:  <p id='withArcoMobile' onClick={() => goRoute('/')}>With Arco</p>}
+
                 {menuMobile === "linksBarMobileActive" &&
                     <ClickAwayListener onClickAway={toggleMenu} touchEvent={false}>
                         <div id={menuMobile}>
                             {
                                 props.logged ? loaded ?
-                                    < >
+                                    <>
                                         {props.plan.status === "active" ? <button className='linkNavBar' onClick={() => goRoute('/tracker')}>Tracker</button> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
                                         {props.plan.status === "active" ? props.profile.profileSet === 0 ? null : <button className='linkNavBar' onClick={() => goRoute('/profile')}>Profile</button> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
                                         <button className='linkNavBar' onClick={() => goRoute('/docs/intro')}>Usage</button>
                                         <button className='linkNavBar' onClick={() => { goRoute('/blog') }}>Blog</button>
                                         <a href="mailto:contact@withar.co" className='linkNavBar' id='contactMobile'>Contact</a>
-
-
                                         <button id='logoutMobile' onClick={logout}>Logout</button>
                                     </> : null :
-                                    < >
+                                    <>
                                         <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>
-                                        <button className='linkNavBar' onClick={() => { setMenuMobile("linksBarMobile"); props.setScrollDocument('').then(()=>{navigate('/#pricing')}) }}>Subscribe</button>
+                                        <button className='linkNavBar' onClick={() => { setMenuMobile("linksBarMobile"); props.setScrollDocument('').then(() => { navigate('/#pricing') }) }}>Subscribe</button>
                                         <button className='linkNavBar' onClick={() => goRoute('/docs/intro')}>Usage</button>
                                         <button className='linkNavBar' onClick={() => { goRoute('/blog') }}>Blog</button>
-
                                         <a href="mailto:contact@withar.co" className='linkNavBar' id='contactMobile'>Contact</a>
-                                        <button onClick={() => { goRoute('/login') }} id='getInMobile'>Login</button>
-                                        <button onClick={() => { goRoute('/register') }} id='getInMobile' className='registerButtonColors'>Sign up</button>
-
+                                        <button onClick={() => { goRoute('/login') }} className='getInMobile'>Login</button>
+                                        <button onClick={() => { goRoute('/register') }} className='registerButtonColors getInMobile'>Sign up</button>
                                     </>
                             }
-
                         </div>
                     </ClickAwayListener>}
+
                 {menuMobile === "linksBarMobileActive" &&
                     <div id='overlay'></div>}
             </nav>

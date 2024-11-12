@@ -68,8 +68,8 @@ const Register = (props) => {
             <div id="verticalLineLogin"></div>
             <div id='login'>
                 <p id='createYour'>Create your account and let's get productive</p>
-                <input onChange={(e) => setMail1(e.target.value)} className='inputRegister' type='email' placeholder='Your email' id="email" pattern=".+@example\.com" ></input>
-                <input onChange={(e) => setPassword(e.target.value)} className='inputRegister' type='password' placeholder='Your password' ></input>
+                <input onChange={(e) => setMail1(e.target.value)} className='inputRegister' type='email' placeholder='Your email' id="email" pattern=".+@example\.com" autoComplete='email' ></input>
+                <input onChange={(e) => setPassword(e.target.value)} className='inputRegister' type='password' placeholder='Your password' autoComplete='new-password'></input>
                 {stateRegister === 0 ? <button onClick={register} id='registerButton' className='registerButtonColors'>Register</button> : 
                 stateRegister===2?<p>A confirmation email has been sent to your email address.</p>:<div id="registerLoader" className='loader'></div>}
                 {errorRegister !== "" && <p className={classMessage}> {errorRegister} </p>}

@@ -35,7 +35,7 @@
 #loginBox1 {
     display: flex;
     flex-direction: row;
-    gap: 60px;
+    gap: 40px;
 }
 
 #getIn {
@@ -45,16 +45,17 @@
     border-radius: 10px;
     cursor: pointer;
 }
-.loginButtonColors{
 
-}
-.registerButtonColors{
+.loginButtonColors {}
+
+.registerButtonColors {
     color: white;
     background-color: rgb(76, 1, 220);
     font-weight: bold;
 
 
 }
+
 .inputLogin {
     padding: 6px 12px;
     border-radius: 12px;
@@ -163,15 +164,38 @@
     text-decoration: none;
 }
 
+.getInMobile {
+    display: none;
+}
+
+#withArcoMobile {
+    display: none;
+}
+
 @media screen and (max-width: 1080px) {
+    #withArcoMobile {
+        font-family: 'UniSansBold';
+        font-size: 20px;
+        color: white;
+        cursor: pointer;
+        display: unset;
+
+    }
+
+    #withArco {
+        display: none;
+    }
+
     .linkNavBar {
         width: 224px;
     }
-    #contactMobile{
+
+    #contactMobile {
         width: 180px;
         text-align: center;
         padding: 9.5px 20px;
     }
+
     #linksBarMobileActive {
         position: fixed;
         top: 80px;
@@ -187,15 +211,17 @@
         gap: 20px;
     }
 
-    #getInMobile {
+    .getInMobile {
+        display: unset;
         border: none;
         font-size: 20px;
         padding: 12px 8px;
         border-radius: 10px;
-        width: 224px;
+        width: 140px;
         cursor: pointer;
     }
-    #logoutMobile{
+
+    #logoutMobile {
         border: none;
         background-color: #f0f0f0;
         font-size: 20px;
@@ -204,6 +230,7 @@
         width: 224px;
         cursor: pointer;
     }
+
     #overlay {
         width: 100vw;
         height: calc(80vh - 80px);
@@ -249,9 +276,6 @@
         text-wrap: nowrap;
     }
 
-    #withArco {
-        font-size: 20px;
-    }
 
     #footer {
         padding: 0px 7vw;

@@ -64,24 +64,26 @@ const Landing = (props) => {
             </div>
             {<div id='pricingBox'>
                 <h2 id='toStartP'>To start to work with Arco</h2>
+                <p id='promoP'>-50 % on all offers with code LAUNCH50</p>
+
                 <div id='offersBox'>
                     <div className='offerDiv'>
                         <p className='offerDivP1'>Monthly</p>
-                        <p className='offerDivP2'>3$/month</p>
+                        <p className='offerDivP2'><span className='lineTrough'>6.99€</span> 3.49€/month</p>
                         <p className='offerDivP3'>Try it just one month..</p>
 
                         <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>SUBSCRIBE NOW</button>
                     </div>
                     <div className='offerDiv'>
                         <p className='offerDivP1'>Yearly</p>
-                        <p className='offerDivP2'>25$/year</p>
-                        <p className='offerDivP3'>30% cheaper than monthly bill</p>
+                        <p className='offerDivP2'><span className='lineTrough'>49.99€</span> 24.99€/year</p>
+                        <p className='offerDivP3'>40% cheaper than monthly bill</p>
 
                         <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>SUBSCRIBE NOW</button>
                     </div>
                     <div className='offerDiv'>
                         <p className='offerDivP1'>Lifetime</p>
-                        <p className='offerDivP2'>60$</p>
+                        <p className='offerDivP2'><span className='lineTrough'>59.99€</span> 29.99€</p>
                         <p className='offerDivP3'>Work with Arco forever</p>
 
                         <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>BUY NOW</button>
@@ -95,8 +97,10 @@ const Landing = (props) => {
                     </div>
                     <div className='offerDiv'>
                         <p className='offerDivP1'>{offersBoxMobile === "monthly" ? "Monthly" : offersBoxMobile === "annual" ? "Annual" : "Lifetime"}</p>
-                        <p className='offerDivP2'>{offersBoxMobile === "monthly" ? "3$/month" : offersBoxMobile === "annual" ? "25$/year" : "60$"}</p>
-                        <p className='offerDivP3'>{offersBoxMobile === "monthly" ? "Try it just one month.." : offersBoxMobile === "annual" ? "30% cheaper than monthly bill" : "Work with Arco forever"}</p>
+                        {offersBoxMobile === "monthly" ? <p className='offerDivP2'><span className='lineTrough'>6.99€</span> 3.49€/month</p>
+                            : offersBoxMobile === "annual" ? <p className='offerDivP2'><span className='lineTrough'>49.99€</span> 24.99€/year</p>
+                                : <p className='offerDivP2'><span className='lineTrough'>59.99€</span> 29.99€</p>
+                        }                        <p className='offerDivP3'>{offersBoxMobile === "monthly" ? "Try it just one month.." : offersBoxMobile === "annual" ? "40% cheaper than monthly bill" : "Work with Arco forever"}</p>
                         <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>{offersBoxMobile === "lifetime" ? "BUY NOW" : "SUBSCRIBE NOW"}</button>
                     </div>
                 </div>

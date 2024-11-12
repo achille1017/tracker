@@ -16,9 +16,21 @@
 .loaderAnimationMobile{
     display: none;
 }
+#promoP{
+    background-color: red;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
 @media screen and (max-width: 720px) {
     #subscriptionManager{
         width: 86vw;
+        padding: 5vh 0px;
+        min-height: calc(90vh - 80px);
+
     }
     #toStartP{
         text-align: center;
@@ -36,5 +48,9 @@
         display: inline-block;
         box-sizing: border-box;
         animation: rotation 1s linear infinite;
+    }
+    #promoP{
+        width: calc(100% - 40px);
+
     }
 }

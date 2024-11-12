@@ -9,6 +9,7 @@ import { BACKEND_SERVER } from './payements.js'
 const db = new Sqlite('db.sqlite');
 db.prepare('CREATE TABLE IF NOT EXISTS users (mail TEXT PRIMARY KEY, password TEXT, data TEXT, habits TEXT,advice_daily TEXT,profile TEXT,plan TEXT, confirmation_token TEXT, token_expires TEXT, is_confirmed INTEGER)').run();
 db.prepare('CREATE TABLE IF NOT EXISTS whiteList (mail TEXT PRIMARY KEY, date TEXT)').run();
+db.prepare('CREATE TABLE IF NOT EXISTS analytics (source TEXT PRIMARY KEY, score INTEGER)').run();
 
 function checkKeyExists(jsonObject, key) {
 	// Using the in operator
@@ -300,4 +301,34 @@ function userExist(mail){
     }
     return true;
 }
-export {setNewPassword, userExist,getData,hasAccess, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, renameHabit, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList }
+function incrementScoreForSource(source) {
+	// Ensure the table exists
+	db.prepare('CREATE TABLE IF NOT EXISTS analytics (source TEXT PRIMARY KEY, score INTEGER)').run();
+  
+	try {
+	  // Begin a transaction
+	  const transaction = db.transaction(() => {
+		// Check if the source already exists
+		const existingRow = db.prepare('SELECT * FROM analytics WHERE source = ?').get(source);
+  
+		if (existingRow) {
+		  // If the source exists, increment the score
+		  db.prepare('UPDATE analytics SET score = score + 1 WHERE source = ?').run(source);
+		} else {
+		  // If the source doesn't exist, insert a new row with score 1
+		  db.prepare('INSERT INTO analytics (source, score) VALUES (?, 1)').run(source);
+		}
+	  });
+  
+	  // Execute the transaction
+	  transaction();
+  
+	  console.log(`Score incremented for source: ${source}`);
+	  return true;
+	} catch (error) {
+	  console.error(`Error incrementing score for source ${source}:`, error);
+	  return false;
+	}
+  }
+
+export {incrementScoreForSource,setNewPassword, userExist,getData,hasAccess, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, renameHabit, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList }

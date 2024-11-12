@@ -22,7 +22,7 @@ const Login = (props) => {
     useEffect(() => {
         window.scrollTo({
             top: 0,
-            behavior: 'auto' 
+            behavior: 'auto'
         });
     }, [])
 
@@ -75,9 +75,34 @@ const Login = (props) => {
             <div id="verticalLineLogin"></div>
             <div id='login'>
                 <p id='createYour'>Log in and track your day now</p>
-                <input onChange={(e) => setMailLogin(e.target.value)} className='inputRegister' type='email' placeholder='Your email' id="email" pattern=".+@example\.com"></input>
-                <input onChange={(e) => setPasswordLogin(e.target.value)} className='inputRegister' type='password' placeholder='Your password' ></input>
-                <button onClick={login} className='registerButtonColors' id='registerButton'>Login</button>
+                <input
+                    onChange={(e) => setMailLogin(e.target.value)}
+                    className='inputRegister'
+                    type='email'
+                    placeholder='Your email'
+                    id="email"
+                    name="email"
+                    autoComplete="username"
+                    required
+                />
+                <input
+                    onChange={(e) => setPasswordLogin(e.target.value)}
+                    className='inputRegister'
+                    type='password'
+                    placeholder='Your password'
+                    id="current-password"
+                    name="current-password"
+                    autoComplete="current-password"
+                    required
+                />
+                <button
+                    onClick={login}
+                    className='registerButtonColors'
+                    id='registerButton'
+                    type="submit"
+                >
+                    Login
+                </button>
                 {messageLogin !== "" && <p> {messageLogin} </p>}
                 <Link className='linkLogin' to="/reset-password">Forgot your password ?</Link>
                 <Link className='linkLogin2' to="/reset-password">Forgot your password ?</Link>

@@ -173,7 +173,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 60px;
+    gap: 80px;
 }
 
 #offersBox {
@@ -210,6 +210,7 @@
 
 .offerDivP2 {
     font-size: 20px;
+    font-weight: bold;
 }
 
 .offerDivP3 {
@@ -296,7 +297,12 @@
     cursor: pointer;
     background-color: #449DD1;
 }
-
+.lineTrough{
+    text-decoration: line-through;
+    color: grey;
+    font-size: 16px;
+    font-weight: normal;
+}
 @media screen and (max-width: 1200px) {
     .howDoesItWorks{
         width: 100%;
@@ -490,10 +496,12 @@
 
     #pricingBox {
         width: 100%;
+        gap: 30px;
     }
 
     #pricingBox2 {
         width: 100%;
+        gap: 20px;
     }
 
     .offerDiv {

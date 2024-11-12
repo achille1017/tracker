@@ -48,19 +48,39 @@
     flex-direction: column;
     gap: 30px;
 }
+.withArcoP{
+    font-family: UniSansBold;
+}
+
+.blackDot{
+    border-radius: 50%; /* This makes the div circular */
+    background-color: black;
+    min-width: 8px;
+    max-width: 8px;
+
+    min-height: 8px;
+    max-height: 8px;
+
+}
+.listElementArticle{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
 @media (max-width: 720px) {
     #article{
-        padding: 10vh 0vw;
+        padding: 5vh 0vw;
         width: calc(86vw);
 
     }
     .articleBox{
-        padding: 20px;
+        padding: 10px;
     }
     .h1Article{
         font-size: 30px;
     }
     .textArticle{
-        font-size: 18px;
+        font-size: 16px;
     }
 }

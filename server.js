@@ -1,6 +1,6 @@
 import express from 'express';
 import session from 'express-session';
-import { setNewPassword,userExist, hasAccess, getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, renameHabit, addToWhiteList, confirmEmail, isEmailInWhiteList } from './db.js';
+import { incrementScoreForSource,setNewPassword,userExist, hasAccess, getData, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, renameHabit, addToWhiteList, confirmEmail, isEmailInWhiteList } from './db.js';
 import cors from 'cors'
 import { getToday } from "./tools.js"
 import path from 'path';
@@ -323,6 +323,9 @@ app.get('/sitemap.xml', (req, res) => {
 })
 app.get('/*', (req, res) => {
     console.log('GET /')
+    if(req.query.source){
+        incrementScoreForSource(req.query.source)
+    }
     res.sendFile(__dirname + "/frontend/build/index.html");
 });
 

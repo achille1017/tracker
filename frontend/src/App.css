@@ -29,3 +29,5 @@ body{
     font-family: 'TommyBold'; /* Name of the font */
     src: url('assets/TommyBold.otf'); /* Path to the .ttf file */
 }
+
+/**{border: 1px red solid;}*/

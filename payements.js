@@ -25,11 +25,12 @@ async function getThreeCheckoutLinks(mail) {
             redirect_url: FRONTEND_SERVER + '/payement'
         },
         checkoutOptions: {
-            embed: true,
+            embed: true
         },
         checkoutData: {
             email: mail,
-            custom: { "mail": mail }
+            custom: { "mail": mail },
+            discount_code:'LAUNCH50'
         },
         expiresAt: null,
         preview: true,
@@ -40,7 +41,8 @@ async function getThreeCheckoutLinks(mail) {
             try {
                 const checkout = await createCheckout(STORE_ID, variantId, newCheckout);
                 if (checkout && checkout.data && checkout.data.data && checkout.data.data.attributes) {
-                    return checkout.data.data.attributes.url;
+                    const checkoutUrl = checkout.data.data.attributes.url;
+                    return `${checkoutUrl}`;
                 }
             } catch (e) {
                 console.log(`Attempt ${attempt + 1} failed:`, e);
@@ -51,17 +53,17 @@ async function getThreeCheckoutLinks(mail) {
         }
         return null; // Return null if both attempts fail
     }
-    
+
     try {
         const checkoutLinks = await Promise.all(variantIds.map(async (variantId) => {
             return await createCheckoutWithRetry(STORE_ID, variantId, newCheckout);
         }));
-    
+
         // Check if any of the checkout creations failed
         if (checkoutLinks.some(link => link === null)) {
             return { "error": "error creating checkout" };
         }
-    
+
         return {
             "monthly": checkoutLinks[0],
             "annual": checkoutLinks[1],
