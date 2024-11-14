@@ -10,7 +10,6 @@ const Intro = (props) => {
 
     return (
         <div id='introBox'>
-            <p className='textUsageMid'> Our daily habit tracker empowers you to build and maintain positive routines with ease. Here’s how it works: </p>
             <p className='textUsage'>The application consists in a big table where each column is a day and each line is an habit. Each day, you will track a column and will be able to follow your progress.</p>
             <div className='blocIntro'>
                 <h3 className='titleUsage'>1. Choose your habits: Select habits to track from three types</h3>

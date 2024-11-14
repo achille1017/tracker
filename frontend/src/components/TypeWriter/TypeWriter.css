@@ -1,0 +1,16 @@
+.buttonTypeWriter {
+    background-color: transparent;
+    border: none;
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 16px;
+    padding: 0;
+}
+
+@media screen and (max-width: 720px) {
+    .buttonTypeWriter {
+        font-size: 12px;
+    }
+}

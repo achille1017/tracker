@@ -194,9 +194,11 @@
     background-color: #eefaff;
 }
 
+#averagesColumn {}
+
 #pricing {}
 
-#toStartP {
+.text2 {
     font-size: 50px;
     font-family: Tommy;
     text-align: center;
@@ -239,6 +241,7 @@
 
 #arcoImg {
     width: 100%;
+    transform: scaleX(-1);
 }
 
 #arcoText {
@@ -284,7 +287,7 @@
     width: 400px;
 }
 
-.howDoesItWorks {
+#howDoesItWorks {
     font-family: TommyBold;
     text-decoration: none;
     color: white;
@@ -297,16 +300,19 @@
     cursor: pointer;
     background-color: #449DD1;
 }
-.lineTrough{
+
+.lineTrough {
     text-decoration: line-through;
     color: grey;
     font-size: 16px;
     font-weight: normal;
 }
+
 @media screen and (max-width: 1200px) {
-    .howDoesItWorks{
+    #howDoesItWorks {
         width: 100%;
     }
+
     #alreadyDiv {
         width: calc(100% - 48px);
         gap: 40px;
@@ -316,9 +322,6 @@
         width: calc(100% - 40px);
     }
 
-    #box2Texts {
-        gap: 30px;
-    }
 
     .validImg {
         display: none;
@@ -345,6 +348,8 @@
 
     #box2Texts {
         width: 80vw;
+        gap: 30px;
+
     }
 
     #secondBoxLanding {
@@ -361,8 +366,7 @@
     }
 
     #arcoImg {
-        width: 40vw;
-        margin-top: 60px;
+        width: 30vw;
     }
 
     #firstBoxLanding {
@@ -426,7 +430,7 @@
         font-size: 24px;
         padding: 10px;
         font-weight: bold;
-        border: none;
+        border: 1px solid transparent;
         flex: 1 1 0%;
         /* This is key for equal width */
         min-width: 0;
@@ -452,7 +456,14 @@
 }
 
 @media screen and (max-width: 720px) {
-   
+    #arcoImg {
+        width: 40vw;
+    }
+    #box2Texts {
+        width: 86vw;
+    }
+
+
 
     #landing {
         width: 86vw;
@@ -489,7 +500,7 @@
         margin-bottom: 0px;
     }
 
-    #toStartP {
+    .text2 {
         font-size: 30px;
         text-wrap: wrap;
     }

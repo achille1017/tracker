@@ -67,7 +67,7 @@ function SubscriptionManager(props) {
         <meta property="og:image" content="https://withar.co/static/media/Arco1.c74a12087a62cf33a280.png" />
       </Helmet>
       <div id='pricingBox2'>
-        <p id='toStartP'>To start to work with Arco</p>
+        <p className='text2'>To start to work with Arco</p>
         <p id='promoP'>-50 % on all offers with code LAUNCH50</p>
         {loaded ? <div id='offersBox'>
           <div className='offerDiv'>

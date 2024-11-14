@@ -33,9 +33,9 @@ const DayTracker = (props) => {
                 </div> 
 
             {Object.keys(reorderObject(props.habitsUser,props.dataDay)).map((habit, index) => (
-                props.habitsUser[habit]==="bool"?<CellBool key={habit} changeCellValue={props.changeCellValue} cellType={habit} habitsUser={props.habitsUser} cellData={props["dataDay"][habit]} date={props["dataDay"]["date"]}></CellBool>
-                :props.habitsUser[habit]==="text"?<CellText openTextCellEditor={props.openTextCellEditor} key={habit} date={props["dataDay"]["date"]} cellType={habit} changeCellValue={props.changeCellValue} cellData={props["dataDay"][habit]}></CellText>
-                :props.habitsUser[habit]==="number"?<CellNumber key={habit} date={props["dataDay"]["date"]} cellType={habit} changeCellValue={props.changeCellValue} cellData={props["dataDay"][habit]}></CellNumber>
+                props.habitsUser[habit]==="bool"?<CellBool key={habit} changeCellValue={props.changeCellValue} habitName={habit} habitsUser={props.habitsUser} cellData={props["dataDay"][habit]} date={props["dataDay"]["date"]}></CellBool>
+                :props.habitsUser[habit]==="text"?<CellText openTextCellEditor={props.openTextCellEditor} key={habit} date={props["dataDay"]["date"]} habitName={habit} changeCellValue={props.changeCellValue} cellData={props["dataDay"][habit]}></CellText>
+                :props.habitsUser[habit]==="number"?<CellNumber key={habit} date={props["dataDay"]["date"]} habitName={habit} changeCellValue={props.changeCellValue} cellData={props["dataDay"][habit]}></CellNumber>
                 :null
             ))}
         </div>

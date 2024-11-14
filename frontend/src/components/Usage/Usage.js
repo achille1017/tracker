@@ -87,7 +87,7 @@ const Usage = (props) => {
                                         section === "number" ? [numberGif, numberGifMobile] :
                                             section === "text" ? [textGif, textGifMobile] :
                                                 section === "manage" ? [manageGif, manageGifMobile] : null}
-                                title={docs[section].title} text={docs[section].text}></TrackDocs> : document === "arco" ? <Arco></Arco> : null}
+                                title={docs[section].title} text={docs[section].text}></TrackDocs> : document === "arco" ? <Arco></Arco> : <Intro></Intro>}
                 </div>
             </div>
             {!navBarMobile && <button id='navBarMobileButton' onClick={toggleNavBarMobile}><img id='chevron' src={chevron}></img></button>}

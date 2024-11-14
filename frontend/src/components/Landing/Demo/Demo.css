@@ -1,0 +1,71 @@
+#demoBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 120px;
+    gap: 60px;
+}
+
+#assistantDemo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    max-width: 939px;
+}
+
+#botDemo {
+    width: 7vw;
+}
+
+#spreadSheetDemo {
+    display: flex;
+    flex-direction: row;
+    max-width: calc(70vw - 26px);
+    overflow-x: scroll;
+    padding: 20px;
+    border: solid lightblue;
+    border-radius: 20px;
+
+}
+
+#habitsColumnDemo {
+    background-color: white;
+
+}
+
+#moreInfosDemo {
+    width: fit-content;
+        text-align: center;
+    background-color: transparent;
+    text-decoration: underline;
+    color: #449DD1;
+    border: none;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+@media screen and (max-width: 1200px) {
+    #demoBox {
+        margin-bottom: 0px;
+        margin-top: 120px;
+
+
+    }
+}
+
+@media screen and (max-width: 720px) {
+    #spreadSheetDemo {
+        max-width: 86vw;
+
+    }
+
+    #assistantDemo {
+        max-width: 86vw;
+        gap: 20px;
+    }
+
+    #botDemo {
+        width: 16%;
+    }
+}

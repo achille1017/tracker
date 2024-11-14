@@ -8,6 +8,7 @@ import botImg from "../../assets/Arco1.png"
 import WhiteList from '../WhiteList/WhiteList.js';
 import blackDot from "../../assets/black-circle.png"
 import { Helmet } from 'react-helmet';
+import Demo from './Demo/Demo.js';
 
 const Landing = (props) => {
     const goRoute = useNavigateAndScroll()
@@ -15,7 +16,7 @@ const Landing = (props) => {
     const location = useLocation();
     useEffect(() => {
         if (location.pathname === '/' && location.hash === '#pricing') {
-            const element = document.getElementById("toStartP");
+            const element = document.getElementById("howDoesItWorks");
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
@@ -57,13 +58,14 @@ const Landing = (props) => {
                     <div id='arcoImgDiv'>
                         <img id='arcoImg' src={botImg}></img>
                         <p id='arcoText'>Meet Arco, our virtual assistant that will guide you to productivity.</p>
-                        <button className='howDoesItWorks' onClick={() => goRoute('/docs/intro')}>How does it works ?</button>
+{            /*            <button id='howDoesItWorks' onClick={() => goRoute('/docs/intro')}>How does it works ?</button>*/}
                     </div>
                 </div>
 
             </div>
-            {<div id='pricingBox'>
-                <h2 id='toStartP'>To start to work with Arco</h2>
+            <Demo></Demo>
+            <div id='pricingBox'>
+                <h2 className='text2'>To start to work with Arco</h2>
                 <p id='promoP'>-50 % on all offers with code LAUNCH50</p>
 
                 <div id='offersBox'>
@@ -104,12 +106,8 @@ const Landing = (props) => {
                         <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>{offersBoxMobile === "lifetime" ? "BUY NOW" : "SUBSCRIBE NOW"}</button>
                     </div>
                 </div>
-            </div>}
-            {!props.logged &&
-                <div id='alreadyDiv'>
-                    <p id='alreadyP'>Already working with Arco ?</p>
-                    <button id='alreadyButton' onClick={() => { goRoute('/login') }}>LOGIN</button>
-                </div>}
+            </div>
+
             {/*<WhiteList></WhiteList>*/}
             <div id='thirdBoxLanding'>
                 <h2 className='text1'>Why did I build withar.co ? </h2>
