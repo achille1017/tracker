@@ -16,7 +16,7 @@ const Landing = (props) => {
     const location = useLocation();
     useEffect(() => {
         if (location.pathname === '/' && location.hash === '#pricing') {
-            const element = document.getElementById("howDoesItWorks");
+            const element = document.getElementById("pricing");
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
@@ -52,7 +52,7 @@ const Landing = (props) => {
                         </div>
                         <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'> Follow week after week your progression and be sure to do better <img className='validImg' src={valid}></img></p></div>
                         <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'>Beat bad habits FOREVER <img className='validImg' src={valid}></img></p></div>
-                        <div className='box2TextsDiv' id='pricing'><img className='blackDot' src={blackDot}></img> <p className='box2TextP'>No gamification, we're not here to play <img className='validImg' src={valid}></img></p></div>
+                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img> <p className='box2TextP'>No gamification, we're not here to play <img className='validImg' src={valid}></img></p></div>
 
                     </div>
                     <div id='arcoImgDiv'>
@@ -64,6 +64,7 @@ const Landing = (props) => {
 
             </div>
             <Demo></Demo>
+            <div id='pricing'></div>
             <div id='pricingBox'>
                 <h2 className='text2'>To start to work with Arco</h2>
                 <p id='promoP'>-50 % on all offers with code LAUNCH50</p>
