@@ -30,7 +30,6 @@ function SubscriptionManager(props) {
       .then(response => {
         if (response.status === 200) {
           response.json().then(data => {
-            console.log(data)
             setCheckoutMonthly(data.monthly)
             setCheckoutAnnual(data.annual)
             setCheckoutLifetime(data.lifetime)
@@ -41,7 +40,6 @@ function SubscriptionManager(props) {
   }, [])
   const isLemonSqueezyLoaded = useLemonSqueezy();
   function loadInterfaceLS(link) {
-    console.log(link)
     if (isLemonSqueezyLoaded && window.LemonSqueezy) {
       window.LemonSqueezy.Setup({
         checkoutOptions: {

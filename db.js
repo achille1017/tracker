@@ -144,7 +144,7 @@ function renameHabit(mail, habit, name) {
 		) WHERE mail = ?;`)
 	update.run(habit, name, mail)
 }
-async function setNewPassword(mail,password){
+async function setNewPassword(mail, password) {
 	const saltRounds = 10;
 	let result;
 	await new Promise(async next => {
@@ -164,7 +164,7 @@ async function setNewPassword(mail,password){
 				}
 				try {
 					let insert = db.prepare(`update users set password = ? where mail = ? `);
-					insert.run(hash,mail);
+					insert.run(hash, mail);
 
 					result = true
 				} catch (e) {
@@ -197,9 +197,11 @@ async function register(mail, password, token) {
 				}
 				try {
 					let insert = db.prepare(`insert into users (mail,password,data,habits,advice_daily,profile,plan,confirmation_token,is_confirmed) values (?,?,?,?,?,?,?,?,?)`);
-					insert.run(mail, hash, `[{"date":"${getFormattedDate()}"}]`, '{}', `{"${getFormattedDate()}":"firstAdvice"}`, '{"profileSet":0,"name":"","job":"","language":""}', `{"status":"inactive","updated":"${getFormattedDate()}"}`, token, 0);
-
 					result = await sendConfirmationEmail(mail, `${BACKEND_SERVER}/verify-email?token=${token}`) ? true : false
+					console.log(result)
+					if (result) {
+						insert.run(mail, hash, `[{"date":"${getFormattedDate()}"}]`, '{}', `{"${getFormattedDate()}":"firstAdvice"}`, '{"profileSet":0,"name":"","job":"","language":""}', `{"status":"inactive","updated":"${getFormattedDate()}"}`, token, 0);
+					}
 				} catch (e) {
 					console.log(e)
 					result = false
@@ -253,7 +255,7 @@ async function getDailyAdvice(day, mail) {
 	}
 	else return result.advice;
 }
-function updateSubscription(event_name,mail, status, date) {
+function updateSubscription(event_name, mail, status, date) {
 	let update = db.prepare(`UPDATE users
 		SET plan = JSON_PATCH(plan, JSON_OBJECT('status','${status}'))
 		WHERE mail = '${mail}'`)
@@ -286,49 +288,49 @@ function isEmailInWhiteList(mail) {
 		return result.count > 0;
 	}
 }
-function hasAccess(mail){
+function hasAccess(mail) {
 	let select = db.prepare(`SELECT plan FROM users WHERE mail = '${mail}'`);
 	let result = JSON.parse(select.get().plan);
-	if (result) return result.status==="active" || result.status==="paid";
+	if (result) return result.status === "active" || result.status === "paid" || result.status === "on_trial";
 }
 function isValidValue(value) {
 	return value !== undefined && value !== null;
 }
-function userExist(mail){
+function userExist(mail) {
 	const user = db.prepare('SELECT * FROM users WHERE mail = ?').get(mail);
-    if (!user) {
-        return false;
-    }
-    return true;
+	if (!user) {
+		return false;
+	}
+	return true;
 }
 function incrementScoreForSource(source) {
 	// Ensure the table exists
 	db.prepare('CREATE TABLE IF NOT EXISTS analytics (source TEXT PRIMARY KEY, score INTEGER)').run();
-  
-	try {
-	  // Begin a transaction
-	  const transaction = db.transaction(() => {
-		// Check if the source already exists
-		const existingRow = db.prepare('SELECT * FROM analytics WHERE source = ?').get(source);
-  
-		if (existingRow) {
-		  // If the source exists, increment the score
-		  db.prepare('UPDATE analytics SET score = score + 1 WHERE source = ?').run(source);
-		} else {
-		  // If the source doesn't exist, insert a new row with score 1
-		  db.prepare('INSERT INTO analytics (source, score) VALUES (?, 1)').run(source);
-		}
-	  });
-  
-	  // Execute the transaction
-	  transaction();
-  
-	  console.log(`Score incremented for source: ${source}`);
-	  return true;
-	} catch (error) {
-	  console.error(`Error incrementing score for source ${source}:`, error);
-	  return false;
-	}
-  }
 
-export {incrementScoreForSource,setNewPassword, userExist,getData,hasAccess, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, renameHabit, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList }
+	try {
+		// Begin a transaction
+		const transaction = db.transaction(() => {
+			// Check if the source already exists
+			const existingRow = db.prepare('SELECT * FROM analytics WHERE source = ?').get(source);
+
+			if (existingRow) {
+				// If the source exists, increment the score
+				db.prepare('UPDATE analytics SET score = score + 1 WHERE source = ?').run(source);
+			} else {
+				// If the source doesn't exist, insert a new row with score 1
+				db.prepare('INSERT INTO analytics (source, score) VALUES (?, 1)').run(source);
+			}
+		});
+
+		// Execute the transaction
+		transaction();
+
+		console.log(`Score incremented for source: ${source}`);
+		return true;
+	} catch (error) {
+		console.error(`Error incrementing score for source ${source}:`, error);
+		return false;
+	}
+}
+
+export { incrementScoreForSource, setNewPassword, userExist, getData, hasAccess, updateData, getHabits, insertHabit, deleteHabit, allowLogin, register, getDailyAdvice, renameHabit, getProfile, updateProfile, changeOrderHabit, getPlan, updateSubscription, addToWhiteList, confirmEmail, isEmailInWhiteList }

@@ -584,4 +584,4 @@ async function sendResetPasswordEmail(mail, link) {
 
   }
 }
-export { sendConfirmationEmail,sendResetPasswordEmail }
+export { sendConfirmationEmail,sendResetPasswordEmail } //TODO gérer erreur 500 mail

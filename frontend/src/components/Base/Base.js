@@ -13,7 +13,6 @@ const Base = (props) => {
     const [password, setPassword] = useState("")
     const [loaded, setLoaded] = useState(false)
     const [menuMobile, setMenuMobile] = useState("linksBarMobile")
-
     const location = useLocation();
     const preGoRoute = useNavigateAndScroll()
     const goRoute = (route) => {
@@ -22,6 +21,8 @@ const Base = (props) => {
         )
     }
     const navigate = useNavigate();
+
+
     function toggleMenu() {
         setMenuMobile(menuMobile === "linksBarMobile" ? "linksBarMobileActive" : "linksBarMobile")
         props.setScrollDocument(menuMobile === "linksBarMobile" ? 'hidden' : '')
@@ -31,19 +32,26 @@ const Base = (props) => {
             props.updatePlan().then((plan) => {
                 redirect(plan)
                 setLoaded(true)
+                if (plan) {
+                    props.updateProfile()
+                }
             })
         }
     }, [props.logged])
-    useEffect(() => {
-        /*if (loaded) {
-            redirect(props.plan)
-        }*/
-    }, [location])
     function redirect(plan) {
-        if (props.logged && plan.status === "inactive" && location.pathname !== "/subscribe" && location.pathname !== "/payement") {
+        if (!plan && location.pathname !== "/subscribe" && location.pathname !== "/payement") {
             goRoute('/subscribe')
         }
+        else {
+            props.updateProfile().then((profile) => {
+                if (profile.profileSet === 0 && location.pathname === "/profile") {
+                    goRoute('/tracker')
+                }
+            })
+        }
+
     }
+
     function logout() {
         fetch(SERVER_NAME + "/logout", {
             method: 'POST',
@@ -65,8 +73,8 @@ const Base = (props) => {
                 {
                     props.logged ? loaded ?
                         <div className='leftBoxNavBar' id='linkLeftNavBar'>
-                            {props.plan.status === "active" ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
-                            {props.plan.status === "active" ? props.profile.profileSet === 0 ? null : <Link to="/profile" className='linkNavBar'>Profile</Link> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
+                            {props.plan ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
+                            {props.plan ? props.profile.profileSet === 0 ? null : <Link to="/profile" className='linkNavBar'>Profile</Link> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
                             <button className='linkNavBar' onClick={() => { goRoute('/docs/intro') }}>Usage</button>
                             <button className='linkNavBar' onClick={() => { goRoute('/blog') }}>Blog</button>
 
@@ -79,7 +87,7 @@ const Base = (props) => {
 
                         </div>
                 }
-  <p id='withArco' onClick={() => goRoute('/')}>With Arco</p>
+                <p id='withArco' onClick={() => goRoute('/')}>With Arco</p>
 
 
                 {props.logged ? <div className='rightBoxNavBar'><button id='logout' onClick={logout}>Logout</button> </div> :
@@ -92,7 +100,7 @@ const Base = (props) => {
                     </div>
                 }
                 <button onClick={toggleMenu} id='hamburger'><img src={hamburger} id='hamburgerImg'></img></button>
-               {!props.logged? <button onClick={() => { goRoute('/login') }} className='getInMobile'>Login</button>:  <p id='withArcoMobile' onClick={() => goRoute('/')}>With Arco</p>}
+                {!props.logged ? <button onClick={() => { goRoute('/login') }} className='getInMobile'>Login</button> : <p id='withArcoMobile' onClick={() => goRoute('/')}>With Arco</p>}
 
                 {menuMobile === "linksBarMobileActive" &&
                     <ClickAwayListener onClickAway={toggleMenu} touchEvent={false}>
@@ -100,8 +108,8 @@ const Base = (props) => {
                             {
                                 props.logged ? loaded ?
                                     <>
-                                        {props.plan.status === "active" ? <button className='linkNavBar' onClick={() => goRoute('/tracker')}>Tracker</button> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
-                                        {props.plan.status === "active" ? props.profile.profileSet === 0 ? null : <button className='linkNavBar' onClick={() => goRoute('/profile')}>Profile</button> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
+                                        {props.plan ? <button className='linkNavBar' onClick={() => goRoute('/tracker')}>Tracker</button> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
+                                        {props.plan ? props.profile.profileSet === 0 ? null : <button className='linkNavBar' onClick={() => goRoute('/profile')}>Profile</button> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
                                         <button className='linkNavBar' onClick={() => goRoute('/docs/intro')}>Usage</button>
                                         <button className='linkNavBar' onClick={() => { goRoute('/blog') }}>Blog</button>
                                         <a href="mailto:contact@withar.co" className='linkNavBar' id='contactMobile'>Contact</a>

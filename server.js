@@ -215,10 +215,6 @@ app.post('/register', async (req, res) => {
         console.log("email provided null")
         return res.status(400).send()
     }
-    /*if (!isEmailInWhiteList(req.body.mail)) {
-        console.log("email provided not in WL")
-        return res.status(400).send()
-    }*/
     const token = jwt.sign({ "mail": req.body.mail }, SECRET_KEY, { expiresIn: '1h' });
     const registration = await register(req.body.mail, req.body.password, token)
     if (registration) {
@@ -283,7 +279,7 @@ app.post('/api/reset-password', async (req, res) => {
 //Payements 
 
 app.get('/checkout', (req, res) => {
-    console.log('GET /checkout')
+    //console.log('GET /checkout')
     getThreeCheckoutLinks(req.session.mail).then(links => res.json(links))
 })
 
@@ -322,7 +318,7 @@ app.get('/sitemap.xml', (req, res) => {
     res.sendFile(__dirname + "/sitemap.xml")
 })
 app.get('/*', (req, res) => {
-    console.log('GET /')
+    //console.log('GET /')
     if(req.query.source){
         incrementScoreForSource(req.query.source)
     }

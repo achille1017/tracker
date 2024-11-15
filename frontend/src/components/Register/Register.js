@@ -17,7 +17,7 @@ const Register = (props) => {
     useEffect(() => {
         window.scrollTo({
             top: 0,
-            behavior: 'auto' 
+            behavior: 'auto'
         });
     }, [])
     function register() {
@@ -35,6 +35,13 @@ const Register = (props) => {
                 .then(response => {
                     if (response.status === 200) {
                         setStateRegister(2)
+                    }
+                    else if (response.status === 400) {
+                        setErrorRegister("We could not send an email to your address. Try another one.")
+                        setClassMessage("redP")
+                        setTimeout(() => { setErrorRegister("") }, 10000)
+                        setStateRegister(0)
+
                     }
                 })
         } else {
@@ -70,8 +77,8 @@ const Register = (props) => {
                 <p id='createYour'>Create your account and let's get productive</p>
                 <input onChange={(e) => setMail1(e.target.value)} className='inputRegister' type='email' placeholder='Your email' id="email" pattern=".+@example\.com" autoComplete='email' ></input>
                 <input onChange={(e) => setPassword(e.target.value)} className='inputRegister' type='password' placeholder='Your password' autoComplete='new-password'></input>
-                {stateRegister === 0 ? <button onClick={register} id='registerButton' className='registerButtonColors'>Register</button> : 
-                stateRegister===2?<p>A confirmation email has been sent to your email address.</p>:<div id="registerLoader" className='loader'></div>}
+                {stateRegister === 0 ? <button onClick={register} id='registerButton' className='registerButtonColors'>Register</button> :
+                    stateRegister === 2 ? <p>A confirmation email has been sent to your email address.</p> : <div id="registerLoader" className='loader'></div>}
                 {errorRegister !== "" && <p className={classMessage}> {errorRegister} </p>}
 
             </div>

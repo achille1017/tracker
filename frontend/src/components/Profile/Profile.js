@@ -11,7 +11,7 @@ const Profile = (props) => {
     const [objectives, setObjectives] = useState('')
     const [loaded, setLoaded] = useState(false)
     useEffect(() => {
-        updateProfile()
+        props.updateProfile().then(data => { setProfile(data); setLanguage(data.language); setJob(data.job); setName(data.name); setLoaded(true);setObjectives(data.objectives); })
         props.updatePlan()
     }, [])
     function setProfileServer() {
@@ -29,19 +29,7 @@ const Profile = (props) => {
             })
 
     }
-    function updateProfile() {
-        return new Promise((resolve, reject) => {
-            fetch(SERVER_NAME + "/getprofile", {
-                credentials: 'include',
-            }).then(res => {
-                if (res.status === 200) {
-                    res.json().then(
-                        data => { setProfile(data); setLanguage(data.language); setJob(data.job); setName(data.name); setLoaded(true);setObjectives(data.objectives); resolve(data) }
-                    )
-                }
-            })
-        })
-    }
+    
     return (
         <div id="appWaiter">
             <Helmet>

@@ -74,8 +74,8 @@ function App() {
         .then(response => {
           if (response.status === 200) {
             response.json().then(data => {
-              setPlan(data.plan)
-              resolve(data.plan)
+              setPlan(data.plan.status === "active" || data.plan.status === "paid"|| data.plan.status === "on_trial")
+              resolve(data.plan.status === "active" || data.plan.status === "paid"|| data.plan.status === "on_trial")
             })
           }
         })
@@ -88,12 +88,12 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Base setScrollDocument={setScrollDocument} updateLogged={updateLogged} logged={logged} updatePlan={updatePlan} plan={plan} profile={profile}></Base>}>
+        <Route path="/" element={<Base setScrollDocument={setScrollDocument} updateLogged={updateLogged} logged={logged} updatePlan={updatePlan} plan={plan} profile={profile} updateProfile={updateProfile}></Base>}>
           <Route path="/" element={<Landing logged={logged}></Landing>} />
           <Route path="/tracker" element={<TrackerApp profile={profile} updateProfile={updateProfile} logged={logged}></TrackerApp>} />
           <Route path="/login" element={<Login updateLogged={updateLogged}></Login>} />
           <Route path="/register" element={<Register updateLogged={updateLogged}></Register>} />
-          <Route path="/profile" element={<Profile updatePlan={updatePlan} plan={plan}></Profile>} />
+          <Route path="/profile" element={<Profile updatePlan={updatePlan} plan={plan} profile={profile} updateProfile={updateProfile}></Profile>} />
           <Route path='/subscribe' element={<SubscriptionManager logged={logged}></SubscriptionManager>}></Route>
           <Route path='/reset-password' element={<PasswordForgotten></PasswordForgotten>}></Route>
           <Route path='/payement' element={<PayementWaiter updateLogged={updateLogged} updatePlan={updatePlan}></PayementWaiter>}></Route>

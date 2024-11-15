@@ -37,7 +37,6 @@ const Usage = (props) => {
         });
     }, [])
     useEffect(() => {
-        console.log(location.pathname)
         window.scrollTo({
             top: 0,
             behavior: 'auto'
