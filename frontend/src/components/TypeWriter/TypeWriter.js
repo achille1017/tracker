@@ -19,6 +19,9 @@ const Typewriter = ({ text, delay, id, className,link,textLink }) => {
   }, [currentIndex, delay, text]);
 
   useEffect(() => {
+    if(textLink===undefined){
+      return
+    }
     if (currentIndexLink < textLink.length && currentIndex >=text.length) {
       const timeout = setTimeout(() => {
         setCurrentLink(prevText => prevText + textLink[currentIndexLink]);

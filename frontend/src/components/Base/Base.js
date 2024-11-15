@@ -29,7 +29,6 @@ const Base = (props) => {
     useEffect(() => {
         if (props.logged) {
             props.updatePlan().then((plan) => {
-                console.log(plan)
                 redirect(plan)
                 setLoaded(true)
             })
