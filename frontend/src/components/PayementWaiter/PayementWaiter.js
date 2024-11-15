@@ -14,8 +14,8 @@ const PayementWaiter = (props) => {
         withCredentials: true
     });
     function updatePlan() {
-        props.updatePlan().then(plan => { console.log(plan); if (plan.status === "active" || plan.status === "paid"|| plan.status === "on_trial") { setPlanActive(true) } })
-        setTimeout(updatePlan,15000)
+        props.updatePlan().then(plan => { setPlanActive(plan) })
+        setTimeout(updatePlan, 15000)
     }
 
     useEffect(() => {
@@ -42,9 +42,9 @@ const PayementWaiter = (props) => {
     return (
         <div id='payementWaiter'>
             <Helmet>
-                <title>{"With Arco | "+planActive?"Payement confirmed":"Waiting for confirmation..."}</title>
+                <title>{"With Arco | " + planActive ? "Payement confirmed" : "Waiting for confirmation..."}</title>
                 <meta name="description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
-                <meta property="og:title" content="With Arco | Get productive today"/>
+                <meta property="og:title" content="With Arco | Get productive today" />
                 <meta property="og:description" content="With Arco, complete your daily habits with our AI-powered virtual assistant. Get personalized advice and track your progress effortlessly." />
                 <meta property="og:image" content="https://withar.co/static/media/Arco1.c74a12087a62cf33a280.png" />
             </Helmet>
