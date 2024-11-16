@@ -51,12 +51,12 @@ const Landing = (props) => {
                 <h2 className='text1'>Start tracking your daily habits and improve your productivity. </h2>
                 <div id='boxArcoLanding'>
                     <div id="box2Texts">
-                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'> Get yourself in a constant routine of good practices <img className='validImg' src={valid}></img></p></div>
+                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'>Get yourself into a constant routine of good practices <img className='validImg' src={valid}></img></p></div>
                         <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img>
-                            <p className='box2TextP'> Receive advices from our virtual assistant <span id='poweredByAI'>Powered by AI</span> <img className='validImg' src={valid}></img></p>
+                            <p className='box2TextP'> Receive advice from our virtual assistant <span id='poweredByAI'>Powered by AI</span> <img className='validImg' src={valid}></img></p>
 
                         </div>
-                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'> Follow weekly your progression and be sure to do better <img className='validImg' src={valid}></img></p></div>
+                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'> Follow your progress daily and be sure to do better <img className='validImg' src={valid}></img></p></div>
                         <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP freeTrialP'>5-days FREE trial <img className='validImg' src={valid}></img></p></div>
                         <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img> <p className='box2TextP'>Synchronize your data on all your devices <img className='validImg' src={valid}></img></p></div>
 
@@ -72,13 +72,13 @@ const Landing = (props) => {
             <Demo></Demo>
             <div id='pricing'></div>
             <div id='pricingBox'>
-                <h2 className='text2'>To start to work with Arco : 5-day FREE trial</h2>
+                <h2 className='text2'>To start to work with Arco : 5-days FREE trial</h2>
                 <p id='promoP'>-50 % on all offers with code LAUNCH50</p>
                 <div id='offersBox'>
                     <div className='offerDiv'>
                         <div className='monthlyBox'>
                             <p className='offerDivP1'>Monthly</p>
-                            <p className='freeTrialP'>5-day FREE trial</p>
+                            <p className='freeTrialP'>5-days FREE trial</p>
                         </div>
                         <p className='offerDivP2'><span className='lineTrough'>6.99€</span> 3.49€/month</p>
                         <p className='offerDivP3'>Try it just one month..</p>
@@ -117,7 +117,7 @@ const Landing = (props) => {
             {/*<WhiteList></WhiteList>*/}
             <div id='thirdBoxLanding'>
                 <h2 className='text1'>Why did I build withar.co ? </h2>
-                <p id='whoMadeItP'>In 2024, I tried to launch with a bad timing a web3 project. Figuring out what my errors were, I quickly observed that my producitvity was the main problem. I was waking up at 11, sleeping at 2 or 3 and working too late.. Once that project I putted a lot of hope into was dead, I had to do something better and I started by working on myself tracking my daily habits to get productive for real. </p>
+                <p id='whoMadeItP'>In 2024, I tried to launch a Web3 project at a bad time. Figuring out what my errors were, I quickly observed that my productivity was the main problem. I was waking up at 11, sleeping at 2 or 3, and working too late. Once that project I had put a lot of hope into was dead, I had to do something better, and I started by working on myself, tracking my daily habits to become truly productive.</p>
             </div>
         </div>
     );
