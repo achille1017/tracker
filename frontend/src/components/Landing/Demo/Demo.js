@@ -99,7 +99,7 @@ const Demo = (props) => {
     }, [textCellEditor])
     return (
         <div id='demoBox'>
-            <h2 className='text2'>How does it works ?</h2>
+            <h2 className='text2' id='demoTag'>How does it works ?</h2>
             <div id='assistantDemo'>
                 <img id='botDemo' src={botImg}></img>
                 <Typewriter id={"loginAdvice"} text={`Here is a simple demo of how the app works. Each day I will advice you analysing data from the previous day. Give it a try and then go for our 5-day free trial ! Each column is a day and each line a dail habit. ${window.innerWidth>1080?"Click on ":"Touch"} a cell to change its value.`} link={"/docs"} textLink={"More infos here."} delay={20} />

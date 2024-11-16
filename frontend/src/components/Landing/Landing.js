@@ -21,6 +21,12 @@ const Landing = (props) => {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
         }
+        if (location.pathname === '/' && location.hash === '#demo') {
+            const element = document.getElementById("demoTag");
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
     }, [location]);
 
     return (

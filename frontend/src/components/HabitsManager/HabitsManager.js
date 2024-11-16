@@ -26,7 +26,7 @@ const HabitsManager = (props) => {
     }
     return (
         <div id={props.id} className='habitsManager'>
-            <p id='addANewHabit'>Add a new habit tracker : </p>
+            <p id='addANewHabit'>Add a new habit to track : </p>
             
             <input id="newHabitName" type='text' value={newHabit} onChange={(e) => setNewHabit(e.target.value)} placeholder='Name of new habit'></input>
             <select id='newHabitType' value={newHabitType} onChange={(e) => setNewHabitType(e.target.value)}>
