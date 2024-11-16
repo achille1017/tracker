@@ -50,15 +50,15 @@ const Landing = (props) => {
                             <p className='box2TextP'> Receive advices from our virtual assistant <span id='poweredByAI'>Powered by AI</span> <img className='validImg' src={valid}></img></p>
 
                         </div>
-                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'> Follow week after week your progression and be sure to do better <img className='validImg' src={valid}></img></p></div>
-                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'>Beat bad habits FOREVER <img className='validImg' src={valid}></img></p></div>
-                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img> <p className='box2TextP'>No gamification, we're not here to play <img className='validImg' src={valid}></img></p></div>
+                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP'> Follow weekly your progression and be sure to do better <img className='validImg' src={valid}></img></p></div>
+                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img><p className='box2TextP freeTrialP'>5-days FREE trial <img className='validImg' src={valid}></img></p></div>
+                        <div className='box2TextsDiv'><img className='blackDot' src={blackDot}></img> <p className='box2TextP'>Synchronize your data on all your devices <img className='validImg' src={valid}></img></p></div>
 
                     </div>
                     <div id='arcoImgDiv'>
                         <img id='arcoImg' src={botImg}></img>
                         <p id='arcoText'>Meet Arco, our virtual assistant that will guide you to productivity.</p>
-{            /*            <button id='howDoesItWorks' onClick={() => goRoute('/docs/intro')}>How does it works ?</button>*/}
+                        {            /*            <button id='howDoesItWorks' onClick={() => goRoute('/docs/intro')}>How does it works ?</button>*/}
                     </div>
                 </div>
 
@@ -66,29 +66,28 @@ const Landing = (props) => {
             <Demo></Demo>
             <div id='pricing'></div>
             <div id='pricingBox'>
-                <h2 className='text2'>To start to work with Arco</h2>
+                <h2 className='text2'>To start to work with Arco : 5-day FREE trial</h2>
                 <p id='promoP'>-50 % on all offers with code LAUNCH50</p>
-
                 <div id='offersBox'>
                     <div className='offerDiv'>
-                        <p className='offerDivP1'>Monthly</p>
+                        <div className='monthlyBox'>
+                            <p className='offerDivP1'>Monthly</p>
+                            <p className='freeTrialP'>5-day FREE trial</p>
+                        </div>
                         <p className='offerDivP2'><span className='lineTrough'>6.99€</span> 3.49€/month</p>
                         <p className='offerDivP3'>Try it just one month..</p>
-
                         <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>SUBSCRIBE NOW</button>
                     </div>
                     <div className='offerDiv'>
                         <p className='offerDivP1'>Yearly</p>
                         <p className='offerDivP2'><span className='lineTrough'>49.99€</span> 24.99€/year</p>
                         <p className='offerDivP3'>40% cheaper than monthly bill</p>
-
                         <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>SUBSCRIBE NOW</button>
                     </div>
                     <div className='offerDiv'>
                         <p className='offerDivP1'>Lifetime</p>
                         <p className='offerDivP2'><span className='lineTrough'>59.99€</span> 29.99€</p>
                         <p className='offerDivP3'>Work with Arco forever</p>
-
                         <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>BUY NOW</button>
                     </div>
                 </div>
