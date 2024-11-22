@@ -11,9 +11,9 @@ const MasteringTimeManagement = (props) => {
         <div className='articleBox'>
             <Helmet>
                 <title>With Arco | Mastering time management: Tips and tools for busy professionals using habit trackers</title>
-                <meta name="description" content="Conquer the chaos of modern life With Arco trackers—your secret weapon! Transform time into a loyal ally, elevate productivity, and flourish personally using AI-powered, goal-smashing strategies. Set sail for success!" />
+                <meta name="description" content="Conquer the chaos of modern life With Arco, your secret weapon! Transform time into a loyal ally, elevate productivity, and flourish personally using AI-powered, goal-smashing strategies. Set sail for success!" />
                 <meta property="og:title" content="With Arco | Mastering time management: Tips and tools for busy professionals using habit trackers" />
-                <meta property="og:description" content="Conquer the chaos of modern life With Arco trackers—your secret weapon! Transform time into a loyal ally, elevate productivity, and flourish personally using AI-powered, goal-smashing strategies. Set sail for success!" />
+                <meta property="og:description" content="Conquer the chaos of modern life With Arco, your secret weapon! Transform time into a loyal ally, elevate productivity, and flourish personally using AI-powered, goal-smashing strategies. Set sail for success!" />
                 <meta property="og:image" content="https://withar.co/static/media/Arco1.c74a12087a62cf33a280.png" />
             </Helmet>
             <img className='coverArticleImg' src={cover}></img>

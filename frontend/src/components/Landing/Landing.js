@@ -63,7 +63,7 @@ const Landing = (props) => {
                     </div>
                     <div id='arcoImgDiv'>
                         <img id='arcoImg' src={botImg}></img>
-                        <p id='arcoText'>Meet Arco, our virtual assistant that will guide you to productivity.</p>
+                        <p id='arcoText'>Meet Arco, our virtual assistant who will guide you to productivity.</p>
                         {            /*            <button id='howDoesItWorks' onClick={() => goRoute('/docs/intro')}>How does it works ?</button>*/}
                     </div>
                 </div>
