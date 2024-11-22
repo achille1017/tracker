@@ -93,7 +93,7 @@ const Demo = (props) => {
         setLoaded(true)
     }, [dates])
     useEffect(() => {
-        if (textCellEditor) {
+        if ((textCellEditor || textCellEditor == "")&& dataDemo[dateCellEditor]!==undefined) {
             dataDemo[dateCellEditor][habitCellEditor] = textCellEditor
         }
     }, [textCellEditor])
