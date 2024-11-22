@@ -73,7 +73,7 @@ const Landing = (props) => {
             <div id='pricing'></div>
             <div id='pricingBox'>
                 <h2 className='text2'>To start to work with Arco : 5-days FREE trial</h2>
-                <p id='promoP'>-50 % on all offers with code LAUNCH50</p>
+                <p id='promoP'>-50 % on all offers with code LAUNCH50 until 01/12</p>
                 <div id='offersBox'>
                     <div className='offerDiv'>
                         <div className='monthlyBox'>

@@ -66,7 +66,7 @@ function SubscriptionManager(props) {
       </Helmet>
       <div id='pricingBox2'>
         <p className='text2'>To start to work with Arco</p>
-        <p id='promoP'>-50 % on all offers with code LAUNCH50</p>
+        <p id='promoP'>-50 % on all offers with code LAUNCH50 until 01/12</p>
         {loaded ? <div id='offersBox'>
           <div className='offerDiv'>
             <p className='offerDivP1'>Monthly</p>
