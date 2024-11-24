@@ -11,11 +11,11 @@ const Profile = (props) => {
     const [objectives, setObjectives] = useState('')
     const [loaded, setLoaded] = useState(false)
     useEffect(() => {
-        props.updateProfile().then(data => { setProfile(data); setLanguage(data.language); setJob(data.job); setName(data.name); setLoaded(true);setObjectives(data.objectives); })
+        props.updateProfile().then(data => { setProfile(data); setLanguage(data.language); setJob(data.job); setName(data.name); setLoaded(true); setObjectives(data.objectives); })
         props.updatePlan()
     }, [])
     function setProfileServer() {
-        const profile = { "profileSet": 1, "name": name, "job": job, "language": language,"objectives":objectives }
+        const profile = { "profileSet": 1, "name": name, "job": job, "language": language, "objectives": objectives }
         fetch(SERVER_NAME + "/setprofile", {
             method: 'POST',
             headers: {
@@ -29,7 +29,7 @@ const Profile = (props) => {
             })
 
     }
-    
+
     return (
         <div id="appWaiter">
             <Helmet>
@@ -43,14 +43,16 @@ const Profile = (props) => {
                 <p id='title1Profile'>Hello, {name}.</p>
                 <div id='bigProfileDiv'>
                     <div className='profileDiv'><p className="profileP">Name : </p><input onChange={(e) => { setName(e.target.value) }} value={name} type='text' className="inputProfile"></input></div>
-                    <div className='profileDiv'><p className="profileP">Language : </p><select value={language} onChange={(e) => setLanguage(e.target.value)} className='selectProfileSetter'>
-                        <option value="english">English</option>
-                        <option value="french">Français</option>
-                        <option value="spanish">Español</option>
-                    </select></div>
-                    
+                    <div className='profileDiv'><p className="profileP">Language : </p>
+                        <select value={language} onChange={(e) => setLanguage(e.target.value)} className='selectProfile'>
+                            <option value="english">English</option>
+                            <option value="french">Français</option>
+                            <option value="spanish">Español</option>
+                        </select>
+                    </div>
+
                     <div className='profileDiv'><p className="profileP">Job : </p><input onChange={(e) => { setJob(e.target.value) }} value={job} type='text' className="inputProfile"></input></div>
-                    <div className='profileDiv'><p className="profileP">Goals and objectives : </p><textarea  onChange={(e) => { setObjectives(e.target.value) }} value={objectives} type='text' className="textareaProfile"></textarea></div>
+                    <div className='profileDiv' id='profileDivGoals'><p className="profileP">Goals and objectives : </p><textarea onChange={(e) => { setObjectives(e.target.value) }} value={objectives} type='text' className="textareaProfile"></textarea></div>
 
                     <div className='profileDiv'><p className="profileP">Plan : {props.plan !== undefined ? props.plan.status : null}</p><a href="https://witharco.lemonsqueezy.com/billing">Manage</a></div>
                     <button id="saveChanges" onClick={setProfileServer}>Save changes</button>

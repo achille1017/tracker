@@ -12,12 +12,19 @@
     font-size: 40px;
     width: fit-content;
     font-weight: bold;
+    text-wrap: nowrap;
 }
 
 .profileDiv {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+.selectProfile {
+    padding: 12px 30px 12px 12px;
+    border-radius: 10px;
+    border: none;
+    width: calc(50% + 20px);
 }
 
 #bigProfileDiv {
@@ -34,6 +41,7 @@
 
 .profileP {
     font-size: 24px;
+    font-family: Tommy;
 }
 
 #saveChanges {
@@ -74,7 +82,7 @@
     #bigProfileDiv {
         min-width: unset;
         width: calc(100% - 20px);
-        padding: 20px 10px;
+        padding: 20px 16px;
         gap: 24px;
     }
 
@@ -85,4 +93,12 @@
     .profileDiv {
         align-items: center;
     }
+    .textareaProfile{
+        width: calc(100% - 20px);
+    }
+    #profileDivGoals{
+        flex-direction: column;   
+        align-items: flex-start    ;
+        gap: 12px;
+       }
 }
