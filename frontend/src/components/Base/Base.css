@@ -272,7 +272,9 @@
     #productHuntLink {
         display: none;
     }
-
+    #productHuntA {
+        display: none;
+    }
     #navBar {
         padding: 0px 7vw;
         width: 86vw;

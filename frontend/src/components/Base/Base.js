@@ -138,7 +138,7 @@ const Base = (props) => {
                 <a className="footerText" href='mailto:contact@withar.co' target="_blank"
                     rel="noopener noreferrer">Contact</a>
                 <p className="footerText">withar.co 2024</p>
-                <a href="https://www.producthunt.com/posts/with-arco?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-with&#0045;arco" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=619732&theme=neutral" alt="With Arco - Get productive today | Product Hunt" id='productHuntLink' /></a>
+                <a href="https://www.producthunt.com/posts/with-arco?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-with&#0045;arco" target="_blank" id='productHuntA'><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=619732&theme=neutral" alt="With Arco - Get productive today | Product Hunt" id='productHuntLink' /></a>
 
             </footer>
         </div>
