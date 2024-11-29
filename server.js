@@ -12,6 +12,7 @@ import fs from 'fs';
 import crypto from "crypto"
 import jwt from "jsonwebtoken"
 import { sendResetPasswordEmail } from "./mail.js"
+
 const keys = JSON.parse(fs.readFileSync('keys.json', 'utf8'));
 const LEMON_SQUEEZY_SIGNING_SECRET = keys["lemonSqueezySigningSecret"]
 const __filename = fileURLToPath(import.meta.url);
@@ -30,10 +31,11 @@ const sessionMiddleware = session({
     }
 });
 app.use(sessionMiddleware);
+
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: [FRONTEND_SERVER, 'https://googleads.g.doubleclick.net', 'https://pagead2.googlesyndication.com'],
+        origin: FRONTEND_SERVER,
         credentials: true
     }
 });
@@ -311,6 +313,9 @@ app.get('/favicon.ico', (req, res) => {
 })
 app.get('/robots.txt', (req, res) => {
     res.sendFile(__dirname + "/robots.txt")
+})
+app.get('/ads.txt', (req, res) => {
+    res.sendFile(__dirname + "/ads.txt")
 })
 app.get('/sitemap.xml', (req, res) => {
     res.sendFile(__dirname + "/sitemap.xml")
