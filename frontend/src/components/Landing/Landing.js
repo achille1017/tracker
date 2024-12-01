@@ -113,9 +113,9 @@ const Landing = (props) => {
                     </div>
                     <div className='offerDiv'>
                         <p className='offerDivP1'>{offersBoxMobile === "monthly" ? "Monthly" : offersBoxMobile === "annual" ? "Annual" : "Lifetime"}</p>
-                        {offersBoxMobile === "monthly" ? <p className='offerDivP2'><span className='lineTrough'>6.99€</span> 3.49€/month</p>
-                            : offersBoxMobile === "annual" ? <p className='offerDivP2'><span className='lineTrough'>49.99€</span> 24.99€/year</p>
-                                : <p className='offerDivP2'><span className='lineTrough'>59.99€</span> 29.99€</p>
+                        {offersBoxMobile === "monthly" ? <p className='offerDivP2'>6.99€/month</p>
+                            : offersBoxMobile === "annual" ? <p className='offerDivP2'>49.99€/year</p>
+                                : <p className='offerDivP2'>59.99€</p>
                         }                        <p className='offerDivP3'>{offersBoxMobile === "monthly" ? "Try it just one month.." : offersBoxMobile === "annual" ? "40% cheaper than monthly bill" : "Work with Arco forever"}</p>
                         <button className='getStarted' onClick={() => goRoute(props.logged ? '/subscribe' : '/register')}>{offersBoxMobile === "lifetime" ? "BUY NOW" : "SUBSCRIBE NOW"}</button>
                     </div>

@@ -243,7 +243,7 @@ function isTodayTuesday() {
 }
 async function getDailyAdvice(day, mail) {
 	if (!hasAccess(mail) && !isTodayTuesday()) {
-		return ("Subscribe to With Arco AI to get daily advice.")
+		return ("noSubscription")
 	}
 	else {
 		let select = db.prepare(`SELECT json_extract(advice_daily, '$."${day}"') as advice FROM users WHERE mail = '${mail}'`);

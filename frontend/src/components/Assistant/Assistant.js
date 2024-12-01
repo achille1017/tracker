@@ -6,6 +6,9 @@ import { SERVER_NAME } from '../../config.js';
 
 const Assistant = (props) => {
     const [advice, setAdvice]= useState("")
+    const [link, setLink]= useState("")
+    const [textLink, setTextLink]= useState("")
+
     useEffect(()=>{
         getAdvice()
     },[])
@@ -30,6 +33,12 @@ const Assistant = (props) => {
                             setAdvice(`Welcome ${props.name} ! Track your first day full of good habits and get an advice tomorrow. Click on each cell to change its value. Have a good day !`)
                             return
                         }
+                        if(data.advice==="noSubscription"){
+                            setAdvice("Upgrade plan to get daily advice With Arco AI.")
+                            setLink("/subscribe")
+                            setTextLink("Subscribe there.")
+                            return
+                        }
                         setAdvice(data.advice)
                     
                     })
@@ -40,7 +49,7 @@ const Assistant = (props) => {
     return (
         <div id='assistant'>
             <img id='bot' src={botImg}></img>
-            <Typewriter id={"dailyAdivce"} text= {advice} delay={10}/>
+            <Typewriter id={"dailyAdivce"} text= {advice} link={link} textLink={textLink} delay={10}/>
         </div>
     );
 };
