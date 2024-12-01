@@ -30,7 +30,7 @@ const Base = (props) => {
     useEffect(() => {
         if (props.logged) {
             props.updatePlan().then((plan) => {
-                redirect(plan)
+                //redirect(plan)
                 setLoaded(true)
                 if (plan) {
                     props.updateProfile()
@@ -73,8 +73,9 @@ const Base = (props) => {
                 {
                     props.logged ? loaded ?
                         <div className='leftBoxNavBar' id='linkLeftNavBar'>
-                            {props.plan ? <Link to="/tracker" className='linkNavBar'>Tracker</Link> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
-                            {props.plan ? props.profile.profileSet === 0 ? null : <Link to="/profile" className='linkNavBar'>Profile</Link> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
+                            <Link to="/tracker" className='linkNavBar'>Tracker</Link> 
+                           { props.profile.profileSet === 0 ? null : <Link to="/profile" className='linkNavBar'>Profile</Link> }
+                           {!props.plan  && <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
                             <button className='linkNavBar' onClick={() => { goRoute('/docs/intro') }}>Usage</button>
                             <button className='linkNavBar' onClick={() => { goRoute('/blog') }}>Blog</button>
 
@@ -95,7 +96,7 @@ const Base = (props) => {
                         <div id='loginBox1'>
                             <button onClick={() => { goRoute('/login') }} id='getIn'>Login</button>
 
-                            <button onClick={() => { goRoute('/register') }} id='getIn' className='registerButtonColors'>Sign up</button>
+                            <button onClick={() => { goRoute('/register') }} id='getIn' className='registerButtonColors'>Get Started</button>
                         </div>
                     </div>
                 }
@@ -108,8 +109,10 @@ const Base = (props) => {
                             {
                                 props.logged ? loaded ?
                                     <>
-                                        {props.plan ? <button className='linkNavBar' onClick={() => goRoute('/tracker')}>Tracker</button> : <button className='linkNavBar' onClick={() => goRoute('/')}>Home</button>}
-                                        {props.plan ? props.profile.profileSet === 0 ? null : <button className='linkNavBar' onClick={() => goRoute('/profile')}>Profile</button> : <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
+                                        <button className='linkNavBar' onClick={() => goRoute('/tracker')}>Tracker</button> 
+                                        { props.profile.profileSet === 0 ? null : <button className='linkNavBar' onClick={() => goRoute('/profile')}>Profile</button>}
+                                        {!props.plan  && <button className='linkNavBar' onClick={() => goRoute('/subscribe')}>Subscribe</button>}
+
                                         <button className='linkNavBar' onClick={() => goRoute('/docs/intro')}>Usage</button>
                                         <button className='linkNavBar' onClick={() => { goRoute('/blog') }}>Blog</button>
                                         <a href="mailto:contact@withar.co" className='linkNavBar' id='contactMobile'>Contact</a>
@@ -122,7 +125,7 @@ const Base = (props) => {
                                         <button className='linkNavBar' onClick={() => { goRoute('/blog') }}>Blog</button>
                                         <a href="mailto:contact@withar.co" className='linkNavBar' id='contactMobile'>Contact</a>
                                         <button onClick={() => { goRoute('/login') }} className='getInMobile'>Login</button>
-                                        <button onClick={() => { goRoute('/register') }} className='registerButtonColors getInMobile'>Sign up</button>
+                                        <button onClick={() => { goRoute('/register') }} className='registerButtonColors getInMobile'>Get Started</button>
                                     </>
                             }
                         </div>

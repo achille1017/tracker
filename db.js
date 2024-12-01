@@ -238,22 +238,30 @@ function updateProfile(mail, newProfile) {
 	let update = db.prepare(`update users set profile='${JSON.stringify(profile)}' where mail = '${mail}'`)
 	update.run()
 }
+function isTodayTuesday() {
+	return new Date().getDay() === 2;
+}
 async function getDailyAdvice(day, mail) {
-	let select = db.prepare(`SELECT json_extract(advice_daily, '$."${day}"') as advice FROM users WHERE mail = '${mail}'`);
-	let result = select.get();
-	if (result.advice === null) {
-		let select2 = db.prepare(`SELECT value FROM users, json_each(data) AS value WHERE json_extract(value, '$.date') = '${getYesterday()}' and mail='${mail}';`);
-		let result2 = select2.get();
-		if (result2 === undefined) {
-			result2 = { "value": JSON.stringify(replaceObjectValues(getHabits(mail), "bool", 0)) }
-		}
-		const profile = getProfile(mail)
-		const advice = await generateDailyAdvice(JSON.parse(result2.value), profile.name, profile.job, profile.language)
-		let update = db.prepare(`update users SET advice_daily = json_insert(advice_daily, '$.${day}', ?) where mail = '${mail}'`)
-		update.run(advice[0])
-		return advice[0]
+	if (!hasAccess(mail) && !isTodayTuesday()) {
+		return ("Subscribe to With Arco AI to get daily advice.")
 	}
-	else return result.advice;
+	else {
+		let select = db.prepare(`SELECT json_extract(advice_daily, '$."${day}"') as advice FROM users WHERE mail = '${mail}'`);
+		let result = select.get();
+		if (result.advice === null) {
+			let select2 = db.prepare(`SELECT value FROM users, json_each(data) AS value WHERE json_extract(value, '$.date') = '${getYesterday()}' and mail='${mail}';`);
+			let result2 = select2.get();
+			if (result2 === undefined) {
+				result2 = { "value": JSON.stringify(replaceObjectValues(getHabits(mail), "bool", 0)) }
+			}
+			const profile = getProfile(mail)
+			const advice = await generateDailyAdvice(JSON.parse(result2.value), profile.name, profile.job, profile.language)
+			let update = db.prepare(`update users SET advice_daily = json_insert(advice_daily, '$.${day}', ?) where mail = '${mail}'`)
+			update.run(advice[0])
+			return advice[0]
+		}
+		else return result.advice;
+	}
 }
 function updateSubscription(event_name, mail, status, date) {
 	let update = db.prepare(`UPDATE users

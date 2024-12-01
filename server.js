@@ -108,18 +108,19 @@ app.get('/getprofile', (req, res) => {
     }
 });
 app.post('/advice', async (req, res) => {
-    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
+    if (req.session.logged !== true) {
         res.status(401).send()
     }
     else {
         if (req.body.type === "daily") {
             let advice = await getDailyAdvice(getToday(), req.session.mail)
+            console.log(advice)
             res.json({ "advice": advice })
         }
     }
 });
 app.post('/setprofile', (req, res) => {
-    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
+    if (req.session.logged !== true) {
         res.status(401).send()
     }
     else {
@@ -136,7 +137,7 @@ app.get('/habits', (req, res) => {
     }
 });
 app.post('/updatedata', (req, res) => {
-    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
+    if (req.session.logged !== true) {
         res.status(401).send()
     }
     else {
@@ -145,7 +146,7 @@ app.post('/updatedata', (req, res) => {
     }
 });
 app.post('/newhabit', (req, res) => {
-    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
+    if (req.session.logged !== true) {
         res.status(401).send()
     }
     else {
@@ -158,7 +159,7 @@ app.post('/newhabit', (req, res) => {
     }
 })
 app.post('/deletehabit', (req, res) => {
-    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
+    if (req.session.logged !== true) {
         res.status(401).send()
     }
     else {
@@ -167,7 +168,7 @@ app.post('/deletehabit', (req, res) => {
     }
 })
 app.post('/changeorderhabit', (req, res) => {
-    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
+    if (req.session.logged !== true) {
         res.status(401).send()
     }
     else {
@@ -177,7 +178,7 @@ app.post('/changeorderhabit', (req, res) => {
 })
 app.post('/renamehabit', (req, res) => {
     console.log('POST /renamehabit')
-    if (req.session.logged !== true || !hasAccess(req.session.mail)) {
+    if (req.session.logged !== true) {
         res.status(401).send()
     }
     else {

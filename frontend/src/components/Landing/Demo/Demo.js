@@ -102,7 +102,7 @@ const Demo = (props) => {
             <h2 className='text2' id='demoTag'>How does it works ?</h2>
             <div id='assistantDemo'>
                 <img id='botDemo' src={botImg}></img>
-                <Typewriter id={"loginAdvice"} text={`Here is a simple demo of how the app works. Each day, I will advise you by analyzing data from the previous day. Give it a try and then go for our 5-days free trial! Each column represents a day, and each row represents a daily habit. ${window.innerWidth>1080?"Click on ":"Touch"} a cell to change its value.`} link={"/docs"} textLink={"More infos here."} delay={20} />
+                <Typewriter id={"loginAdvice"} text={`Here is a simple demo of how the app works. Each day, I will advise you by analyzing data from the previous day. With the free plan, I will only advise you on tuesday. Each column represents a day, and each row represents a daily habit. ${window.innerWidth>1080?"Click on ":"Touch"} a cell to change its value.`} link={"/docs"} textLink={"More infos here."} delay={20} />
             </div>
             <div id='demoUnderBox'>
                 {loaded &&

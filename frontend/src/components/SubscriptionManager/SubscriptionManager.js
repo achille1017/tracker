@@ -66,25 +66,24 @@ function SubscriptionManager(props) {
       </Helmet>
       <div id='pricingBox2'>
         <p className='text2'>To start to work with Arco</p>
-        <p id='promoP'>-50 % on all offers with code LAUNCH50 until 01/12</p>
         {loaded ? <div id='offersBox'>
           <div className='offerDiv'>
             <p className='offerDivP1'>Monthly</p>
-            <p className='offerDivP2'><span className='lineTrough'>6.99€</span> 3.49€/month</p>
+            <p className='offerDivP2'>6.99€/month</p>
             <p className='offerDivP3'>Try it just one month..</p>
 
             <button className='getStarted' onClick={() => loadInterfaceLS(checkoutMonthly)}>SUBSCRIBE NOW</button>
           </div>
           <div className='offerDiv'>
             <p className='offerDivP1'>Yearly</p>
-            <p className='offerDivP2'><span className='lineTrough'>49.99€</span> 24.99€/year</p>
+            <p className='offerDivP2'>49.99€/year</p>
             <p className='offerDivP3'>40% cheaper than monthly bill</p>
 
             <button className='getStarted' onClick={() => loadInterfaceLS(checkoutAnnual)}>SUBSCRIBE NOW</button>
           </div>
           <div className='offerDiv'>
             <p className='offerDivP1'>Lifetime</p>
-            <p className='offerDivP2'><span className='lineTrough'>59.99€</span> 29.99€</p>
+            <p className='offerDivP2'>59.99€</p>
             <p className='offerDivP3'>Work with Arco forever</p>
 
             <button className='getStarted' onClick={() => loadInterfaceLS(checkoutLifetime)}>BUY NOW</button>
